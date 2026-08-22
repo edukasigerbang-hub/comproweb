@@ -1,143 +1,421 @@
 ---
-// Gerbang Edukasi — a GCS product page within the GCS corporate ecosystem.
+// Gerbang Edukasi — product page within the GCS corporate ecosystem.
 // Brand hierarchy: GCS (corporate) → Products & Solutions → Gerbang Edukasi.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
-import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import { company } from '../data/company';
 import { gerbangEdukasiProductLabel, GERBANG_EDUKASI_URL } from '../data/solutions';
+import { gerbangEdukasi as ge } from '../data/gerbang-edukasi';
 import geProduct from '../assets/product-gcs.png';
+import geClassroom from '../assets/storytelling-gcs.png';
 
 const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
 ---
 <SiteLayout
-  title="Gerbang Edukasi"
-  description="Gerbang Edukasi is interactive learning media for modern education — a product / solution developed by PT. Gerbang Cipta Sarana."
+  title="Gerbang Edukasi — Interactive Learning for Modern Classrooms"
+  description="Gerbang Edukasi is interactive learning media for modern classrooms and Interactive Flat Panel platforms — a GCS Product / Solution developed by PT. Gerbang Cipta Sarana."
   currentPath="/gerbang-edukasi"
 >
-  <PageHero
-    title="Gerbang Edukasi"
-    subtitle="Interactive learning media for modern education."
-    breadcrumb="Gerbang Edukasi"
-  />
-
-  <div class="container">
-    {/* Product attribution to GCS — critical brand relationship */}
-    <div class="product-label">
-      <span class="pill">{gerbangEdukasiProductLabel}</span>
-      <p class="product-label__text">
-        Developed / provided by {company.name}.
-      </p>
+  {/* 01 — PRODUCT HERO */}
+  <section class="p-hero" aria-labelledby="ge-title">
+    <div class="container p-hero__grid">
+      <div class="p-hero__content">
+        <Badge variant="orange" label={gerbangEdukasiProductLabel} />
+        <h1 id="ge-title" class="p-hero__title">{ge.name}</h1>
+        <p class="p-hero__tagline">{ge.tagline}</p>
+        <p class="p-hero__desc">{ge.shortDescription}</p>
+        <div class="p-hero__actions">
+          <Button variant="primary" href="/contact">Contact GCS</Button>
+          <Button variant="ghost" href="/solutions">Explore Solutions</Button>
+        </div>
+        <p class="p-hero__provider">{ge.providerLine}</p>
+      </div>
+      <div class="p-hero__visual">
+        <Image
+          src={geProduct}
+          alt="Perangkat Interactive Flat Panel dengan antarmuka pembelajaran interaktif di ruang kelas modern"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 820px) 92vw, 44vw"
+          loading="eager"
+          fetchpriority="high"
+          class="p-hero__img"
+        />
+      </div>
     </div>
+  </section>
 
-    {/* Product Overview */}
-    <section class="section">
+  {/* 02 — WHAT IS GERBANG EDUKASI? */}
+  <section class="section" aria-labelledby="what-title">
+    <div class="container grid grid--feature">
+      <div>
+        <p class="eyebrow">01 · What is Gerbang Edukasi?</p>
+        <h2 id="what-title" class="what__statement">{ge.whatIs.statement}</h2>
+      </div>
+      <div>
+        {ge.whatIs.description.map((p) => <p class="what__text">{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  {/* 03 — THE LEARNING EXPERIENCE (image-led) */}
+  <section class="section section--soft" aria-labelledby="exp-title">
+    <div class="container">
+      <div class="learn">
+        <div class="learn__visual">
+          <Image
+            src={geClassroom}
+            alt={ge.learningExperience.imageAlt}
+            widths={[480, 720, 960]}
+            sizes="(max-width: 820px) 92vw, 58vw"
+            loading="lazy"
+            class="learn__img"
+          />
+        </div>
+        <div class="learn__content">
+          <p class="eyebrow">02 · The Learning Experience</p>
+          <h2 id="exp-title" class="learn__heading">{ge.learningExperience.heading}</h2>
+          <p class="learn__text">{ge.learningExperience.description}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* 04 — INTERACTIVE CLASSROOM FLOW (contrast panel) */}
+  <section class="section flow" aria-labelledby="flow-title">
+    <div class="container">
       <SectionHeader
-        eyebrow="Product Overview"
-        title="Interactive Learning Media"
-        lead="Gerbang Edukasi is an interactive learning application designed for education and interactive flat panels."
+        eyebrow="03 · Interactive Classroom"
+        title={ge.flow.heading}
+        lead={ge.flow.note}
+        align="center"
       />
-      <p>
-        As part of GCS's education and interactive multimedia solutions, Gerbang
-        Edukasi brings interactive learning media to modern classrooms and learning
-        environments.
-      </p>
-      <Image
-        src={geProduct}
-        alt="Perangkat interactive flat panel Gerbang Edukasi dengan antarmuka perangkat lunak pembelajaran di ruang kelas modern"
-        widths={[480, 720, 960]}
-        sizes="(max-width: 820px) 92vw, (max-width: 1200px) 60vw, 800px"
-        loading="lazy"
-        class="showcase-img"
-      />
-    </section>
-
-    {/* Key capabilities */}
-    <section class="section section--soft">
-      <SectionHeader
-        eyebrow="Key Capabilities"
-        title="Capabilities"
-        lead="Detailed capability information is available upon request."
-      />
-      <p class="ge-note">
-        Gerbang Edukasi is designed around interactive learning for classrooms
-        and Interactive Flat Panel (IFP) platforms.
-      </p>
-    </section>
-
-    {/* Educational use case */}
-    <section class="section">
-      <SectionHeader
-        eyebrow="Use Case"
-        title="Built for Education"
-        lead="Interactive learning media for modern classrooms and Interactive Flat Panel platforms."
-      />
-    </section>
-
-    {/* CTA */}
-    <section class="section section--soft">
-      <div class="cta-inner">
-        <h2>Explore Gerbang Edukasi</h2>
+      <ol class="flow__steps">
         {
-          hasExternalUrl ? (
-            <>
-              <p>Visit the Gerbang Edukasi product site.</p>
-              <a class="btn btn--primary" href={GERBANG_EDUKASI_URL} target="_blank" rel="noopener">
-                Visit Gerbang Edukasi
-              </a>
-            </>
-          ) : (
-            <p class="ge-note">
-              The Gerbang Edukasi product website is being prepared. For more
-              information in the meantime, please <a href="/contact">contact GCS</a>.
-            </p>
-          )
+          ge.flow.steps.map((step, i) => (
+            <li class="flow__step" key={step.title}>
+              <span class="flow__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="flow__title">{step.title}</h3>
+              <p class="flow__desc">{step.description}</p>
+              {i < ge.flow.steps.length - 1 && (
+                <span class="flow__arrow" aria-hidden="true">↓</span>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+  {/* 05 — PRODUCT / PLATFORM EXPERIENCE */}
+  <section class="section section--soft" aria-labelledby="px-title">
+    <div class="container px">
+      <SectionHeader
+        eyebrow="04 · Product Experience"
+        title={ge.productExperience.heading}
+        lead={ge.productExperience.description}
+      />
+      <figure class="px__figure">
+        <Image
+          src={geProduct}
+          alt="Interactive Flat Panel sebagai permukaan interaksi kelas untuk aktivitas pembelajaran"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 820px) 92vw, 72vw"
+          loading="lazy"
+          class="px__img"
+        />
+        <figcaption class="px__note">{ge.productExperience.imageNote}</figcaption>
+      </figure>
+      <p class="px__fallback">{ge.productExperience.detailsFallback}</p>
+    </div>
+  </section>
+
+  {/* 06 — WHO IT SERVES */}
+  <section class="section" aria-labelledby="who-title">
+    <div class="container">
+      <SectionHeader eyebrow="05 · Who It Serves" title="Built for the Classroom Community" />
+      <div class="grid grid--4 who">
+        {
+          ge.audience.map((a, i) => (
+            <article class="who__item" key={a.title}>
+              <span class="who__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="who__title">{a.title}</h3>
+              <p class="who__desc">{a.description}</p>
+            </article>
+          ))
         }
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+
+  {/* 07 — WHY GERBANG EDUKASI */}
+  <section class="section section--soft" aria-labelledby="why-title">
+    <div class="container">
+      <SectionHeader
+        eyebrow="06 · Why Gerbang Edukasi"
+        title="A Different Way to Teach"
+      />
+      <div class="grid grid--4 why">
+        {
+          ge.why.map((w) => (
+            <article class="why__item" key={w.title}>
+              <h3 class="why__title">{w.title}</h3>
+              <p class="why__desc">{w.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* GCS CONNECTION */}
+  <section class="section relation" aria-labelledby="rel-title">
+    <div class="container relation__inner">
+      <p class="eyebrow">Part of the GCS Ecosystem</p>
+      <div class="relation__chain" role="img" aria-label="PT. Gerbang Cipta Sarana, Technology Experience Solutions, menghasilkan Gerbang Edukasi, solusi pendidikan interaktif">
+        <div class="relation__gcs" aria-hidden="true">
+          <span class="relation__company">{company.name}</span>
+          <span class="relation__tagline">{company.tagline}</span>
+        </div>
+        <span class="relation__arrow" aria-hidden="true">↓</span>
+        <div class="relation__product" aria-hidden="true">
+          <span class="relation__name">{ge.name}</span>
+          <span class="relation__sub">Interactive Education Solution</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="section cta-final" aria-labelledby="cta-title">
+    <div class="container cta-final__inner">
+      <h2 id="cta-title">{ge.cta.heading}</h2>
+      <p>{ge.cta.text}</p>
+      <div class="cta-final__actions">
+        <Button variant="primary" href="/contact">Contact GCS</Button>
+        <Button variant="white" href="/solutions">Explore GCS Solutions</Button>
+      </div>
+      {hasExternalUrl && (
+        <p class="cta-final__ext">
+          <a href={GERBANG_EDUKASI_URL} target="_blank" rel="noopener">Visit the Gerbang Edukasi website →</a>
+        </p>
+      )}
+      <p class="cta-final__note">{ge.cta.contactNote}</p>
+    </div>
+  </section>
 </SiteLayout>
-
 <style>
-  .product-label {
-    display: flex;
+  /* ============ 01 HERO ============ */
+  .p-hero {
+    background:
+      radial-gradient(circle at 12% 85%, rgba(20, 145, 155, 0.16) 0%, transparent 42%),
+      linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
+    color: #fff;
+    padding: var(--space-6) 0;
+  }
+  .p-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--space-6);
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
   }
-  .pil {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-orange);
-    background: rgba(240, 122, 46, 0.12);
-    border-radius: 999px;
-    padding: 0.3rem 0.7rem;
+  .p-hero :global(.badge) { margin-bottom: var(--space-3); }
+  .p-hero__title {
+    color: #fff;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: var(--space-2) 0 var(--space-1);
   }
-  .product-label__text { margin: 0; font-weight: 600; }
-
-  .ge-note {
-    color: var(--color-muted);
-    background: rgba(27, 95, 180, 0.06);
-    border: 1px dashed var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-3);
+  .p-hero__tagline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 600;
+    color: #8fd0d6;
+    margin-bottom: var(--space-2);
   }
-
-  .showcase-img {
+  .p-hero__desc { color: #d5e0ea; max-width: 46ch; }
+  .p-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  .p-hero__provider {
+    margin-top: var(--space-4);
+    font-size: var(--font-body-sm);
+    color: #9fb2c4;
+  }
+  .p-hero__img {
     width: 100%;
     height: auto;
     display: block;
-    margin-top: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* ============ 02 WHAT IS ============ */
+  .what__statement {
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    line-height: 1.25;
+    max-width: 16ch;
+  }
+  .what__text { color: var(--color-muted); max-width: 56ch; }
+
+  /* ============ 03 LEARNING EXPERIENCE ============ */
+  .learn {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: center;
+  }
+  .learn__img {
+    width: 100%;
+    height: auto;
+    display: block;
     border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
   }
+  .learn__heading { font-size: clamp(1.7rem, 3.4vw, 2.4rem); }
+  .learn__text { color: var(--color-muted); max-width: 48ch; }
 
-  .cta-inner { text-align: center; padding-block: var(--space-2); }
-  .cta-inner p { color: var(--color-muted); }
+  /* ============ 04 FLOW (dark panel) ============ */
+  .flow { background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%); color: #fff; }
+  .flow :global(.section__lead) { color: #9fb2c4; }
+  .flow :global(.section__title) { color: #fff; }
+  .flow__steps {
+    list-style: none;
+    margin: var(--space-5) auto 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--space-3);
+    max-width: 1080px;
+  }
+  .flow__step {
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    flex: 1;
+    min-width: 0;
+  }
+  .flow__num { display: block; font-family: var(--font-heading); font-weight: 800; color: #8fd0d6; font-size: var(--font-caption); margin-bottom: var(--space-1); }
+  .flow__title { color: #fff; font-size: var(--font-h4); margin: 0 0 0.35rem; }
+  .flow__desc { color: #c9d6e3; font-size: var(--font-body-sm); margin: 0; }
+  .flow__arrow {
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    border-radius: 50%;
+    color: #8fd0d6;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+<style>
+  /* ============ 05 PRODUCT EXPERIENCE ============ */
+  .px { text-align: center; }
+  .px :global(.section__header) { margin-inline: auto; text-align: center; }
+  .px__figure { margin: 0 auto; max-width: 860px; }
+  .px__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+  }
+  .px__note {
+    margin-top: var(--space-2);
+    font-size: var(--font-caption);
+    color: var(--color-muted);
+    font-style: italic;
+  }
+  .px__fallback { color: var(--color-muted); font-size: var(--font-body-sm); margin: var(--space-2) 0 0; }
+
+  /* ============ 06 WHO IT SERVES ============ */
+  .who__item { border-top: 3px solid var(--color-teal); padding-top: var(--space-3); }
+  .who__num { display: block; font-family: var(--font-heading); font-weight: 800; color: var(--neutral-200); font-size: 1.6rem; line-height: 1; margin-bottom: var(--space-2); }
+  .who__title { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .who__desc { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
+
+  /* ============ 07 WHY GE ============ */
+  .why__item { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-3); }
+  .why__title { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .why__desc { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
+
+  /* ============ GCS RELATIONSHIP ============ */
+  .relation { background: var(--color-bg-soft); }
+  .relation__inner { text-align: center; max-width: var(--container-narrow); }
+  .relation__chain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .relation__gcs {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: var(--color-navy);
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-5);
+  }
+  .relation__company { font-family: var(--font-heading); font-weight: 700; font-size: var(--font-h4); }
+  .relation__tagline { font-size: var(--font-caption); color: #9fb2c4; letter-spacing: 0.08em; text-transform: uppercase; }
+  .relation__arrow { font-size: 1.3rem; color: var(--color-teal); }
+  .relation__product {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: #fff;
+    border: 1px solid rgba(240, 122, 46, 0.5);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-5);
+  }
+  .relation__name { font-family: var(--font-heading); font-weight: 700; font-size: var(--font-h4); color: var(--color-navy); }
+  .relation__sub { font-size: var(--font-caption); color: var(--color-orange); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ============ FINAL CTA ============ */
+  .cta-final {
+    background:
+      radial-gradient(circle at 85% 20%, rgba(20, 145, 155, 0.25) 0%, transparent 45%),
+      linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
+    color: #fff;
+    padding: var(--space-6) 0;
+    text-align: center;
+  }
+  .cta-final__inner { max-width: var(--container-narrow); }
+  .cta-final h2 { color: #fff; font-size: var(--font-h1); }
+  .cta-final p { color: #c9d6e3; font-size: var(--font-body-lg); }
+  .cta-final__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  .cta-final__ext { margin-top: var(--space-3); }
+  .cta-final__ext a { color: #8fd0d6; font-weight: 600; }
+  .cta-final__note { font-size: var(--font-body-sm); color: #9fb2c4; margin-top: var(--space-2); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .flow__steps { flex-wrap: wrap; }
+    .flow__step { flex: 1 1 calc(33% - var(--space-3)); }
+    .flow__arrow { display: none; }
+  }
+  @media (max-width: 820px) {
+    .p-hero__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .p-hero__visual { order: 2; max-width: 540px; }
+    .learn { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+  @media (max-width: 560px) {
+    .flow__step { flex: 1 1 100%; }
+    .cta-final__actions .btn { width: 100%; }
+  }
 </style>
