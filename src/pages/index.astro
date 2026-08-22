@@ -1,237 +1,559 @@
 ---
-// Home — corporate landing page.
-// Structural flow (approved): Hero → Company Intro → Capabilities →
-// Industries → Solutions → Gerbang Edukasi feature → Experience → Strengths → CTA.
+// Home — flagship corporate homepage of PT. Gerbang Cipta Sarana.
+// Narrative: Hero → Who is GCS → Capabilities → Industries → Solutions →
+// Gerbang Edukasi → Experience → Why GCS → Final CTA.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
+import SolutionCard from '../components/SolutionCard.astro';
 import { company, site } from '../data/company';
 import { services } from '../data/services';
 import { industries } from '../data/industries';
-import { solutions, gerbangEdukasiProductLabel } from '../data/solutions';
-import { projectCount } from '../data/experience';
+import {
+  solutions,
+  gerbangEdukasiProductLabel,
+  GERBANG_EDUKASI_URL,
+} from '../data/solutions';
+import { projects, projectCount } from '../data/experience';
+
+const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
+const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
+
+// Curated experience preview: 5 representative projects across sectors.
+const experiencePreview = [projects[0], projects[3], projects[4], projects[8], projects[12]];
 ---
 
 <SiteLayout
   title={site.name}
-  description={site.description}
+  description={`${company.name} (${company.shortName}) is a technology consulting and solutions company established in ${company.founded}, serving education, government, health, industry, and cooperatives.`}
   currentPath="/"
 >
-  {/* 01 — Hero */}
-  <section class="hero">
-    <div class="container hero__inner">
-      <p class="hero__kicker">{company.name}</p>
-      <h1 class="hero__title">{company.tagline}</h1>
-      <p class="hero__sub">
-        A technology consulting and solutions company with experience across
-        education, government, and business sectors.
-      </p>
-      <div class="hero__actions">
-        <a class="btn btn--primary" href="/solutions">Explore Our Solutions</a>
-        <a class="btn btn--outline" href="/contact">Contact Us</a>
+  {/* 01 — HERO */}
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__grid container">
+      <div class="hero__content">
+        <p class="hero__eyebrow">{company.name}</p>
+        <h1 id="hero-title" class="hero__title">
+          Technology.<br />
+          Experience.<br />
+          Solutions.
+        </h1>
+        <p class="hero__lead">
+          A technology consulting and solutions company with experience across
+          education, government, and business sectors.
+        </p>
+        <div class="hero__actions">
+          <Button variant="primary" href="/solutions">Explore Our Solutions</Button>
+          <Button variant="white" href="/contact">Contact Us</Button>
+        </div>
+      </div>
+
+      {/* Abstract technology visual system (decorative) */}
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero-panel">
+          <div class="hero-panel__bar">
+            <span class="dot dot--teal"></span>
+            <span class="dot dot--blue"></span>
+            <span class="dot dot--orange"></span>
+          </div>
+          <svg class="hero-net" viewBox="0 0 320 260" fill="none" role="presentation">
+            <g stroke-width="1.5" opacity="0.55">
+              <line x1="60" y1="60" x2="160" y2="110" stroke="#2f7fd1" />
+              <line x1="160" y1="110" x2="255" y2="70" stroke="#2f7fd1" />
+              <line x1="160" y1="110" x2="120" y2="200" stroke="#14919b" />
+              <line x1="160" y1="110" x2="250" y2="190" stroke="#14919b" />
+              <line x1="60" y1="60" x2="120" y2="200" stroke="#24486e" />
+              <line x1="255" y1="70" x2="250" y2="190" stroke="#24486e" />
+            </g>
+            <circle cx="160" cy="110" r="34" fill="#122f4d" stroke="#2f7fd1" stroke-width="2" />
+            <text x="160" y="115" text-anchor="middle" fill="#ffffff" font-size="13" font-family="Plus Jakarta Sans, sans-serif" font-weight="700">GCS</text>
+            <circle cx="60" cy="60" r="16" fill="#0b2239" stroke="#14919b" stroke-width="2" />
+            <circle cx="255" cy="70" r="16" fill="#0b2239" stroke="#14919b" stroke-width="2" />
+            <circle cx="120" cy="200" r="16" fill="#0b2239" stroke="#f07a2e" stroke-width="2" />
+            <circle cx="250" cy="190" r="16" fill="#0b2239" stroke="#2f7fd1" stroke-width="2" />
+          </svg>
+          <div class="hero-panel__meta">
+            <span>EST. {company.founded}</span>
+            <span>{projectCount} PROJECTS</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* 02 — Company Introduction */}
-  <section class="section">
-    <div class="container">
-      <SectionHeader
-        eyebrow="About GCS"
-        title={`Established in ${company.founded}`}
-        lead="GCS is a technology consulting company providing services related to Information Technology — planning, implementation, training, supervision, software, and hardware."
-      />
-      <p>
-        Since 2012, GCS has worked with experienced professionals on projects
-        across government and private sectors, as well as in education.
-      </p>
-      <a class="btn btn--dark" href="/about">Learn About GCS</a>
+  {/* 02 — WHO IS GCS */}
+  <section class="section intro" aria-labelledby="intro-title">
+    <div class="container grid grid--feature">
+      <div>
+        <p class="eyebrow">Who We Are</p>
+        <h2 id="intro-title">Technology consulting since {company.founded}.</h2>
+        <p class="intro__text">
+          PT. Gerbang Cipta Sarana (GCS) is a multidisciplinary technology
+          consulting company providing Information Technology services — from
+          planning, implementation, and training to supervision of software and
+          hardware.
+        </p>
+        <p class="intro__text">
+          Founded by experienced IT professionals, GCS has contributed to
+          development in Indonesia across both the government and private
+          sectors, supported by professional personnel with broad work
+          experience.
+        </p>
+        <Button variant="navy" href="/about">Learn About GCS</Button>
+      </div>
+      <div class="intro__visual" aria-hidden="true">
+        <span class="intro__year">{company.founded}</span>
+        <span class="intro__est">Established</span>
+      </div>
     </div>
   </section>
-
-  {/* 03 — Core Capabilities */}
-  <section class="section section--soft">
+  {/* 03 — CORE CAPABILITIES */}
+  <section class="section section--soft" aria-labelledby="cap-title">
     <div class="container">
       <SectionHeader
         eyebrow="What We Do"
         title="Core Capabilities"
-        lead="Six major capability areas rooted in GCS's technology consulting scope."
+        lead="Six capability areas covering the full lifecycle of technology — from planning and development to training and educational media."
       />
-      <div class="grid">
-        {
-          services.map((s) => (
-            <article class="card" key={s.id}>
-              <h3>{s.name}</h3>
-              <p>{s.shortDescription}</p>
-            </article>
-          ))
-        }
+      <div class="caps">
+        {services.map((s, i) => (
+          <a
+            href="/services"
+            class={'cap cap--' + (i < 2 ? 'wide' : 'std')}
+          >
+            <span class="cap__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="cap__body">
+              <h3 class="cap__title">{s.name}</h3>
+              <p class="cap__desc">{s.shortDescription}</p>
+            </span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  {/* 04 — Industries */}
-  <section class="section">
+  {/* 04 — INDUSTRIES */}
+  <section class="section" aria-labelledby="ind-title">
     <div class="container">
       <SectionHeader
         eyebrow="Who We Serve"
-        title="Industries"
-        lead="Sectors GCS serves through technology consulting and solutions."
+        title="Industries We Serve"
+        lead="GCS develops technology solutions according to each organization's needs — across very different environments."
+        align="center"
       />
-      <div class="grid grid--compact">
-        {
-          industries.map((i) => (
-            <article class="card" key={i.id}>
-              <h3>{i.name}</h3>
-              <p>{i.description}</p>
-            </article>
-          ))
-        }
+      <div class="inds">
+        {industries.map((ind, i) => (
+          <a
+            href="/industries"
+            class={'ind ind--' + (i === 0 ? 'lead' : 'cell')}
+          >
+            <span class="ind__icon" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="ind__name">{ind.name}</h3>
+            <p class="ind__desc">{ind.description}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  {/* 05 — Solutions */}
-  <section class="section section--soft">
+  {/* 05 — SOLUTIONS */}
+  <section class="section section--soft" aria-labelledby="sol-title">
     <div class="container">
       <SectionHeader
         eyebrow="Products & Solutions"
         title="Solutions"
-        lead="Information systems, education solutions, interactive multimedia, and more."
+        lead="Technology capabilities delivered as solutions for organizational needs."
+        cta={{ label: 'All Solutions', href: '/solutions' }}
       />
-      <div class="grid">
-        {
-          solutions.map((s) => (
-            <article class="card" key={s.id}>
-              <h3>{s.name}</h3>
-              {s.product && <p class="pill">{gerbangEdukasiProductLabel}</p>}
-              <p>{s.description}</p>
-              <a class="card__link" href={s.route}>View</a>
-            </article>
-          ))
-        }
+      <div class="sols">
+        {solutions.map((sol) => (
+          <SolutionCard
+            title={sol.name}
+            description={sol.description}
+            productLabel={sol.product ? gerbangEdukasiProductLabel : undefined}
+            accent={sol.product}
+            href={sol.route}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  {/* 06 — GERBANG EDUKASI FEATURE */}
+  <section class="section ge" aria-labelledby="ge-title">
+    <div class="container grid grid--feature">
+      <div class="ge__content">
+        <p class="badge badge--orange">{gerbangEdukasiProductLabel}</p>
+        <h2 id="ge-title" class="ge__title">Gerbang Edukasi</h2>
+        <p class="ge__lead">Interactive learning media for modern education.</p>
+        <p class="ge__text">
+          Developed within GCS's interactive multimedia and educational media
+          capabilities, Gerbang Edukasi brings interactive learning to
+          classrooms and Interactive Flat Panel platforms.
+        </p>
+        <div class="ge__actions">
+          <Button variant="accent" href={geHref}>Explore Gerbang Edukasi</Button>
+          {hasExternalGeUrl && (
+            <Button variant="ghost" href="/gerbang-edukasi">Product Details</Button>
+          )}
+        </div>
+      </div>
+
+      {/* Designed placeholder visual (no fabricated screenshots) */}
+      <div class="ge__visual" aria-hidden="true">
+        <div class="ge-frame">
+          <div class="ge-frame__top">
+            <span class="ge-frame__brand">Gerbang Edukasi</span>
+            <span class="ge-frame__tag">Interactive Learning</span>
+          </div>
+          <div class="ge-frame__stage">
+            <div class="ge-tile ge-tile--teal"></div>
+            <div class="ge-tile ge-tile--blue"></div>
+            <div class="ge-tile ge-tile--orange"></div>
+            <div class="ge-tile ge-tile--wide"></div>
+          </div>
+          <p class="ge-frame__note">Product visual — to be provided</p>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* 06 — Gerbang Edukasi Feature */}
-  <section class="section">
-    <div class="container">
-      <SectionHeader
-        eyebrow={gerbangEdukasiProductLabel}
-        title="Gerbang Edukasi"
-        lead="Interactive learning media for modern education."
-      />
-      <p class="feature-note">
-        Gerbang Edukasi is an interactive learning solution developed by
-        PT. Gerbang Cipta Sarana for education and interactive flat panels.
-      </p>
-      <a class="btn btn--primary" href="/gerbang-edukasi">Explore Gerbang Edukasi</a>
-    </div>
-  </section>
-{/* 07 — Experience */}
-  <section class="section section--soft">
+  {/* 07 — EXPERIENCE / PROOF */}
+  <section class="section section--soft" aria-labelledby="exp-title">
     <div class="container">
       <SectionHeader
         eyebrow="Track Record"
-        title={`${projectCount}+ Project Experiences`}
-        lead="Across government, higher education, schools, and the private sector."
+        title="Selected Experience"
+        lead={`${projectCount} documented project experiences across government, higher education, schools, and the public sector.`}
       />
-      <a class="btn btn--dark" href="/experience">View Our Experience</a>
+      <ul class="exp">
+        {experiencePreview.map((p) => (
+          <li class="exp__row">
+            <div class="exp__main">
+              <h3 class="exp__project">{p.project}</h3>
+              <p class="exp__client">{p.client}</p>
+            </div>
+            <span class="badge badge--teal exp__sector">{p.sector}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="exp__cta">
+        <Button variant="navy" href="/experience">View All Experience</Button>
+      </div>
     </div>
   </section>
 
-  {/* 08 — Company Strengths */}
-  <section class="section">
+  {/* 08 — WHY GCS / STRENGTHS */}
+  <section class="section" aria-labelledby="why-title">
     <div class="container">
-      <SectionHeader eyebrow="Why GCS" title="Company Strengths" />
-      <div class="grid grid--compact">
-        <article class="card">
-          <h3>Human Resources</h3>
-          <p>Quality and professional expertise across technology fields.</p>
+      <SectionHeader
+        eyebrow="Why GCS"
+        title="Built on Experience"
+        lead="Three pillars behind the quality and consistency of our work."
+      />
+      <div class="strengths">
+        <article class="strength">
+          <span class="strength__num">01</span>
+          <h3>People</h3>
+          <p>
+            Professional human resources with expertise in their respective
+            fields — the foundation of reliable service delivery.
+          </p>
         </article>
-        <article class="card">
+        <article class="strength">
+          <span class="strength__num">02</span>
           <h3>Methodology</h3>
-          <p>GIP — Gerbang Implementation Methodology combining efficiency, effectiveness, and business considerations.</p>
+          <p>
+            GIP — Gerbang Implementation Methodology — combining work
+            efficiency, effectiveness, organizational considerations, and
+            business and management aspects.
+          </p>
         </article>
-        <article class="card">
-          <h3>Directors</h3>
-          <p>Direct involvement in project management, concept development, and knowledge transfer.</p>
+        <article class="strength">
+          <span class="strength__num">03</span>
+          <h3>Leadership</h3>
+          <p>
+            Our directors are directly involved in project management, concept
+            design, and knowledge transfer — delivering higher value to clients.
+          </p>
         </article>
       </div>
     </div>
   </section>
 
-  {/* 09 — CTA */}
-  <section class="section cta">
-    <div class="container">
-      <h2>Let's discuss your technology needs.</h2>
-      <a class="btn btn--primary" href="/contact">Contact GCS</a>
+  {/* 09 — FINAL CTA */}
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="container cta__inner">
+      <h2 id="cta-title">Let's Build the Right Solution</h2>
+      <p>
+        Discuss your organization's technology needs with a team that has been
+        delivering solutions since {company.founded}.
+      </p>
+      <div class="cta__actions">
+        <Button variant="primary" href="/contact">Contact Us</Button>
+        <Button variant="white" href="/solutions">Explore Solutions</Button>
+      </div>
     </div>
   </section>
 </SiteLayout>
-
 <style>
+  /* ============ 01 HERO ============ */
   .hero {
-    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-2) 100%);
+    background:
+      radial-gradient(circle at 88% 10%, rgba(20, 145, 155, 0.22) 0%, transparent 45%),
+      linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
     color: #fff;
-    padding-block: var(--space-6);
+    padding: var(--space-6) 0;
+    overflow: hidden;
   }
-
-  .hero__inner { max-width: var(--container-narrow); }
-
-  .hero__kicker {
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #bcd0e4;
-    margin-bottom: var(--space-2);
-  }
-
-  .hero__title { color: #fff; }
-
-  .hero__sub { font-size: 1.15rem; color: #d5e0ea; }
-
-  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-
-  .grid {
+  .hero__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-3);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .hero__eyebrow {
+    font-family: var(--font-heading);
+    font-size: var(--font-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8fd0d6;
+    margin-bottom: var(--space-3);
+  }
+  .hero__title {
+    color: #fff;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.08;
+    margin-bottom: var(--space-3);
+  }
+  .hero__lead { color: #d5e0ea; font-size: var(--font-body-lg); max-width: 46ch; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+
+  .hero-panel {
+    background: rgba(11, 34, 57, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2);
+  }
+  .hero-panel__bar { display: flex; gap: 6px; padding: 0 var(--space-1) var(--space-2); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dot--teal { background: var(--color-teal); }
+  .dot--blue { background: var(--color-blue); }
+  .dot--orange { background: var(--color-orange); }
+  .hero-net { width: 100%; height: auto; display: block; }
+  .hero-panel__meta {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-1) 0;
+    font-size: var(--font-caption);
+    letter-spacing: 0.12em;
+    color: #8fa6bd;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: var(--space-2);
   }
 
-  .grid--compact { grid-template-columns: repeat(3, 1fr); }
+  /* ============ 02 INTRO ============ */
+  .intro__text { max-width: 58ch; }
+  .intro__visual {
+    justify-self: center;
+    text-align: center;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    min-width: 260px;
+  }
+  .intro__year {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    line-height: 1;
+    color: var(--color-navy);
+  }
+  .intro__est {
+    display: block;
+    margin-top: var(--space-2);
+    font-family: var(--font-heading);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: var(--font-caption);
+    color: var(--color-teal);
+    font-weight: 700;
+  }
 
-  .card {
+  /* ============ 03 CAPABILITIES ============ */
+  .caps { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); }
+  .cap {
+    display: flex;
+    gap: var(--space-2);
     background: #fff;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-3);
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: border-color var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+  }
+  .cap:hover {
+    text-decoration: none;
+    border-color: var(--color-blue);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .cap:hover .cap__num { color: var(--color-orange); }
+  .cap__num {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--font-caption);
+    color: var(--neutral-300);
+    line-height: 1.4;
+    transition: color var(--transition-base);
+  }
+  .cap__title { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .cap__desc { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
+
+  /* ============ 04 INDUSTRIES ============ */
+  .inds {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+    margin-inline: auto;
+  }
+  .ind--lead { grid-column: span 4; flex-direction: row; align-items: center; gap: var(--space-3); }
+  .ind {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+  }
+  .ind--lead { border-left: 4px solid var(--color-teal); }
+  .ind:hover { text-decoration: none; border-color: var(--color-teal); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .ind__icon { font-family: var(--font-heading); font-weight: 800; font-size: var(--font-caption); color: var(--color-teal); }
+  .ind__name { font-size: var(--font-h4); margin: 0; }
+  .ind__desc { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
+
+  /* ============ 05 SOLUTIONS ============ */
+  .sols { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+</style>
+<style>
+  /* ============ 06 GERBANG EDUKASI ============ */
+  .ge {
+    background:
+      radial-gradient(circle at 10% 90%, rgba(240, 122, 46, 0.08) 0%, transparent 40%),
+      var(--color-bg);
+  }
+  .ge__title { font-size: var(--font-h1); }
+  .ge__lead { font-size: var(--font-h3); color: var(--color-navy); font-weight: 600; }
+  .ge__text { max-width: 52ch; }
+  .ge__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  .ge-frame {
+    background: linear-gradient(180deg, #fff 0%, var(--neutral-50) 100%);
+    border: 1px solid var(--color-border);
+    border-top: 4px solid var(--color-orange);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .ge-frame__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .ge-frame__brand { font-family: var(--font-heading); font-weight: 700; color: var(--color-navy); }
+  .ge-frame__tag { font-size: var(--font-caption); color: var(--color-muted); }
+  .ge-frame__stage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    padding: var(--space-4);
+    min-height: 190px;
+  }
+  .ge-tile { border-radius: var(--radius-md); opacity: 0.85; }
+  .ge-tile--teal { background: var(--color-teal-soft); }
+  .ge-tile--blue { background: var(--color-blue-soft); }
+  .ge-tile--orange { background: var(--color-orange-soft); }
+  .ge-tile--wide { grid-column: span 3; background: var(--neutral-100); }
+  .ge-frame__note {
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-caption);
+    color: var(--color-muted);
+    border-top: 1px dashed var(--color-border);
+    text-align: center;
   }
 
-  .pill {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-teal);
-    background: rgba(20, 145, 155, 0.12);
-    border-radius: 999px;
-    padding: 0.2rem 0.6rem;
-    margin-bottom: var(--space-1);
+  /* ============ 07 EXPERIENCE ============ */
+  .exp { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
+  .exp__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
   }
+  .exp__row:first-child { border-top: 1px solid var(--color-border); }
+  .exp__project { font-size: var(--font-h4); margin: 0 0 0.15rem; }
+  .exp__client { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
+  .exp__sector { flex-shrink: 0; }
+  .exp__cta { text-align: center; margin-top: var(--space-4); }
 
-  .card__link { font-weight: 600; }
-  .feature-note { margin-bottom: var(--space-2); }
+  /* ============ 08 STRENGTHS ============ */
+  .strengths { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .strength { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
+  .strength__num {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: var(--font-h2);
+    color: var(--neutral-200);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+  .strength h3 { font-size: var(--font-h3); }
+  .strength p { color: var(--color-muted); margin: 0; }
 
-  .cta { background: var(--color-bg-soft); text-align: center; }
+  /* ============ 09 FINAL CTA ============ */
+  .cta {
+    background:
+      radial-gradient(circle at 85% 20%, rgba(20, 145, 155, 0.25) 0%, transparent 45%),
+      linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
+    color: #fff;
+    padding: var(--space-6) 0;
+    text-align: center;
+  }
+  .cta__inner { max-width: var(--container-narrow); }
+  .cta h2 { color: #fff; font-size: var(--font-h1); margin-bottom: var(--space-2); }
+  .cta p { color: #c9d6e3; font-size: var(--font-body-lg); }
+  .cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .sols { grid-template-columns: repeat(2, 1fr); }
+  }
 
   @media (max-width: 820px) {
-    .grid, .grid--compact { grid-template-columns: repeat(2, 1fr); }
+    .hero__grid { grid-template-columns: 1fr; gap: var(--space-5); }
+    .hero__visual { order: 2; max-width: 480px; }
+    .intro__visual { min-width: 0; padding: var(--space-5); }
+    .inds { grid-template-columns: repeat(2, 1fr); }
+    .ind--lead { grid-column: span 2; }
   }
 
   @media (max-width: 560px) {
-    .grid, .grid--compact { grid-template-columns: 1fr; }
+    .caps { grid-template-columns: 1fr; }
+    .inds { grid-template-columns: 1fr; }
+    .ind--lead { grid-column: span 1; flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+    .sols { grid-template-columns: 1fr; }
+    .strengths { grid-template-columns: 1fr; }
+    .hero__actions .btn, .cta__actions .btn { width: 100%; }
+    .exp__row { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
   }
 </style>

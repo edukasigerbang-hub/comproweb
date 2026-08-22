@@ -53,8 +53,9 @@ export const solutions: Solution[] = [
   {
     id: 'other-solutions',
     name: 'Other Solutions',
+    // Public copy stays neutral; detailed offerings are added when verified.
     description:
-      'Additional technology solutions tailored to organizational needs. [CONTENT TO BE PROVIDED]',
+      'Additional technology solutions tailored to your organization\'s specific needs.',
     icon: 'other-solutions',
     route: '/solutions#other-solutions',
     product: false,

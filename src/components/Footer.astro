@@ -3,6 +3,10 @@
 import { company } from '../data/company';
 import { footerNavigation } from '../data/navigation';
 import { contact } from '../data/contact';
+
+// Only show confirmed contact details publicly — placeholders stay in the data layer.
+const contactDetails = [contact.address, contact.phone, contact.email, contact.socialMedia]
+  .filter((v) => v && !v.includes('['));
 ---
 
 <footer class="site-footer">
@@ -44,12 +48,15 @@ import { contact } from '../data/contact';
 
     <div class="site-footer__col">
       <h3 class="site-footer__heading">Contact</h3>
-      <ul class="site-footer__list site-footer__contact">
-        <li>{contact.address}</li>
-        <li>{contact.phone}</li>
-        <li>{contact.email}</li>
-        <li>{contact.socialMedia}</li>
-      </ul>
+      {
+        contactDetails.length > 0 ? (
+          <ul class="site-footer__list site-footer__contact">
+            {contactDetails.map((line) => <li>{line}</li>)}
+          </ul>
+        ) : (
+          <p class="site-footer__contact-note">Contact details are available upon request.</p>
+        )
+      }
     </div>
   </div>
 
@@ -101,6 +108,7 @@ import { contact } from '../data/contact';
   .site-footer__heading { color: #fff; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: var(--space-3); }
 
   .site-footer__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  .site-footer__contact-note { color: var(--color-on-dark-muted); margin: 0; }
   .site-footer__col .site-footer__list a { color: var(--color-on-dark-muted); }
   .site-footer__col .site-footer__list a:hover { color: #fff; text-decoration: none; }
 
