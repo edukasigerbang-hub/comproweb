@@ -32,9 +32,10 @@ const {
 } = Astro.props;
 ---
 <section class="err" data-error-root>
-  {/* Abstract geometric visual — connected nodes on an architectural grid */}
-  <div class="err__visual" aria-hidden="true">
-    <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+  <div class="container err__inner">
+    {/* Abstract geometric visual — connected nodes on an architectural grid */}
+    <div class="err__visual" aria-hidden="true">
+      <svg viewBox="0 0 520 300" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
       <defs>
         <linearGradient id="err-line" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="#14919b" stop-opacity="0.55" />
@@ -62,36 +63,38 @@ const {
       {/* subtle accent square */}
       <rect x="392" y="52" width="56" height="56" rx="12" fill="#14919b" fill-opacity="0.08" />
       <rect x="60" y="60" width="34" height="34" rx="8" fill="#f07a2e" fill-opacity="0.10" />
-    </svg>
-  </div>
+      </svg>
+    </div>
 
-  <div class="err__content">
-    <p class="err__eyebrow">{code} · {eyebrow}</p>
-    <p class="err__code" aria-hidden="true">{code}</p>
-    <h1 class="err__title">{title}</h1>
-    <p class="err__desc">{description}</p>
-    <div class="err__actions">
-      <a class="btn btn--primary" href={primaryHref}>{primaryLabel}</a>
-      {secondaryLabel && secondaryHref && (
-        <a class="btn btn--secondary" href={secondaryHref}>{secondaryLabel}</a>
-      )}
-      {tertiaryLabel && tertiaryHref && (
-        <a class="btn btn--ghost" href={tertiaryHref}>{tertiaryLabel}</a>
-      )}
+    <div class="err__content">
+      <p class="err__eyebrow">{code} · {eyebrow}</p>
+      <p class="err__code" aria-hidden="true">{code}</p>
+      <h1 class="err__title">{title}</h1>
+      <p class="err__desc">{description}</p>
+      <div class="err__actions">
+        <a class="btn btn--primary" href={primaryHref}>{primaryLabel}</a>
+        {secondaryLabel && secondaryHref && (
+          <a class="btn btn--secondary" href={secondaryHref}>{secondaryLabel}</a>
+        )}
+        {tertiaryLabel && tertiaryHref && (
+          <a class="btn btn--outline" href={tertiaryHref}>{tertiaryLabel}</a>
+        )}
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .err {
+  .err__inner {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: center;
     gap: var(--space-6);
-    padding: var(--space-6) 0 var(--space-7);
-    min-height: 62vh;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-7);
   }
-  .err__content { max-width: 56ch; }
+  .err { min-height: 60vh; }
+  .err__content { max-width: 56ch; position: relative; }
   .err__eyebrow {
     font-size: var(--font-caption);
     font-weight: 700;
@@ -100,15 +103,17 @@ const {
     color: var(--color-teal);
     margin-bottom: var(--space-2);
   }
+  /* Ghost code — decorative, tucked behind the title on desktop only */
   .err__code {
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: clamp(5rem, 16vw, 11rem);
-    line-height: 0.95;
+    line-height: 0.9;
     color: var(--color-navy);
-    opacity: 0.08;
-    margin: 0 0 calc(-1 * var(--space-4));
+    opacity: 0.06;
+    margin: 0 0 calc(-1 * var(--space-5));
     user-select: none;
+    pointer-events: none;
   }
   .err__title {
     font-size: var(--font-h1);
@@ -121,11 +126,35 @@ const {
   .err__visual svg { width: 100%; height: auto; display: block; }
 
   @media (max-width: 900px) {
-    .err.err { grid-template-columns: 1fr; gap: var(--space-4); padding-top: var(--space-4); }
-    /* Mobile order: content first, visual after */
-    .err__content { order: 1; }
-    .err__visual { order: 2; max-width: 420px; }
-    .err__actions .btn { width: 100%; text-align: center; }
+    .err.err { min-height: auto; }
+    .err__inner.err__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      padding-top: var(--space-4);
+      padding-bottom: var(--space-6);
+    }
+    /* Mobile order: eyebrow → heading → copy → CTA → visual */
+    .err__visual { order: 2; max-width: 340px; margin-inline: auto; }
+
+    /* Ghost code: compact badge-style numeral instead of a huge watermark */
+    .err__code {
+      font-size: clamp(3.2rem, 18vw, 4.5rem);
+      opacity: 0.10;
+      margin-bottom: calc(-1 * var(--space-3));
+    }
+    .err__title { font-size: clamp(1.55rem, 6.4vw, 2rem); }
+    .err__desc { font-size: var(--font-body); }
+
+    /* CTA: clean stacked hierarchy, guaranteed to fit any narrow viewport */
+    .err__inner > * { min-width: 0; }
+    .err__actions { display: block; }
+    .err__actions :global(.btn) {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin: 0 0 var(--space-2);
+    }
+    .err__actions :global(.btn:last-child) { margin-bottom: 0; }
   }
   @media (prefers-reduced-motion: no-preference) {
     .err__visual svg path:first-of-type { animation: err-draw 1.2s ease-out both; }
