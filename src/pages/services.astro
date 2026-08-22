@@ -6,48 +6,89 @@ import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { services } from '../data/services';
 
-const capabilityDetails: Record<string, string[]> = {
-  'it-consulting': ['Planning', 'Implementation', 'Evaluation', 'IT-related consulting'],
-  'software-development': ['Information systems', 'Software solutions', 'System development'],
-  'business-process-management': ['Process analysis', 'Process management', 'Business efficiency'],
-  'training': ['Training programs', 'Professional development', 'Knowledge transfer'],
-  'interactive-multimedia': ['Interactive content', 'Interactive presentation', 'Multimedia solutions'],
-  'educational-media': ['Learning media', 'Educational content', 'Education-oriented technology'],
+const capabilityDetails: Record<'id' | 'en', Record<string, string[]>> = {
+  id: {
+    'it-consulting': ['Perencanaan', 'Implementasi', 'Evaluasi', 'Konsultansi terkait TI'],
+    'software-development': ['Sistem informasi', 'Solusi perangkat lunak', 'Pengembangan sistem'],
+    'business-process-management': ['Analisis proses', 'Pengelolaan proses', 'Efisiensi bisnis'],
+    'training': ['Program pelatihan', 'Pengembangan profesional', 'Transfer pengetahuan'],
+    'interactive-multimedia': ['Konten interaktif', 'Presentasi interaktif', 'Solusi multimedia'],
+    'educational-media': ['Media pembelajaran', 'Konten pendidikan', 'Teknologi berorientasi pendidikan'],
+  },
+  en: {
+    'it-consulting': ['Planning', 'Implementation', 'Evaluation', 'IT-related consulting'],
+    'software-development': ['Information systems', 'Software solutions', 'System development'],
+    'business-process-management': ['Process analysis', 'Process management', 'Business efficiency'],
+    'training': ['Training programs', 'Professional development', 'Knowledge transfer'],
+    'interactive-multimedia': ['Interactive content', 'Interactive presentation', 'Multimedia solutions'],
+    'educational-media': ['Learning media', 'Educational content', 'Education-oriented technology'],
+  },
 };
 
 import { lp, type Lang } from '../i18n/config';
 interface Props { lang?: Lang }
 const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+
+const t = en
+  ? {
+      metaTitle: 'Technology Services & Capabilities | GCS',
+      metaDesc: 'GCS capabilities: IT consulting, software development, business process management, training, interactive multimedia, and educational media.',
+      heroEyebrow: 'Services',
+      heroTitle: 'Capabilities That Deliver',
+      heroSubtitle: 'Six capability areas covering the full lifecycle of technology — from planning and development to training and educational media.',
+      breadcrumb: 'Services',
+      introHeading: 'Capability Overview',
+      introText: 'Every engagement draws on the same system of capabilities. Depending on your organization\'s needs, these areas are combined into a single coherent solution.',
+      seeSolutions: 'See Solutions',
+      contactUs: 'Contact Us',
+      listAria: 'Capability list',
+      ctaTitle: 'Need a specific combination?',
+      ctaText: 'Solutions are developed according to each organization\'s needs.',
+      ctaButton: 'Discuss Your Needs',
+    }
+  : {
+      metaTitle: 'Layanan & Kapabilitas Teknologi | GCS',
+      metaDesc: 'Kapabilitas GCS: konsultasi TI, pengembangan perangkat lunak, manajemen proses bisnis, pelatihan, multimedia interaktif, dan media pendidikan.',
+      heroEyebrow: 'Layanan',
+      heroTitle: 'Kapabilitas yang Memberikan Hasil',
+      heroSubtitle: 'Enam area kapabilitas yang mencakup siklus teknologi secara utuh — dari perencanaan dan pengembangan hingga pelatihan dan media pendidikan.',
+      breadcrumb: 'Layanan',
+      introHeading: 'Ikhtisar Kapabilitas',
+      introText: 'Setiap kolaborasi bersandar pada sistem kapabilitas yang sama. Sesuai kebutuhan organisasi Anda, area-area ini dikombinasikan menjadi satu solusi yang utuh.',
+      seeSolutions: 'Lihat Solusi',
+      contactUs: 'Hubungi Kami',
+      listAria: 'Daftar kapabilitas',
+      ctaTitle: 'Butuh kombinasi yang spesifik?',
+      ctaText: 'Solusi dikembangkan sesuai kebutuhan masing-masing organisasi.',
+      ctaButton: 'Diskusikan Kebutuhan Anda',
+    };
 ---
 <SiteLayout
-  title="Technology Services & Capabilities | GCS"
-  description={`GCS capabilities: IT consulting, software development, business process management, training, interactive multimedia, and educational media.`}
+  title={t.metaTitle}
+  description={t.metaDesc}
   lang={lang}
   currentPath={lp(lang, '/services')}
 >
   <PageHero
-    eyebrow="Services"
-    title="Capabilities That Deliver"
-    subtitle="Six capability areas covering the full lifecycle of technology — from planning and development to training and educational media."
-    breadcrumb="Services"
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    subtitle={t.heroSubtitle}
+    breadcrumb={t.breadcrumb}
   />
 
   <section class="section" aria-labelledby="svc-intro">
     <div class="container svc-intro">
-      <h2 id="svc-intro" class="visually-hidden">Capability Overview</h2>
-      <p class="svc-intro__text">
-        Every engagement draws on the same system of capabilities. Depending on
-        your organization's needs, these areas are combined into a single
-        coherent solution.
-      </p>
+      <h2 id="svc-intro" class="visually-hidden">{t.introHeading}</h2>
+      <p class="svc-intro__text">{t.introText}</p>
       <div class="svc-intro__links">
-        <Button variant="secondary" size="sm" href={lp(lang, '/solutions')}>See Solutions</Button>
-        <Button variant="ghost" size="sm" href={lp(lang, '/contact')}>Contact Us</Button>
+        <Button variant="secondary" size="sm" href={lp(lang, '/solutions')}>{t.seeSolutions}</Button>
+        <Button variant="ghost" size="sm" href={lp(lang, '/contact')}>{t.contactUs}</Button>
       </div>
     </div>
   </section>
 
-  <section class="section section--tight" aria-label="Capability list">
+  <section class="section section--tight" aria-label={t.listAria}>
     <div class="container">
       <ol class="caps">
         {
@@ -56,12 +97,12 @@ const { lang = 'id' } = Astro.props;
               <span class="cap-row__num">{String(i + 1).padStart(2, '0')}</span>
               <div class="cap-row__body">
                 <div class="cap-row__head">
-                  <h2 class="cap-row__title">{s.name}</h2>
-                  <p class="cap-row__desc">{s.shortDescription}</p>
+                  <h2 class="cap-row__title">{en && s.nameEn ? s.nameEn : s.name}</h2>
+                  <p class="cap-row__desc">{en && s.shortDescriptionEn ? s.shortDescriptionEn : s.shortDescription}</p>
                 </div>
-                {capabilityDetails[s.id] && (
+                {capabilityDetails[lang][s.id] && (
                   <ul class="cap-row__details">
-                    {capabilityDetails[s.id].map((d) => (
+                    {capabilityDetails[lang][s.id].map((d) => (
                       <li>{d}</li>
                     ))}
                   </ul>
@@ -77,10 +118,10 @@ const { lang = 'id' } = Astro.props;
   <section class="section section--soft">
     <div class="container cta-band">
       <div>
-        <h2>Need a specific combination?</h2>
-        <p>Solutions are developed according to each organization's needs.</p>
+        <h2>{t.ctaTitle}</h2>
+        <p>{t.ctaText}</p>
       </div>
-      <Button variant="primary" href={lp(lang, '/contact')}>Discuss Your Needs</Button>
+      <Button variant="primary" href={lp(lang, '/contact')}>{t.ctaButton}</Button>
     </div>
   </section>
 </SiteLayout>
