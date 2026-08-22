@@ -8,28 +8,29 @@ import Badge from '../components/Badge.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import { company } from '../data/company';
 import { gerbangEdukasiProductLabel, GERBANG_EDUKASI_URL } from '../data/solutions';
-import { gerbangEdukasi as ge } from '../data/gerbang-edukasi';
+import { gerbangEdukasi as geData } from '../data/gerbang-edukasi';
 import geProduct from '../assets/product-gcs.png';
 import geClassroom from '../assets/storytelling-gcs.png';
 
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+const ge = geData[lang];
 const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
 
 // Minimal, fully source-supported Product schema — no price/rating/specs invented.
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: ge.name,
+  name: 'Gerbang Edukasi',
   description: ge.shortDescription,
   brand: { '@type': 'Organization', name: company.name },
 };
-
-import { lp, type Lang } from '../i18n/config';
-interface Props { lang?: Lang }
-const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
-  title="Gerbang Edukasi | Interactive Education Solution by GCS"
-  description="Gerbang Edukasi is interactive learning media for modern classrooms and Interactive Flat Panels — a GCS Product / Solution by PT. Gerbang Cipta Sarana."
+  title={ge.metaTitle}
+  description={ge.metaDesc}
   lang={lang}
   currentPath={lp(lang, "/gerbang-edukasi")}
     ogImage="/og/og-gerbang-edukasi.jpg"
@@ -40,19 +41,19 @@ const { lang = 'id' } = Astro.props;
     <div class="container p-hero__grid">
       <div class="p-hero__content">
         <Badge variant="orange" label={gerbangEdukasiProductLabel} />
-        <h1 id="ge-title" class="p-hero__title">{ge.name}</h1>
+        <h1 id="ge-title" class="p-hero__title">Gerbang Edukasi</h1>
         <p class="p-hero__tagline">{ge.tagline}</p>
         <p class="p-hero__desc">{ge.shortDescription}</p>
         <div class="p-hero__actions">
-          <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
-          <Button variant="ghost" href={lp(lang, '/solutions')}>Explore Solutions</Button>
+          <Button variant="primary" href={lp(lang, '/contact')}>{ge.heroCtaContact}</Button>
+          <Button variant="ghost" href={lp(lang, '/solutions')}>{ge.heroCtaSolutions}</Button>
         </div>
         <p class="p-hero__provider">{ge.providerLine}</p>
       </div>
       <div class="p-hero__visual">
         <Image
           src={geProduct}
-          alt="Perangkat Interactive Flat Panel dengan antarmuka pembelajaran interaktif di ruang kelas modern"
+          alt={ge.imgIfpHero}
           widths={[480, 720, 960]}
           sizes="(max-width: 820px) 92vw, 44vw"
           loading="eager"
@@ -67,7 +68,7 @@ const { lang = 'id' } = Astro.props;
   <section class="section" aria-labelledby="what-title">
     <div class="container grid grid--feature">
       <div>
-        <p class="eyebrow">01 · What is Gerbang Edukasi?</p>
+        <p class="eyebrow">{ge.s1Eyebrow}</p>
         <h2 id="what-title" class="what__statement">{ge.whatIs.statement}</h2>
       </div>
       <div>
@@ -91,7 +92,7 @@ const { lang = 'id' } = Astro.props;
           />
         </div>
         <div class="learn__content">
-          <p class="eyebrow">02 · The Learning Experience</p>
+          <p class="eyebrow">{ge.s2Eyebrow}</p>
           <h2 id="exp-title" class="learn__heading">{ge.learningExperience.heading}</h2>
           <p class="learn__text">{ge.learningExperience.description}</p>
         </div>
@@ -103,7 +104,7 @@ const { lang = 'id' } = Astro.props;
   <section class="section flow" aria-labelledby="flow-title">
     <div class="container">
       <SectionHeader
-        eyebrow="03 · Interactive Classroom"
+        eyebrow={ge.s3Eyebrow}
         title={ge.flow.heading}
         lead={ge.flow.note}
         align="center"
@@ -128,14 +129,14 @@ const { lang = 'id' } = Astro.props;
   <section class="section section--soft" aria-labelledby="px-title">
     <div class="container px">
       <SectionHeader
-        eyebrow="04 · Product Experience"
+        eyebrow={ge.s4Eyebrow}
         title={ge.productExperience.heading}
         lead={ge.productExperience.description}
       />
       <figure class="px__figure">
         <Image
           src={geProduct}
-          alt="Interactive Flat Panel sebagai permukaan interaksi kelas untuk aktivitas pembelajaran"
+          alt={ge.imgIfpPlatform}
           widths={[480, 720, 960]}
           sizes="(max-width: 820px) 92vw, 72vw"
           loading="lazy"
@@ -150,7 +151,7 @@ const { lang = 'id' } = Astro.props;
   {/* 06 — WHO IT SERVES */}
   <section class="section" aria-labelledby="who-title">
     <div class="container">
-      <SectionHeader eyebrow="05 · Who It Serves" title="Built for the Classroom Community" />
+      <SectionHeader eyebrow={ge.s5Eyebrow} title={ge.s5Title} />
       <div class="grid grid--4 who">
         {
           ge.audience.map((a, i) => (
@@ -188,16 +189,16 @@ const { lang = 'id' } = Astro.props;
   {/* GCS CONNECTION */}
   <section class="section relation" aria-labelledby="rel-title">
     <div class="container relation__inner">
-      <p class="eyebrow">Part of the GCS Ecosystem</p>
-      <div class="relation__chain" role="img" aria-label="PT. Gerbang Cipta Sarana, Technology Experience Solutions, menghasilkan Gerbang Edukasi, solusi pendidikan interaktif">
+      <p class="eyebrow">{ge.relationEyebrow}</p>
+      <div class="relation__chain" role="img" aria-label={`${company.name}, ${company.tagline}, menghasilkan Gerbang Edukasi, solusi pendidikan interaktif`}>
         <div class="relation__gcs" aria-hidden="true">
           <span class="relation__company">{company.name}</span>
           <span class="relation__tagline">{company.tagline}</span>
         </div>
         <span class="relation__arrow" aria-hidden="true">↓</span>
         <div class="relation__product" aria-hidden="true">
-          <span class="relation__name">{ge.name}</span>
-          <span class="relation__sub">Interactive Education Solution</span>
+          <span class="relation__name">Gerbang Edukasi</span>
+          <span class="relation__sub">{ge.relationSub}</span>
         </div>
       </div>
     </div>
@@ -209,8 +210,8 @@ const { lang = 'id' } = Astro.props;
       <h2 id="cta-title">{ge.cta.heading}</h2>
       <p>{ge.cta.text}</p>
       <div class="cta-final__actions">
-        <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
-        <Button variant="white" href={lp(lang, '/solutions')}>Explore GCS Solutions</Button>
+        <Button variant="primary" href={lp(lang, '/contact')}>{ge.ctaContactBtn}</Button>
+        <Button variant="white" href={lp(lang, '/solutions')}>{ge.ctaSolutionsBtn}</Button>
       </div>
       {hasExternalUrl && (
         <p class="cta-final__ext">
