@@ -26,7 +26,6 @@ export const navigation: NavItem[] = [
   { label: 'Services', href: '/services' },
   { label: 'Industries', href: '/industries' },
   { label: 'Solutions', href: '/solutions' },
-  { label: 'Experience', href: '/experience' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -36,7 +35,6 @@ export const footerNavigation = {
     { label: 'About GCS', href: '/about' },
     { label: 'Services', href: '/services' },
     { label: 'Industries', href: '/industries' },
-    { label: 'Experience', href: '/experience' },
     { label: 'Contact', href: '/contact' },
   ],
   solutions: [

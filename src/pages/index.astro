@@ -1,7 +1,7 @@
 ---
 // Home — flagship corporate homepage of PT. Gerbang Cipta Sarana.
 // Narrative: Hero → Who is GCS → Capabilities → Industries → Solutions →
-// Gerbang Edukasi → Experience → Why GCS → Final CTA.
+// Gerbang Edukasi → Why GCS → Final CTA.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { Image } from 'astro:assets';
 import SectionHeader from '../components/SectionHeader.astro';
@@ -17,13 +17,9 @@ import {
   gerbangEdukasiProductLabel,
   GERBANG_EDUKASI_URL,
 } from '../data/solutions';
-import { projects, projectCount } from '../data/experience';
 
 const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
 const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
-
-// Curated experience preview: 5 representative projects across sectors.
-const experiencePreview = [projects[0], projects[3], projects[4], projects[8], projects[12]];
 ---
 
 <SiteLayout
@@ -64,7 +60,7 @@ const experiencePreview = [projects[0], projects[3], projects[4], projects[8], p
         />
         <p class="hero__visual-meta">
           <span>EST. {company.founded}</span>
-          <span>{projectCount} PROJECTS</span>
+          <span>GOVERNMENT · EDUCATION · BUSINESS</span>
         </p>
       </div>
     </div>
@@ -201,37 +197,12 @@ const experiencePreview = [projects[0], projects[3], projects[4], projects[8], p
     </div>
   </section>
 
-  {/* 07 — EXPERIENCE / PROOF */}
-  <section class="section section--soft" aria-labelledby="exp-title">
-    <div class="container">
-      <SectionHeader
-        eyebrow="Track Record"
-        title="Selected Experience"
-        lead={`${projectCount} documented project experiences across government, higher education, schools, and the public sector.`}
-      />
-      <ul class="exp">
-        {experiencePreview.map((p) => (
-          <li class="exp__row">
-            <div class="exp__main">
-              <h3 class="exp__project">{p.project}</h3>
-              <p class="exp__client">{p.client}</p>
-            </div>
-            <span class="badge badge--teal exp__sector">{p.sector}</span>
-          </li>
-        ))}
-      </ul>
-      <div class="exp__cta">
-        <Button variant="navy" href="/experience">View All Experience</Button>
-      </div>
-    </div>
-  </section>
-
-  {/* 08 — WHY GCS / STRENGTHS */}
+  {/* 07 — WHY GCS / STRENGTHS */}
   <section class="section" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
         eyebrow="Why GCS"
-        title="Built on Experience"
+        title="The GCS Approach"
         lead="Three pillars behind the quality and consistency of our work."
       />
       <div class="strengths">
@@ -264,7 +235,7 @@ const experiencePreview = [projects[0], projects[3], projects[4], projects[8], p
     </div>
   </section>
 
-  {/* 09 — FINAL CTA */}
+  {/* 08 — FINAL CTA */}
   <section class="cta" aria-labelledby="cta-title">
     <div class="container cta__inner">
       <h2 id="cta-title">Let's Build the Right Solution</h2>
@@ -440,24 +411,7 @@ const experiencePreview = [projects[0], projects[3], projects[4], projects[8], p
     box-shadow: var(--shadow-lg);
   }
 
-  /* ============ 07 EXPERIENCE ============ */
-  .exp { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
-  .exp__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid var(--color-border);
-    flex-wrap: wrap;
-  }
-  .exp__row:first-child { border-top: 1px solid var(--color-border); }
-  .exp__project { font-size: var(--font-h4); margin: 0 0 0.15rem; }
-  .exp__client { color: var(--color-muted); margin: 0; font-size: var(--font-body-sm); }
-  .exp__sector { flex-shrink: 0; }
-  .exp__cta { text-align: center; margin-top: var(--space-4); }
-
-  /* ============ 08 STRENGTHS ============ */
+  /* ============ 07 STRENGTHS ============ */
   .strengths { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
   .strength { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
   .strength__num {
@@ -472,7 +426,7 @@ const experiencePreview = [projects[0], projects[3], projects[4], projects[8], p
   .strength h3 { font-size: var(--font-h3); }
   .strength p { color: var(--color-muted); margin: 0; }
 
-  /* ============ 09 FINAL CTA ============ */
+  /* ============ 08 FINAL CTA ============ */
   .cta {
     background:
       radial-gradient(circle at 85% 20%, rgba(20, 145, 155, 0.25) 0%, transparent 45%),

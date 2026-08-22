@@ -1,14 +1,12 @@
-// Management (leadership) — source-grounded from Compro GCS.ppt.
-// Names and official organizational positions are used exactly as provided.
-// No photos/biographies are included because none are verified/available.
+// Leadership roles only — client request (Phase 7.1):
+// personal names of Komisaris/Direktur are not published on the website.
 
-export type ManagementMember = {
-  name: string;
+export type LeadershipRole = {
   position: string;
 };
 
-export const management: ManagementMember[] = [
-  { name: 'U Auliya Sari, SE, M.Pd', position: 'Komisaris' },
-  { name: 'Ir. Panca C.S. Handaya, M.Si', position: 'Direktur Utama' },
-  { name: 'Acuk Prihantara', position: 'Direktur' },
+export const leadershipRoles: LeadershipRole[] = [
+  { position: 'Komisaris' },
+  { position: 'Direktur Utama' },
+  { position: 'Direktur' },
 ];

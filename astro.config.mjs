@@ -5,6 +5,10 @@ import sitemap from '@astrojs/sitemap';
 // but canonical/sitemap/OG identity always points here.
 export default defineConfig({
   site: 'https://gerbangciptasarana.co.id',
+  redirects: {
+    // /experience removed from public site per client request (Phase 7.1).
+    '/experience': '/about',
+  },
   integrations: [
     sitemap({
       // Exclude internal development routes from the public sitemap.

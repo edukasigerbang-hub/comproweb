@@ -5,8 +5,6 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { company } from '../data/company';
-import { management } from '../data/management';
-import { projectCount } from '../data/experience';
 ---
 <SiteLayout
   title="About PT. Gerbang Cipta Sarana | GCS"
@@ -45,15 +43,9 @@ import { projectCount } from '../data/experience';
             <span class="meta-block__value">{company.founded}</span>
             <span class="meta-block__label">Established</span>
           </div>
-          <div class="meta-block">
-            <span class="meta-block__value">{projectCount}</span>
-            <span class="meta-block__label">Project Experiences</span>
-          </div>
-          <div class="meta-block">
-            <span class="meta-block__value">3</span>
-            <span class="meta-block__label">Leadership Roles</span>
-          </div>
-        </div>
+          
+                    
+         </div>
       </div>
     </div>
   </section>
@@ -95,19 +87,18 @@ import { projectCount } from '../data/experience';
       </div>
     </div>
   </section>
-  {/* 04 — LEADERSHIP */}
+    {/* 04 — LEADERSHIP */}
   <section class="section section--soft" id="management" aria-labelledby="mgmt-title">
     <div class="container">
       <SectionHeader
         eyebrow="04 · Leadership"
-        title="Susunan Pengurus"
+        title="Corporate Structure"
         lead="The company is led by a committed leadership team."
       />
       <div class="grid grid--3">
         {management.map((m) => (
           <article class="exec">
             <span class="exec__role">{m.position}</span>
-            <h3 class="exec__name">{m.name}</h3>
             <span class="exec__line" aria-hidden="true"></span>
           </article>
         ))}
@@ -183,7 +174,7 @@ import { projectCount } from '../data/experience';
       <SectionHeader
         eyebrow="07 · Why GCS"
         title="Built on Experience"
-        lead={`Three pillars behind ${projectCount} documented project experiences.`}
+        lead="Three pillars behind GCS project delivery."
       />
       <div class="pillars">
         <article class="pillar">
@@ -213,8 +204,8 @@ import { projectCount } from '../data/experience';
         </article>
       </div>
       <div class="about-cta">
-        <Button variant="navy" href="/experience">View Our Experience</Button>
-        <Button variant="ghost" href="/services">Explore Services</Button>
+        <Button variant="navy" href="/services">Explore Services</Button>
+        <Button variant="ghost" href="/solutions">Explore Solutions</Button>
       </div>
     </div>
   </section>
