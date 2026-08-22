@@ -1,0 +1,64 @@
+﻿  .profile__meta { display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap; }
+  .meta-block {
+    border-left: 3px solid var(--color-teal);
+    padding-left: var(--space-2);
+    min-width: 110px;
+  }
+  .meta-block__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.75rem;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+  .meta-block__label {
+    font-size: var(--font-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  /* Timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; max-width: var(--container-narrow); }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--space-4);
+    border-left: 2px solid var(--color-border-strong);
+    padding: 0 0 var(--space-5) var(--space-4);
+    position: relative;
+  }
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+  .timeline__year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+  .timeline__content h3 { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .timeline__content p { color: var(--color-muted); margin: 0; max-width: 60ch; }
+
+  /* Vision & Mission */
+  .vm { background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%); color: #fff; }
+  .vm .eyebrow { color: #8fd0d6; }
+  .vm__statement {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    line-height: 1.35;
+    color: #fff;
+    margin: 0;
+  }
+  .vm__text { font-size: var(--font-body-lg); line-height: 1.7; color: #d5e0ea; margin: 0; max-width: 52ch; }
+

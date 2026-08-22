@@ -1,11 +1,10 @@
----
-// About — corporate identity, credibility, and institutional trust.
+﻿---
+// About â€” corporate identity, credibility, and institutional trust.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { company } from '../data/company';
-import { leadershipRoles } from '../data/management';
 ---
 <SiteLayout
   title="About PT. Gerbang Cipta Sarana | GCS"
@@ -15,15 +14,15 @@ import { leadershipRoles } from '../data/management';
   <PageHero
     eyebrow="About GCS"
     title="Building Solutions with Technology and Experience"
-    subtitle="An established technology and solutions company — operating since 2012."
+    subtitle="An established technology and solutions company â€” operating since 2012."
     breadcrumb="About"
   />
 
-  {/* 01 — CORPORATE PROFILE */}
+  {/* 01 â€” CORPORATE PROFILE */}
   <section class="section" id="profile" aria-labelledby="profile-title">
     <div class="container grid grid--feature">
       <div>
-        <p class="eyebrow">01 · Corporate Profile</p>
+        <p class="eyebrow">01 Â· Corporate Profile</p>
         <h2 id="profile-title">A multidisciplinary technology consulting company.</h2>
       </div>
       <div class="profile__body">
@@ -44,17 +43,15 @@ import { leadershipRoles } from '../data/management';
             <span class="meta-block__value">{company.founded}</span>
             <span class="meta-block__label">Established</span>
           </div>
-          
-                    
-         </div>
+        </div>
       </div>
     </div>
   </section>
 
-  {/* 02 — OUR JOURNEY */}
+  {/* 02 â€” OUR JOURNEY */}
   <section class="section section--soft" aria-labelledby="journey-title">
     <div class="container">
-      <SectionHeader eyebrow="02 · Our Journey" title="Established in 2012" />
+      <SectionHeader eyebrow="02 Â· Our Journey" title="Established in 2012" />
       <ol class="timeline">
         <li class="timeline__item">
           <span class="timeline__year">{company.founded}</span>
@@ -72,13 +69,13 @@ import { leadershipRoles } from '../data/management';
     </div>
   </section>
 
-  {/* 03 — VISION & MISSION */}
+  {/* 03 â€” VISION & MISSION */}
   <section class="section vm" id="vision-mission" aria-labelledby="vm-title">
     <div class="container">
       <h2 id="vm-title" class="visually-hidden">Vision &amp; Mission</h2>
       <div class="grid grid--2">
         <article class="vm__block">
-          <p class="eyebrow">03 · Vision</p>
+          <p class="eyebrow">03 Â· Vision</p>
           <p class="vm__statement">{company.vision}</p>
         </article>
         <article class="vm__block vm__block--accent">
@@ -88,92 +85,20 @@ import { leadershipRoles } from '../data/management';
       </div>
     </div>
   </section>
-    {/* 04 — LEADERSHIP */}
-  <section class="section section--soft" id="management" aria-labelledby="mgmt-title">
-    <div class="container">
-      <SectionHeader
-        eyebrow="04 · Leadership"
-        title="Corporate Structure"
-        lead="The company is led by a committed leadership team."
-      />
-      <div class="grid grid--3">
-        {leadershipRoles.map((m) => (
-          <article class="exec">
-            <span class="exec__role">{m.position}</span>
-            <span class="exec__line" aria-hidden="true"></span>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
 
-  {/* 05 — ORGANIZATION */}
+  {/* 05 â€” ORGANIZATION */}
   <section class="section" id="organization" aria-labelledby="org-title">
     <div class="container">
       <SectionHeader
-        eyebrow="05 · Organization"
+        eyebrow="04 Â· Organization"
         title="Struktur Organisasi"
-        lead="A clear structure connecting leadership to delivery divisions."
-      />
-      <div class="org">
-        <div class="org__tier">
-          <div class="org__node org__node--top">Komisaris</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__tier">
-          <div class="org__node org__node--top">Direktur Utama</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__tier">
-          <div class="org__node org__node--top">Direktur</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__row" role="list">
-          <div class="org__node" role="listitem">Divisi Pemasaran</div>
-          <div class="org__node" role="listitem">Divisi Implementasi</div>
-          <div class="org__node" role="listitem">Divisi Riset &amp; Development</div>
-          <div class="org__node" role="listitem">Divisi Multimedia Interaktif</div>
-          <div class="org__node" role="listitem">Adm &amp; Keuangan</div>
-        </div>
-      </div>
-      <p class="org__note">
-        Supporting units: Perguruan Tinggi · Sekolah · Pemerintah Daerah ·
-        Perusahaan Swasta · HRD Support · Factory · Project Based · Departemen
-        SAP &amp; Non SAP · Keuangan · Administrasi
-      </p>
-    </div>
-  </section>
 
-  {/* 06 — LEGALITAS */}
-  <section class="section section--soft" id="legalitas" aria-labelledby="legal-title">
-    <div class="container legal">
-      <SectionHeader
-        eyebrow="06 · Legalitas"
-        title="Legal Foundation"
-        lead="GCS holds the formal legal requirements to operate as a consulting company."
-      />
-      <ul class="legal__list">
-        <li>
-          <span class="legal__doc">Akte Pendirian dan Perubahan</span>
-          <span class="legal__status">Tersedia</span>
-        </li>
-        <li>
-          <span class="legal__doc">NIB</span>
-          <span class="legal__status legal__status--pending">Available upon request</span>
-        </li>
-        <li>
-          <span class="legal__doc">Nomor Pokok Wajib Pajak (NPWP)</span>
-          <span class="legal__status legal__status--pending">Available upon request</span>
-        </li>
-      </ul>
-    </div>
-  </section>
 
-  {/* 07 — WHY GCS */}
+  {/* 07 â€” WHY GCS */}
   <section class="section" id="strengths" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
-        eyebrow="07 · Why GCS"
+        eyebrow="05 Â· Why GCS"
         title="Built on Experience"
         lead="Three pillars behind GCS project delivery."
       />
@@ -190,14 +115,14 @@ import { leadershipRoles } from '../data/management';
           <span class="pillar__num">02</span>
           <h3>Methodology</h3>
           <p>
-            GIP — Gerbang Implementation Methodology — combines efficiency,
+            GIP â€” Gerbang Implementation Methodology â€” combines efficiency,
             effectiveness, organizational considerations, and business and
             management aspects to deliver fast, high-quality results.
           </p>
         </article>
         <article class="pillar">
           <span class="pillar__num">03</span>
-          <h3>Leadership</h3>
+          <h3>Involvement</h3>
           <p>
             Our directors are directly involved in project management, concept
             design, and knowledge transfer — creating higher value for clients.
@@ -277,32 +202,6 @@ import { leadershipRoles } from '../data/management';
     margin: 0;
   }
   .vm__text { font-size: var(--font-body-lg); line-height: 1.7; color: #d5e0ea; margin: 0; max-width: 52ch; }
-
-  /* Leadership */
-  .exec {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-top: 3px solid var(--color-navy);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-  }
-  .exec__role {
-    display: block;
-    font-size: var(--font-caption);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-teal);
-    margin-bottom: var(--space-2);
-  }
-  .exec__name { font-size: var(--font-h4); margin: 0; }
-  .exec__line {
-    display: block;
-    width: 40px;
-    height: 2px;
-    background: var(--color-orange);
-    margin-top: var(--space-3);
-  }
 </style>
 <style>
   /* Organization */
@@ -351,30 +250,6 @@ import { leadershipRoles } from '../data/management';
     margin: var(--space-4) auto 0;
   }
 
-  /* Legalitas */
-  .legal__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-width: 640px;
-    display: grid;
-    gap: var(--space-2);
-  }
-  .legal__list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--space-3);
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-3) var(--space-3);
-    flex-wrap: wrap;
-  }
-  .legal__doc { font-family: var(--font-heading); font-weight: 600; color: var(--color-text); }
-  .legal__status { font-size: var(--font-body-sm); color: var(--color-teal); font-weight: 600; }
-  .legal__status--pending { color: var(--color-muted); font-weight: 500; }
-
   /* Why GCS pillars */
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
   .pillar { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
@@ -409,3 +284,4 @@ import { leadershipRoles } from '../data/management';
     .profile__meta { gap: var(--space-3); }
   }
 </style>
+

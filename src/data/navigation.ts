@@ -18,7 +18,6 @@ export const navigation: NavItem[] = [
     children: [
       { label: 'Company Profile', href: '/about' },
       { label: 'Vision & Mission', href: '/about#vision-mission' },
-      { label: 'Management', href: '/about#management' },
       { label: 'Organization', href: '/about#organization' },
       { label: 'Company Strengths', href: '/about#strengths' },
     ],

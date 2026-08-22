@@ -1,0 +1,161 @@
+﻿    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+  .timeline__year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+  .timeline__content h3 { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .timeline__content p { color: var(--color-muted); margin: 0; max-width: 60ch; }
+
+  /* Vision & Mission */
+  .vm { background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%); color: #fff; }
+  .vm .eyebrow { color: #8fd0d6; }
+  .vm__statement {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    line-height: 1.35;
+    color: #fff;
+    margin: 0;
+  }
+  .vm__text { font-size: var(--font-body-lg); line-height: 1.7; color: #d5e0ea; margin: 0; max-width: 52ch; }
+
+  /* Leadership */
+  .exec {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-navy);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+  .exec__role {
+    display: block;
+    font-size: var(--font-caption);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: var(--space-2);
+  }
+  .exec__name { font-size: var(--font-h4); margin: 0; }
+  .exec__line {
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--color-orange);
+    margin-top: var(--space-3);
+  }
+</style>
+<style>
+  /* Organization */
+  .org { max-width: 820px; margin-inline: auto; text-align: center; }
+  .org__tier { display: flex; justify-content: center; }
+  .org__node {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 1.1rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-navy);
+  }
+  .org__node--top {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
+    min-width: 220px;
+  }
+  .org__link {
+    display: block;
+    width: 2px;
+    height: var(--space-4);
+    background: var(--color-border-strong);
+    margin-inline: auto;
+  }
+  .org__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    justify-content: center;
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--color-border-strong);
+    max-width: 780px;
+    margin-inline: auto;
+  }
+  .org__node:not(.org__node--top) { font-size: 0.9rem; }
+  .org__note {
+    text-align: center;
+    color: var(--color-muted);
+    font-size: var(--font-body-sm);
+    max-width: 70ch;
+    margin: var(--space-4) auto 0;
+  }
+
+  /* Legalitas */
+  .legal__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 640px;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .legal__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-3);
+    flex-wrap: wrap;
+  }
+  .legal__doc { font-family: var(--font-heading); font-weight: 600; color: var(--color-text); }
+  .legal__status { font-size: var(--font-body-sm); color: var(--color-teal); font-weight: 600; }
+  .legal__status--pending { color: var(--color-muted); font-weight: 500; }
+
+  /* Why GCS pillars */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  .pillar { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
+  .pillar__num {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--neutral-200);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+  .pillar h3 { font-size: var(--font-h3); }
+  .pillar p { color: var(--color-muted); margin: 0; }
+
+  .about-cta {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+  }
+
+  @media (max-width: 1024px) {
+    .pillars.pillars { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+  @media (max-width: 820px) {
+    .timeline__item.timeline__item { grid-template-columns: 1fr; gap: var(--space-1); }
+  }
+  @media (max-width: 560px) {
+    .org__row.org__row { flex-direction: column; align-items: stretch; }
+    .org__link { height: var(--space-3); }
+    .profile__meta { gap: var(--space-3); }
+  }
+</style>
