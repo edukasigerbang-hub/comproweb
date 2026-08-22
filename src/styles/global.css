@@ -476,5 +476,5 @@ ul, ol { margin: 0 0 var(--space-2); }
 }
 @media (max-width: 560px) {
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
-  .section { padding-block: var(--space-5); }
+  .section { padding-block: var(--space-4); }
 }
