@@ -55,10 +55,15 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
 
     {/* Key capabilities */}
     <section class="section section--soft">
-      <SectionHeader eyebrow="Key Capabilities" title="Capabilities" lead="[CONTENT TO BE PROVIDED]" />
-      <ul class="placeholder-list">
-        <li>[CONTENT TO BE PROVIDED]</li>
-      </ul>
+      <SectionHeader
+        eyebrow="Key Capabilities"
+        title="Capabilities"
+        lead="Detailed capability information is available upon request."
+      />
+      <p class="ge-note">
+        Gerbang Edukasi is designed around interactive learning for classrooms
+        and Interactive Flat Panel (IFP) platforms.
+      </p>
     </section>
 
     {/* Educational use case */}
@@ -66,7 +71,7 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
       <SectionHeader
         eyebrow="Use Case"
         title="Built for Education"
-        lead="Interactive Flat Panel (IFP) and other platforms — [CONTENT TO BE PROVIDED]."
+        lead="Interactive learning media for modern classrooms and Interactive Flat Panel platforms."
       />
     </section>
 
@@ -74,14 +79,21 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
     <section class="section section--soft">
       <div class="cta-inner">
         <h2>Explore Gerbang Edukasi</h2>
-        <p>
-          {hasExternalUrl
-            ? 'Visit the Gerbang Edukasi product site.'
-            : 'The Gerbang Edukasi product website URL is not yet confirmed.'}
-        </p>
-        {hasExternalUrl
-          ? <a class="btn btn--primary" href={GERBANG_EDUKASI_URL} target="_blank" rel="noopener">Visit Gerbang Edukasi</a>
-          : <span class="placeholder">{GERBANG_EDUKASI_URL}</span>}
+        {
+          hasExternalUrl ? (
+            <>
+              <p>Visit the Gerbang Edukasi product site.</p>
+              <a class="btn btn--primary" href={GERBANG_EDUKASI_URL} target="_blank" rel="noopener">
+                Visit Gerbang Edukasi
+              </a>
+            </>
+          ) : (
+            <p class="ge-note">
+              The Gerbang Edukasi product website is being prepared. For more
+              information in the meantime, please <a href="/contact">contact GCS</a>.
+            </p>
+          )
+        }
       </div>
     </section>
   </div>
@@ -108,13 +120,12 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
   }
   .product-label__text { margin: 0; font-weight: 600; }
 
-  .placeholder {
+  .ge-note {
     color: var(--color-muted);
-    font-style: italic;
     background: rgba(27, 95, 180, 0.06);
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
-    padding: var(--space-2);
+    padding: var(--space-2) var(--space-3);
   }
 
   .showcase-img {
@@ -126,8 +137,6 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
   }
-
-  .placeholder-list { color: var(--color-muted); font-style: italic; }
 
   .cta-inner { text-align: center; padding-block: var(--space-2); }
   .cta-inner p { color: var(--color-muted); }

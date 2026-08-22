@@ -1,231 +1,419 @@
 ---
-// About — corporate information: profile, history, vision & mission, legalitas,
-// management, organization, and company strengths.
+// About — corporate identity, credibility, and institutional trust.
 import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
 import { company } from '../data/company';
 import { management } from '../data/management';
 import { projectCount } from '../data/experience';
 ---
 <SiteLayout
   title="About GCS"
-  description="Learn about PT. Gerbang Cipta Sarana — a technology consulting company established in 2012, its vision, mission, management, organization, and strengths."
+  description={`PT. Gerbang Cipta Sarana (GCS) is a technology consulting and solutions company established in ${company.founded}, serving government, education, and private-sector organizations across Indonesia.`}
   currentPath="/about"
 >
-  <section class="page-hero">
-    <div class="container">
-      <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">About</span>
-      </nav>
-      <h1>About {company.shortName}</h1>
-      <p>{company.tagline}</p>
+  <PageHero
+    eyebrow="About GCS"
+    title="Building Solutions with Technology and Experience"
+    subtitle="An established technology and solutions company — operating since 2012."
+    breadcrumb="About"
+  />
+
+  {/* 01 — CORPORATE PROFILE */}
+  <section class="section" id="profile" aria-labelledby="profile-title">
+    <div class="container grid grid--feature">
+      <div>
+        <p class="eyebrow">01 · Corporate Profile</p>
+        <h2 id="profile-title">A multidisciplinary technology consulting company.</h2>
+      </div>
+      <div class="profile__body">
+        <p>
+          PT. Gerbang Cipta Sarana (GCS) provides Information Technology
+          consulting services covering planning, implementation, training,
+          supervision, software, and hardware.
+        </p>
+        <p>
+          The company was founded by experienced IT professionals who have
+          contributed to development in Indonesia across both government and
+          private sectors. Its capability is supported by professional personnel
+          and dynamic supporting staff with broad work experience, including
+          collaboration with local and international companies.
+        </p>
+        <div class="profile__meta">
+          <div class="meta-block">
+            <span class="meta-block__value">{company.founded}</span>
+            <span class="meta-block__label">Established</span>
+          </div>
+          <div class="meta-block">
+            <span class="meta-block__value">{projectCount}</span>
+            <span class="meta-block__label">Project Experiences</span>
+          </div>
+          <div class="meta-block">
+            <span class="meta-block__value">3</span>
+            <span class="meta-block__label">Leadership Roles</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="container">
-    {/* Company Profile + History */}
-    <section class="section" id="profile">
-      <SectionHeader eyebrow="Company Profile" title="Who We Are" />
-      <p class="lead">
-        {company.name} ({company.shortName}) is a technology consulting company
-        providing services related to Information Technology — from planning,
-        implementation, and training to supervision of software and hardware.
-      </p>
-      <p>
-        {company.shortName} is a multidisciplinary consulting company established
-        in {company.founded}. It was founded by experienced professionals in the
-        Information Technology field who have contributed to development across
-        Indonesia in both the government and private sectors.
-      </p>
-      <p>
-        The company's capability is supported by professional personnel and dynamic
-        supporting staff with broad work experience, including working with both
-        local and international companies.
-      </p>
-    </section>
+  {/* 02 — OUR JOURNEY */}
+  <section class="section section--soft" aria-labelledby="journey-title">
+    <div class="container">
+      <SectionHeader eyebrow="02 · Our Journey" title="Established in 2012" />
+      <ol class="timeline">
+        <li class="timeline__item">
+          <span class="timeline__year">{company.founded}</span>
+          <div class="timeline__content">
+            <h3>PT. Gerbang Cipta Sarana was established</h3>
+            <p>
+              Founded by reliable and experienced individuals in Information
+              Technology, GCS began its journey as a technology consultancy
+              participating in Indonesia's development across the public and
+              private sectors.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-    {/* Vision & Mission */}
-    <section class="section section--soft" id="vision-mission">
-      <SectionHeader eyebrow="Vision & Mission" title="Direction" />
-      <article class="card">
-        <h3>Visi</h3>
-        <p>{company.vision}</p>
-      </article>
-      <article class="card">
-        <h3>Misi</h3>
-        <p>{company.mission}</p>
-      </article>
-      <ul class="anchor-nav" aria-label="About sections">
-        <li><a href="#management">Management</a></li>
-        <li><a href="#organization">Organization</a></li>
-        <li><a href="#legalitas">Legalitas</a></li>
-        <li><a href="#strengths">Company Strengths</a></li>
-        <li><a href="/experience">Experience</a></li>
-      </ul>
-    </section>
-
-    {/* Management */}
-    <section class="section" id="management">
+  {/* 03 — VISION & MISSION */}
+  <section class="section vm" id="vision-mission" aria-labelledby="vm-title">
+    <div class="container">
+      <h2 id="vm-title" class="visually-hidden">Vision &amp; Mission</h2>
+      <div class="grid grid--2">
+        <article class="vm__block">
+          <p class="eyebrow">03 · Vision</p>
+          <p class="vm__statement">{company.vision}</p>
+        </article>
+        <article class="vm__block vm__block--accent">
+          <p class="eyebrow">Mission</p>
+          <p class="vm__text">{company.mission}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  {/* 04 — LEADERSHIP */}
+  <section class="section section--soft" id="management" aria-labelledby="mgmt-title">
+    <div class="container">
       <SectionHeader
-        eyebrow="Management"
+        eyebrow="04 · Leadership"
         title="Susunan Pengurus"
-        lead="The company is led by the following leadership team."
+        lead="The company is led by a committed leadership team."
       />
-      <div class="grid">
+      <div class="grid grid--3">
         {management.map((m) => (
-          <article class="card person" key={m.name}>
-            <h3>{m.name}</h3>
-            <p class="person__role">{m.position}</p>
+          <article class="exec">
+            <span class="exec__role">{m.position}</span>
+            <h3 class="exec__name">{m.name}</h3>
+            <span class="exec__line" aria-hidden="true"></span>
           </article>
         ))}
       </div>
-    </section>
+    </div>
+  </section>
 
-    {/* Organization */}
-    <section class="section section--soft" id="organization">
-      <SectionHeader eyebrow="Organization" title="Struktur Organisasi" />
+  {/* 05 — ORGANIZATION */}
+  <section class="section" id="organization" aria-labelledby="org-title">
+    <div class="container">
+      <SectionHeader
+        eyebrow="05 · Organization"
+        title="Struktur Organisasi"
+        lead="A clear structure connecting leadership to delivery divisions."
+      />
       <div class="org">
-        <div class="org__row org__row--center">
-          <div class="org__node">Komisaris</div>
+        <div class="org__tier">
+          <div class="org__node org__node--top">Komisaris</div>
         </div>
-        <div class="org__connector" aria-hidden="true"></div>
-        <div class="org__row org__row--center">
-          <div class="org__node">Direktur Utama</div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__tier">
+          <div class="org__node org__node--top">Direktur Utama</div>
         </div>
-        <div class="org__connector" aria-hidden="true"></div>
-        <div class="org__row org__row--center">
-          <div class="org__node">Direktur</div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__tier">
+          <div class="org__node org__node--top">Direktur</div>
         </div>
-        <div class="org__connector" aria-hidden="true"></div>
-        <div class="org__row">
-          <div class="org__node">Divisi Pemasaran</div>
-          <div class="org__node">Divisi Implementasi</div>
-          <div class="org__node">Divisi Riset &amp; Development</div>
-          <div class="org__node">Divisi Multimedia Interaktif</div>
-          <div class="org__node">Adm &amp; Keuangan</div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__row" role="list">
+          <div class="org__node" role="listitem">Divisi Pemasaran</div>
+          <div class="org__node" role="listitem">Divisi Implementasi</div>
+          <div class="org__node" role="listitem">Divisi Riset &amp; Development</div>
+          <div class="org__node" role="listitem">Divisi Multimedia Interaktif</div>
+          <div class="org__node" role="listitem">Adm &amp; Keuangan</div>
         </div>
       </div>
       <p class="org__note">
-        Supporting units and departments: Perguruan Tinggi · Sekolah ·
-        Pemerintah Daerah · Perusahaan Swasta · HRD Support · Factory ·
-        Project Based · Departemen SAP · Non SAP · Keuangan · Administrasi.
+        Supporting units: Perguruan Tinggi · Sekolah · Pemerintah Daerah ·
+        Perusahaan Swasta · HRD Support · Factory · Project Based · Departemen
+        SAP &amp; Non SAP · Keuangan · Administrasi
       </p>
-    </section>
+    </div>
+  </section>
 
-    {/* Legalitas */}
-    <section class="section" id="legalitas">
-      <SectionHeader eyebrow="Legalitas" title="Legal Foundation" />
-      <p>
-        {company.shortName} holds the formal legal requirements to operate as a
-        consulting firm, including:
-      </p>
-      <ul class="list">
-        <li>{company.legal.akte}</li>
-        <li>NIB: {company.legal.nib}</li>
-        <li>NPWP: {company.legal.npwp}</li>
+  {/* 06 — LEGALITAS */}
+  <section class="section section--soft" id="legalitas" aria-labelledby="legal-title">
+    <div class="container legal">
+      <SectionHeader
+        eyebrow="06 · Legalitas"
+        title="Legal Foundation"
+        lead="GCS holds the formal legal requirements to operate as a consulting company."
+      />
+      <ul class="legal__list">
+        <li>
+          <span class="legal__doc">Akte Pendirian dan Perubahan</span>
+          <span class="legal__status">Tersedia</span>
+        </li>
+        <li>
+          <span class="legal__doc">NIB</span>
+          <span class="legal__status legal__status--pending">Available upon request</span>
+        </li>
+        <li>
+          <span class="legal__doc">Nomor Pokok Wajib Pajak (NPWP)</span>
+          <span class="legal__status legal__status--pending">Available upon request</span>
+        </li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    {/* Company Strengths */}
-    <section class="section section--soft" id="strengths">
-      <SectionHeader eyebrow="Company Strengths" title="Why GCS" />
-      <div class="grid">
-        <article class="card">
-          <h3>Human Resources</h3>
+  {/* 07 — WHY GCS */}
+  <section class="section" id="strengths" aria-labelledby="why-title">
+    <div class="container">
+      <SectionHeader
+        eyebrow="07 · Why GCS"
+        title="Built on Experience"
+        lead={`Three pillars behind ${projectCount} documented project experiences.`}
+      />
+      <div class="pillars">
+        <article class="pillar">
+          <span class="pillar__num">01</span>
+          <h3>People</h3>
           <p>
             The quality of our people reflects the quality of our work.
-            Our expertise in each field is a guarantee of complete service.
+            Expertise in each field is a guarantee of complete, dependable service.
           </p>
         </article>
-        <article class="card">
+        <article class="pillar">
+          <span class="pillar__num">02</span>
           <h3>Methodology</h3>
           <p>
-            GIP — Gerbang Implementation Methodology combines work efficiency
-            and effectiveness, organizational considerations, and business and
+            GIP — Gerbang Implementation Methodology — combines efficiency,
+            effectiveness, organizational considerations, and business and
             management aspects to deliver fast, high-quality results.
           </p>
         </article>
-        <article class="card">
-          <h3>Directors</h3>
+        <article class="pillar">
+          <span class="pillar__num">03</span>
+          <h3>Leadership</h3>
           <p>
-            Our directors dedicate a large part of their time to direct
-            involvement in project management, concept design, and knowledge
-            transfer — delivering higher value to our clients.
+            Our directors are directly involved in project management, concept
+            design, and knowledge transfer — creating higher value for clients.
           </p>
         </article>
       </div>
-      <p class="stat-line">
-        <strong>{projectCount}+</strong> recorded project experiences across
-        education, government, and other sectors.
-      </p>
-    </section>
-  </div>
+      <div class="about-cta">
+        <Button variant="navy" href="/experience">View Our Experience</Button>
+        <Button variant="ghost" href="/services">Explore Services</Button>
+      </div>
+    </div>
+  </section>
 </SiteLayout>
-
 <style>
-  .page-hero {
-    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-2) 100%);
+  /* Profile */
+  .profile__body p { max-width: 58ch; }
+  .profile__meta { display: flex; gap: var(--space-4); margin-top: var(--space-4); flex-wrap: wrap; }
+  .meta-block {
+    border-left: 3px solid var(--color-teal);
+    padding-left: var(--space-2);
+    min-width: 110px;
+  }
+  .meta-block__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.75rem;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+  .meta-block__label {
+    font-size: var(--font-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  /* Timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; max-width: var(--container-narrow); }
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--space-4);
+    border-left: 2px solid var(--color-border-strong);
+    padding: 0 0 var(--space-5) var(--space-4);
+    position: relative;
+  }
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+  .timeline__year {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+  .timeline__content h3 { font-size: var(--font-h4); margin-bottom: 0.35rem; }
+  .timeline__content p { color: var(--color-muted); margin: 0; max-width: 60ch; }
+
+  /* Vision & Mission */
+  .vm { background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%); color: #fff; }
+  .vm .eyebrow { color: #8fd0d6; }
+  .vm__statement {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    line-height: 1.35;
     color: #fff;
-    padding: var(--space-5) 0;
+    margin: 0;
   }
-  .page-hero h1 { color: #fff; margin-bottom: var(--space-1); }
-  .page-hero p { margin: 0; color: #d5e0ea; }
+  .vm__text { font-size: var(--font-body-lg); line-height: 1.7; color: #d5e0ea; margin: 0; max-width: 52ch; }
 
-  .crumbs { font-size: 0.85rem; margin-bottom: var(--space-3); }
-  .crumbs a { color: #bcd0e4; }
-  .crumbs a:hover { color: #fff; text-decoration: none; }
-  .crumbs span[aria-current] { color: #fff; }
-
-  .lead { font-size: 1.15rem; }
-
-  .anchor-nav {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-1);
-    margin: var(--space-3) 0 0;
-    padding: 0;
-  }
-  .anchor-nav a {
-    display: inline-block;
-    padding: 0.4rem 0.85rem;
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  .anchor-nav a:hover { border-color: var(--color-blue); text-decoration: none; }
-
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
-  .card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow); }
-  .person { text-align: center; }
-  .person__role { color: var(--color-teal); font-weight: 600; margin: 0; }
-
-  .list { padding-inline-start: 1.25rem; }
-
-  .org { max-width: 860px; margin-inline: auto; }
-  .org__row { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center; }
-  .org__row--center { justify-content: center; }
-  .org__node {
+  /* Leadership */
+  .exec {
     background: #fff;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 1rem;
+    border-top: 3px solid var(--color-navy);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+  .exec__role {
+    display: block;
+    font-size: var(--font-caption);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: var(--space-2);
+  }
+  .exec__name { font-size: var(--font-h4); margin: 0; }
+  .exec__line {
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--color-orange);
+    margin-top: var(--space-3);
+  }
+</style>
+<style>
+  /* Organization */
+  .org { max-width: 820px; margin-inline: auto; text-align: center; }
+  .org__tier { display: flex; justify-content: center; }
+  .org__node {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    padding: 0.6rem 1.1rem;
     font-family: var(--font-heading);
     font-weight: 600;
-    box-shadow: var(--shadow);
+    font-size: 0.95rem;
+    color: var(--color-navy);
   }
-  .org__connector {
+  .org__node--top {
+    background: var(--color-navy);
+    color: #fff;
+    border-color: var(--color-navy);
+    min-width: 220px;
+  }
+  .org__link {
+    display: block;
     width: 2px;
-    height: var(--space-3);
-    background: var(--color-border);
+    height: var(--space-4);
+    background: var(--color-border-strong);
     margin-inline: auto;
   }
-  .org__note { text-align: center; color: var(--color-muted); margin-top: var(--space-4); }
+  .org__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    justify-content: center;
+    padding-top: var(--space-3);
+    border-top: 2px solid var(--color-border-strong);
+    max-width: 780px;
+    margin-inline: auto;
+  }
+  .org__node:not(.org__node--top) { font-size: 0.9rem; }
+  .org__note {
+    text-align: center;
+    color: var(--color-muted);
+    font-size: var(--font-body-sm);
+    max-width: 70ch;
+    margin: var(--space-4) auto 0;
+  }
 
-  .stat-line { text-align: center; margin-top: var(--space-3); }
-  .stat-line strong { font-size: 1.3rem; color: var(--color-navy); }
+  /* Legalitas */
+  .legal__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 640px;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .legal__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-3);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-3);
+    flex-wrap: wrap;
+  }
+  .legal__doc { font-family: var(--font-heading); font-weight: 600; color: var(--color-text); }
+  .legal__status { font-size: var(--font-body-sm); color: var(--color-teal); font-weight: 600; }
+  .legal__status--pending { color: var(--color-muted); font-weight: 500; }
 
-  @media (max-width: 820px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+  /* Why GCS pillars */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  .pillar { border-top: 3px solid var(--color-navy); padding-top: var(--space-3); }
+  .pillar__num {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.2rem;
+    color: var(--neutral-200);
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+  .pillar h3 { font-size: var(--font-h3); }
+  .pillar p { color: var(--color-muted); margin: 0; }
+
+  .about-cta {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-top: var(--space-5);
+  }
+
+  @media (max-width: 1024px) {
+    .pillars { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+  @media (max-width: 820px) {
+    .timeline__item { grid-template-columns: 1fr; gap: var(--space-1); }
+  }
+  @media (max-width: 560px) {
+    .org__row { flex-direction: column; align-items: stretch; }
+    .org__link { height: var(--space-3); }
+    .profile__meta { gap: var(--space-3); }
+  }
 </style>

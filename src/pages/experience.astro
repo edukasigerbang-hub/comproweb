@@ -1,31 +1,32 @@
 ---
-// Experience — searchable/filterable project database (20 source-grounded projects).
-// Lightweight client-side filtering by sector; no invented data.
+// Experience — project database: evidence of GCS's track record (20 source-grounded projects).
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
 import { projects, projectCount, projectFilters } from '../data/experience';
 ---
 <SiteLayout
   title="Experience"
-  description={`GCS project experience — ${projectCount} recorded projects across education, government, higher education, and other sectors.`}
+  description={`GCS project experience — ${projectCount} documented projects with clients across government, higher education, schools, and the public sector.`}
   currentPath="/experience"
 >
   <PageHero
-    title="Experience"
-    subtitle={`${projectCount} recorded project experiences with clients across the public and private sectors.`}
+    eyebrow="Selected Experience"
+    title="Experience That Supports Solutions"
+    subtitle={`${projectCount} documented projects delivered for institutions across Indonesia.`}
     breadcrumb="Experience"
   />
 
-  <div class="container">
-    <section class="section">
+  <section class="section" aria-labelledby="exp-title">
+    <div class="container">
       <SectionHeader
-        eyebrow="Project Experience"
-        title="Selected Projects"
-        lead="Projects and clients from the GCS company profile. Use the filters to browse by sector."
+        eyebrow="Project Database"
+        title="Projects & Clients"
+        lead="Filter by sector to explore the breadth of GCS's delivery record."
       />
 
-      <div class="filters" aria-label="Filter projects">
+      <div class="filters" role="group" aria-label="Filter projects by sector">
         {
           projectFilters.map((f) => (
             <button
@@ -39,27 +40,44 @@ import { projects, projectCount, projectFilters } from '../data/experience';
         }
       </div>
 
-      <ul class="project-list" data-project-list>
+      <div class="exp-table" data-project-list>
+        <div class="exp-head" aria-hidden="true">
+          <span>Project</span>
+          <span>Client / User</span>
+          <span>Sector</span>
+        </div>
+
         {
           projects.map((p) => (
-            <li class="project" data-sector={p.sector} key={p.id}>
-              <div class="project__head">
-                <h3 class="project__name">{p.project}</h3>
-                <span class="project__chip">{p.sector}</span>
-              </div>
-              <p class="project__client"><strong>Client / User:</strong> {p.client}</p>
-            </li>
+            <article class="exp-row" data-sector={p.sector} key={p.id}>
+              <h3 class="exp-row__project">{p.project}</h3>
+              <p class="exp-row__client">
+                <span class="exp-row__label">Client</span>
+                {p.client}
+              </p>
+              <span class="badge badge--teal exp-row__sector">
+                <span class="exp-row__label">Sector</span>
+                {p.sector}
+              </span>
+            </article>
           ))
         }
-      </ul>
+      </div>
 
       <p class="filter-empty" data-filter-empty hidden>
         No projects found for the selected sector.
       </p>
-    </section>
-  </div>
-</SiteLayout>
 
+      <div class="exp-cta">
+        <p>Want to know whether we have worked in your context?</p>
+        <div class="exp-cta__actions">
+          <Button variant="primary" href="/contact">Contact GCS</Button>
+          <Button variant="ghost" href="/solutions">Explore Solutions</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</SiteLayout>
 <script>
   const listEl = document.querySelector('[data-project-list]');
   const emptyEl = document.querySelector('[data-filter-empty]');
@@ -74,7 +92,7 @@ import { projects, projectCount, projectFilters } from '../data/experience';
         let visible = 0;
         listEl.querySelectorAll('[data-sector]').forEach((item) => {
           const match = filter === 'All' || item.getAttribute('data-sector') === filter;
-          item.hidden = !match;
+          (item as HTMLElement).hidden = !match;
           if (match) visible += 1;
         });
         if (emptyEl) emptyEl.hidden = visible !== 0;
@@ -84,43 +102,86 @@ import { projects, projectCount, projectFilters } from '../data/experience';
 </script>
 
 <style>
-  .filters { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-3); }
+  .filters { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-4); }
   .filter {
-    padding: 0.45rem 1rem;
-    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border-strong);
     background: #fff;
     color: var(--color-text);
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     font-family: var(--font-heading);
     font-weight: 600;
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
   }
-  .filter:hover { border-color: var(--color-blue); }
+  .filter:hover { border-color: var(--color-blue); color: var(--color-blue); }
   .filter--active { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
 
-  .project-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
-  .project {
-    background: #fff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-3);
-    box-shadow: var(--shadow);
+  /* Desktop: editorial table */
+  .exp-head,
+  .exp-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) 150px;
+    gap: var(--space-3);
+    align-items: center;
   }
-  .project__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); flex-wrap: wrap; }
-  .project__name { font-size: 1.05rem; margin: 0 0 var(--space-1); }
-  .project__chip {
-    font-size: 0.72rem;
+  .exp-head {
+    padding: 0 var(--space-3) var(--space-2);
+    font-family: var(--font-heading);
+    font-size: var(--font-caption);
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-teal);
-    background: rgba(20, 145, 155, 0.12);
-    border-radius: 999px;
-    padding: 0.2rem 0.6rem;
-    white-space: nowrap;
+    color: var(--color-muted);
+    border-bottom: 2px solid var(--color-navy);
   }
-  .project__client { color: var(--color-muted); margin: 0; }
+  .exp-row {
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    transition: background var(--transition-base);
+  }
+  .exp-row:hover { background: var(--neutral-50); }
+  .exp-row[hidden] { display: none; }
+  .exp-row__project { font-size: var(--font-body); font-weight: 600; margin: 0; color: var(--color-navy); }
+  .exp-row__client { margin: 0; color: var(--color-muted); font-size: var(--font-body-sm); }
+  .exp-row__sector { justify-self: start; }
+  .exp-row__label { display: none; }
 
   .filter-empty { color: var(--color-muted); font-style: italic; }
+
+  .exp-cta {
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+    justify-content: space-between;
+  }
+  .exp-cta p { margin: 0; font-size: var(--font-body-lg); color: var(--color-navy); font-weight: 600; }
+  .exp-cta__actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+  /* Mobile: structured cards */
+  @media (max-width: 768px) {
+    .exp-head { display: none; }
+    .exp-table { display: grid; gap: var(--space-2); }
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-3);
+    }
+    .exp-row__label {
+      display: inline;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-right: 0.4rem;
+    }
+  }
 </style>

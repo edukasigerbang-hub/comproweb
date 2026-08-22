@@ -1,113 +1,169 @@
 ---
-// Contact — lead-generation structure + clearly marked placeholder contact info.
-// Form fields are structured but not wired to any fake email/service.
+// Contact — convert corporate interest into inquiry.
+// Form is structural only; no backend is connected.
 import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
 import { company } from '../data/company';
-import { contact, contactFormFields } from '../data/contact';
+import { contact } from '../data/contact';
 import { services } from '../data/services';
+
+// Only show confirmed contact details — placeholders stay in the data layer.
+const contactDetails = [
+  { label: 'Address', value: contact.address },
+  { label: 'Phone', value: contact.phone },
+  { label: 'Email', value: contact.email },
+  { label: 'Social Media', value: contact.socialMedia },
+].filter((c) => c.value && !c.value.includes('['));
 ---
 <SiteLayout
   title="Contact"
-  description="Contact PT. Gerbang Cipta Sarana to discuss your technology needs."
+  description={`Contact ${company.name} to discuss your organization's technology needs — technology consulting and solutions since ${company.founded}.`}
   currentPath="/contact"
 >
   <PageHero
-    title="Contact"
-    subtitle="Discuss your technology needs with GCS."
+    eyebrow="Contact"
+    title="Let's Discuss the Right Solution"
+    subtitle="Tell us about your organization and where technology should take it next."
     breadcrumb="Contact"
   />
 
-  <div class="container">
-    <div class="contact-layout">
-      <section class="section">
-        <SectionHeader eyebrow="Get in Touch" title="Send an Inquiry" />
-        <p>
-          Tell us about your organization and how GCS can help. This form is a
-          structural template; submission handling will be connected once the
-          contact service is configured.
+  <section class="section" aria-labelledby="contact-title">
+    <div class="container contact-layout">
+      <div class="contact-side">
+        <h2 id="contact-title" class="visually-hidden">Contact information</h2>
+        <p class="contact-side__text">
+          GCS works with government institutions, higher education, schools, and
+          private companies. The first step is a conversation about your
+          organization's needs.
         </p>
 
+        {
+          contactDetails.length > 0 ? (
+            <dl class="contact-list">
+              {contactDetails.map((c) => (
+                <div class="contact-list__item">
+                  <dt>{c.label}</dt>
+                  <dd>{c.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : (
+            <p class="contact-note">
+              Contact details are available upon request — send an inquiry using
+              the form and we will respond with the right channel.
+            </p>
+          )
+        }
+
+        <div class="contact-links">
+          <p class="contact-links__title">Helpful links</p>
+          <ul>
+            <li><a href="/services">Explore our services</a></li>
+            <li><a href="/solutions">See our solutions</a></li>
+            <li><a href="/experience">View project experience</a></li>
+            <li><a href="/about">Learn about GCS</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <h2 class="form-panel__title">Send an Inquiry</h2>
+        <p class="form-panel__note">
+          Submission handling will be connected once the contact service is
+          configured.
+        </p>
         <form class="form" method="post" name="contact">
           <div class="form__grid">
-            <div class="form__field">
-              <label for="name">Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" required />
+            <div class="field">
+              <label class="field__label" for="name">Name <span aria-hidden="true">*</span></label>
+              <input class="input" id="name" name="name" type="text" autocomplete="name" required />
             </div>
-            <div class="form__field">
-              <label for="organization">Organization</label>
-              <input id="organization" name="organization" type="text" autocomplete="organization" />
+            <div class="field">
+              <label class="field__label" for="organization">Organization</label>
+              <input class="input" id="organization" name="organization" type="text" autocomplete="organization" />
             </div>
-            <div class="form__field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" required />
+            <div class="field">
+              <label class="field__label" for="email">Email <span aria-hidden="true">*</span></label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" required />
             </div>
-            <div class="form__field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            <div class="field">
+              <label class="field__label" for="phone">Phone</label>
+              <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" />
             </div>
-            <div class="form__field">
-              <label for="interest">Service / Interest</label>
-              <select id="interest" name="interest">
+            <div class="field field--full">
+              <label class="field__label" for="interest">Service / Interest</label>
+              <select class="select" id="interest" name="interest">
                 <option value="">Select a service area</option>
                 {services.map((s) => <option value={s.id}>{s.name}</option>)}
                 <option value="other">Other</option>
               </select>
             </div>
-            <div class="form__field form__field--full">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5"></textarea>
+            <div class="field field--full">
+              <label class="field__label" for="message">Message</label>
+              <textarea class="textarea" id="message" name="message" rows="5" placeholder="Describe your organization and what you need"></textarea>
             </div>
           </div>
-          <button class="btn btn--primary" type="submit">Submit Inquiry</button>
+          <Button variant="primary" type="submit">Submit Inquiry</Button>
+          <p class="form__privacy">
+            We only ask for the information needed to respond to your inquiry.
+          </p>
         </form>
-      </section>
-
-      <aside class="section contact-info">
-        <SectionHeader eyebrow="Company" title="Contact Details" />
-        <p class="contact-line"><strong>Address:</strong> {contact.address}</p>
-        <p class="contact-line"><strong>Phone:</strong> {contact.phone}</p>
-        <p class="contact-line"><strong>Email:</strong> {contact.email}</p>
-        <p class="contact-line"><strong>Social Media:</strong> {contact.socialMedia}</p>
-        <p class="contact-line contact-line--muted">
-          {company.name} — {company.tagline}
-        </p>
-      </aside>
+      </div>
     </div>
-  </div>
+  </section>
 </SiteLayout>
-
 <style>
-  .contact-layout { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-4); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
 
-  .form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); margin-bottom: var(--space-2); }
-  .form__field--full { grid-column: 1 / -1; }
-  .form__field label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
-  .form__field input,
-  .form__field select,
-  .form__field textarea {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    font-family: var(--font-body);
-    font-size: 1rem;
+  .contact-side__text { font-size: var(--font-body-lg); color: var(--color-text); max-width: 46ch; }
+  .contact-note { color: var(--color-muted); font-style: italic; }
+
+  .contact-list { margin: var(--space-4) 0 0; display: grid; gap: var(--space-3); }
+  .contact-list__item { border-left: 3px solid var(--color-teal); padding-left: var(--space-2); }
+  .contact-list__item dt {
+    font-size: var(--font-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+  .contact-list__item dd { margin: 0; font-weight: 600; color: var(--color-navy); }
+
+  .contact-links { margin-top: var(--space-5); }
+  .contact-links__title {
+    font-size: var(--font-caption);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    margin-bottom: var(--space-1);
+  }
+  .contact-links ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+
+  .form-panel {
     background: #fff;
-    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-md);
   }
-  .form__field input:focus,
-  .form__field select:focus,
-  .form__field textarea:focus {
-    outline: none;
-    border-color: var(--color-blue);
-    box-shadow: 0 0 0 3px rgba(27, 95, 180, 0.15);
+  .form-panel__title { font-size: var(--font-h3); margin-bottom: 0.25rem; }
+  .form-panel__note { font-size: var(--font-body-sm); color: var(--color-muted); margin-bottom: var(--space-4); }
+
+  .form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .field--full { grid-column: 1 / -1; }
+  .form :global(.btn) { margin-top: var(--space-2); }
+  .form__privacy { font-size: var(--font-body-sm); color: var(--color-muted); margin-top: var(--space-2); }
+
+  @media (max-width: 900px) {
+    .contact-layout { grid-template-columns: 1fr; gap: var(--space-5); }
   }
-
-  .contact-info { background: var(--color-bg-soft); border-radius: var(--radius); padding: var(--space-4); align-self: start; }
-  .contact-line { margin-bottom: var(--space-2); }
-  .contact-line--muted { color: var(--color-muted); font-style: italic; }
-
-  @media (max-width: 820px) { .contact-layout { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) { .form__grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    .form__grid { grid-template-columns: 1fr; }
+    .form-panel { padding: var(--space-4); }
+  }
 </style>
