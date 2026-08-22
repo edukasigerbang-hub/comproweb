@@ -54,17 +54,15 @@ export const ui = {
     },
   } as Record<Lang, Record<string, string>>,
 
-  aboutChildren: {
+    aboutChildren: {
     id: [
       { label: 'Profil Perusahaan', anchor: '/about' },
       { label: 'Visi & Misi', anchor: '/about#vision-mission' },
-      { label: 'Organisasi', anchor: '/about#organization' },
       { label: 'Keunggulan', anchor: '/about#strengths' },
     ],
     en: [
       { label: 'Company Profile', anchor: '/about' },
       { label: 'Vision & Mission', anchor: '/about#vision-mission' },
-      { label: 'Organization', anchor: '/about#organization' },
       { label: 'Company Strengths', anchor: '/about#strengths' },
     ],
   } as Record<Lang, { label: string; anchor: string }[]>,
