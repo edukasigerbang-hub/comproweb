@@ -8,9 +8,11 @@ interface Props {
   href?: string;
   productLabel?: string;
   accent?: boolean;
+  /** Locale-correct CTA label for the card link. */
+  linkLabel?: string;
 }
 
-const { title, description, href, productLabel, accent = false } = Astro.props;
+const { title, description, href, productLabel, accent = false, linkLabel } = Astro.props;
 const cardClass = 'card card--hover solution-card' + (accent ? ' card--accent-border' : '');
 ---
 
@@ -20,7 +22,7 @@ const cardClass = 'card card--hover solution-card' + (accent ? ' card--accent-bo
   <p class="card__body">{description}</p>
   {href && (
     <a class="link solution-card__link" href={href}>
-      {accent ? 'Explore Gerbang Edukasi' : 'View details'}
+      {linkLabel ?? (accent ? 'Explore Gerbang Edukasi' : 'View details')}
     </a>
   )}
 </article>

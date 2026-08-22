@@ -31,6 +31,11 @@ const isActive = (href: string) =>
 
 const otherLang: Lang = lang === 'id' ? 'en' : 'id';
 const altHref = altPath(lang, currentPath);
+const a11y = {
+  toggleMenu: lang === 'id' ? 'Buka menu' : 'Toggle menu',
+  primaryNav: lang === 'id' ? 'Navigasi utama' : 'Primary',
+  language: lang === 'id' ? 'Bahasa' : 'Language',
+};
 ---
 
 <header class="site-header" data-site-header>
@@ -51,14 +56,14 @@ const altHref = altPath(lang, currentPath);
       data-nav-toggle
       aria-expanded="false"
       aria-controls="primary-nav"
-      aria-label="Toggle menu"
+      aria-label={a11y.toggleMenu}
     >
       <span class="nav-toggle__bar"></span>
       <span class="nav-toggle__bar"></span>
       <span class="nav-toggle__bar"></span>
     </button>
 
-    <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+    <nav id="primary-nav" class="primary-nav" aria-label={a11y.primaryNav}>
       <ul class="primary-nav__list">
         {
           items.map((item) => (
@@ -76,7 +81,7 @@ const altHref = altPath(lang, currentPath);
             </li>
           ))
         }
-        <li class="lang-switch" aria-label="Language / Bahasa">
+        <li class="lang-switch" aria-label={a11y.language}>
           <a
             href={lang === 'id' ? currentPath : altHref}
             class={'lang-switch__opt' + (lang === 'id' ? ' is-active' : '')}

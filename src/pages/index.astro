@@ -63,7 +63,7 @@ const t = en
       strMethodology: 'Methodology',
       strMethodologyDesc: 'GIP — Gerbang Implementation Methodology — combining work efficiency, effectiveness, organizational considerations, and business and management aspects.',
       strInvolvement: 'Involvement',
-      strInvolvementDesc: 'Our directors are directly involved in project management, concept design, and knowledge transfer — delivering higher value to clients.',
+      strInvolvementDesc: 'Professional involvement across planning, implementation, knowledge transfer, and solution delivery — close engagement that adds value for clients.',
       ctaTitle: 'Let\'s Build the Right Solution',
       ctaText: `Discuss your organization's technology needs with a team that has been delivering solutions since ${company.founded}.`,
       ctaContact: 'Contact Us',
@@ -98,12 +98,12 @@ const t = en
       whyEyebrow: 'Mengapa GCS',
       whyTitle: 'Pendekatan GCS',
       whyLead: 'Tiga pilar yang mendukung kualitas dan konsistensi kerja kami.',
-      strPeople: 'People',
+      strPeople: 'SDM',
       strPeopleDesc: 'Sumber daya manusia profesional dengan keahlian di bidang masing-masing — fondasi dari layanan yang dapat diandalkan.',
-      strMethodology: 'Methodology',
+      strMethodology: 'Metodologi',
       strMethodologyDesc: 'GIP — Gerbang Implementation Methodology — menggabungkan efisiensi kerja, keefektifan, pertimbangan organisasi, serta aspek bisnis dan manajemen.',
-      strInvolvement: 'Involvement',
-      strInvolvementDesc: 'Direksi kami terlibat langsung dalam manajemen proyek, desain konsep, dan transfer ilmu — memberikan nilai lebih kepada klien.',
+      strInvolvement: 'Keterlibatan',
+      strInvolvementDesc: 'Keterlibatan profesional lintas perencanaan, implementasi, transfer pengetahuan, dan penyampaian solusi — kedekatan yang memberi nilai tambah bagi klien.',
       ctaTitle: 'Mari Bangun Solusi yang Tepat',
       ctaText: `Diskusikan kebutuhan teknologi organisasi Anda dengan tim yang telah\n          mengirimkan solusi sejak ${company.founded}.`,
       ctaContact: 'Hubungi Kami',
@@ -138,7 +138,9 @@ const t = en
       <div class="hero__visual">
         <Image
           src={heroGcs}
-          alt="Visualisasi ekosistem teknologi GCS — sistem yang saling terhubung untuk pendidikan, pemerintahan, kesehatan, dan industri"
+          alt={en
+              ? 'Visualization of the GCS technology ecosystem — interconnected systems serving education, government, health, and industry'
+              : 'Visualisasi ekosistem teknologi GCS — sistem yang saling terhubung untuk pendidikan, pemerintahan, kesehatan, dan industri'}
           widths={[480, 720, 960]}
           sizes="(max-width: 820px) 92vw, 44vw"
           loading="eager"
@@ -147,7 +149,7 @@ const t = en
         />
         <p class="hero__visual-meta">
           <span>EST. {company.founded}</span>
-          <span>GOVERNMENT · EDUCATION · BUSINESS</span>
+          <span>{t.sectors}</span>
         </p>
       </div>
     </div>
@@ -225,16 +227,17 @@ const t = en
                 eyebrow={t.solEyebrow}
         title={t.solTitle}
         lead={t.solLead}
-        cta={{ label: 'All Solutions', href: '/solutions' }}
+        cta={{ label: en ? 'All Solutions' : 'Semua Solusi', href: lp(lang, '/solutions') }}
       />
       <div class="sols">
         {solutions.map((sol) => (
           <SolutionCard
-            title={sol.name}
-            description={sol.description}
+            title={en && sol.nameEn ? sol.nameEn : sol.name}
+            description={en && sol.descriptionEn ? sol.descriptionEn : sol.description}
             productLabel={sol.product ? gerbangEdukasiProductLabel : undefined}
             accent={sol.product}
-            href={sol.route}
+            href={lp(lang, sol.route)}
+            linkLabel={sol.product ? t.geExplore : (en ? 'View details' : 'Lihat detail')}
           />
         ))}
       </div>
@@ -260,7 +263,9 @@ const t = en
       <div class="ge__visual">
         <Image
           src={geClassroom}
-          alt="Kelas modern dengan guru dan siswa sekolah dasar menggunakan media pembelajaran interaktif Gerbang Edukasi"
+          alt={en
+              ? 'Modern classroom with a teacher and elementary school students using Gerbang Edukasi interactive learning media'
+              : 'Kelas modern dengan guru dan siswa sekolah dasar menggunakan media pembelajaran interaktif Gerbang Edukasi'}
           widths={[480, 720, 960]}
           sizes="(max-width: 820px) 92vw, 44vw"
           loading="lazy"
@@ -274,35 +279,25 @@ const t = en
   <section class="section" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
-        eyebrow="Why GCS"
-        title="The GCS Approach"
-        lead="Three pillars behind the quality and consistency of our work."
+        eyebrow={t.whyEyebrow}
+        title={t.whyTitle}
+        lead={t.whyLead}
       />
       <div class="strengths">
         <article class="strength">
           <span class="strength__num">01</span>
-          <h3>People</h3>
-          <p>
-            Professional human resources with expertise in their respective
-            fields — the foundation of reliable service delivery.
-          </p>
+          <h3>{t.strPeople}</h3>
+          <p>{t.strPeopleDesc}</p>
         </article>
         <article class="strength">
           <span class="strength__num">02</span>
-          <h3>Methodology</h3>
-          <p>
-            GIP — Gerbang Implementation Methodology — combining work
-            efficiency, effectiveness, organizational considerations, and
-            business and management aspects.
-          </p>
+          <h3>{t.strMethodology}</h3>
+          <p>{t.strMethodologyDesc}</p>
         </article>
         <article class="strength">
           <span class="strength__num">03</span>
-          <h3>Involvement</h3>
-          <p>
-            Our directors are directly involved in project management, concept
-            design, and knowledge transfer — delivering higher value to clients.
-          </p>
+          <h3>{t.strInvolvement}</h3>
+          <p>{t.strInvolvementDesc}</p>
         </article>
       </div>
     </div>
@@ -311,14 +306,11 @@ const t = en
   {/* 08 — FINAL CTA */}
   <section class="cta" aria-labelledby="cta-title">
     <div class="container cta__inner">
-      <h2 id="cta-title">Let's Build the Right Solution</h2>
-      <p>
-        Discuss your organization's technology needs with a team that has been
-        delivering solutions since {company.founded}.
-      </p>
+      <h2 id="cta-title">{t.ctaTitle}</h2>
+      <p>{t.ctaText}</p>
       <div class="cta__actions">
-        <Button variant="primary" href={lp(lang, '/contact')}>Contact Us</Button>
-        <Button variant="white" href={lp(lang, '/solutions')}>Explore Solutions</Button>
+        <Button variant="primary" href={lp(lang, '/contact')}>{t.ctaContact}</Button>
+        <Button variant="white" href={lp(lang, '/solutions')}>{t.ctaExplore}</Button>
       </div>
     </div>
   </section>
