@@ -19,98 +19,132 @@ const contactDetails = [
 import { lp, type Lang } from '../i18n/config';
 interface Props { lang?: Lang }
 const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+
+const labelsId: Record<string, string> = { Address: 'Alamat', Phone: 'Telepon', Email: 'Email', 'Social Media': 'Media Sosial' };
+const t = en
+  ? {
+      metaTitle: 'Contact PT. Gerbang Cipta Sarana | GCS',
+      metaDesc: `Contact ${company.name} to discuss your organization's technology needs — technology consulting and solutions since ${company.founded}.`,
+      heroEyebrow: 'Contact',
+      heroTitle: "Let's Discuss the Right Solution",
+      heroSubtitle: 'Tell us about your organization and where technology should take it next.',
+      breadcrumb: 'Contact',
+      sideHeading: 'Contact information',
+      sideText: 'GCS works with government institutions, higher education, schools, and private companies. The first step is a conversation about your organization\'s needs.',
+      fallbackNote: 'Contact details are available upon request — send an inquiry using the form and we will respond with the right channel.',
+      linksTitle: 'Helpful links',
+      linkAbout: 'About GCS',
+      linkSolutions: 'Our Solutions',
+      formTitle: 'Send an Inquiry',
+      formNote: 'Submission handling will be connected once the contact service is configured.',
+      fName: 'Name', fOrg: 'Organization', fEmail: 'Email', fPhone: 'Phone',
+      fInterest: 'Service / Interest', fInterestPlaceholder: 'Select a service area', fOther: 'Other',
+      fMessage: 'Message', fMsgPlaceholder: 'Describe your organization and what you need',
+      submit: 'Submit Inquiry',
+      privacy: 'We only ask for the information needed to respond to your inquiry.',
+    }
+  : {
+      metaTitle: 'Hubungi PT. Gerbang Cipta Sarana | GCS',
+      metaDesc: `Hubungi ${company.name} untuk mendiskusikan kebutuhan teknologi organisasi Anda — konsultan teknologi dan solusi sejak ${company.founded}.`,
+      heroEyebrow: 'Kontak',
+      heroTitle: 'Mari Diskusikan Solusi yang Tepat',
+      heroSubtitle: 'Ceritakan organisasi Anda dan ke mana teknologi harus membawanya selanjutnya.',
+      breadcrumb: 'Kontak',
+      sideHeading: 'Informasi kontak',
+      sideText: 'GCS bekerja sama dengan institusi pemerintah, pendidikan tinggi, sekolah, dan perusahaan swasta. Langkah pertama adalah percakapan tentang kebutuhan organisasi Anda.',
+      fallbackNote: 'Informasi kontak tersedia berdasarkan permintaan — kirim pertanyaan melalui formulir dan kami akan menanggapi melalui kanal yang tepat.',
+      linksTitle: 'Tautan terkait',
+      linkAbout: 'Tentang GCS',
+      linkSolutions: 'Solusi Kami',
+      formTitle: 'Kirim Pertanyaan',
+      formNote: 'Penanganan pengiriman akan dihubungkan setelah layanan kontak dikonfigurasi.',
+      fName: 'Nama', fOrg: 'Organisasi', fEmail: 'Email', fPhone: 'Telepon',
+      fInterest: 'Layanan / Minat', fInterestPlaceholder: 'Pilih area layanan', fOther: 'Lainnya',
+      fMessage: 'Pesan', fMsgPlaceholder: 'Ceritakan organisasi Anda dan kebutuhan yang Anda perlukan',
+      submit: 'Kirim Pertanyaan',
+      privacy: 'Kami hanya meminta informasi yang diperlukan untuk menanggapi pertanyaan Anda.',
+    };
 ---
 <SiteLayout
-  title="Contact PT. Gerbang Cipta Sarana | GCS"
-  description={`Contact ${company.name} to discuss your organization's technology needs — technology consulting and solutions since ${company.founded}.`}
+  title={t.metaTitle}
+  description={t.metaDesc}
   lang={lang}
   currentPath={lp(lang, '/contact')}
 >
   <PageHero
-    eyebrow="Contact"
-    title="Let's Discuss the Right Solution"
-    subtitle="Tell us about your organization and where technology should take it next."
-    breadcrumb="Contact"
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    subtitle={t.heroSubtitle}
+    breadcrumb={t.breadcrumb}
   />
 
   <section class="section" aria-labelledby="contact-title">
     <div class="container contact-layout">
       <div class="contact-side">
-        <h2 id="contact-title" class="visually-hidden">Contact information</h2>
-        <p class="contact-side__text">
-          GCS works with government institutions, higher education, schools, and
-          private companies. The first step is a conversation about your
-          organization's needs.
-        </p>
+        <h2 id="contact-title" class="visually-hidden">{t.sideHeading}</h2>
+        <p class="contact-side__text">{t.sideText}</p>
 
         {
           contactDetails.length > 0 ? (
             <dl class="contact-list">
               {contactDetails.map((c) => (
                 <div class="contact-list__item">
-                  <dt>{c.label}</dt>
+                  <dt>{en ? c.label : labelsId[c.label]}</dt>
                   <dd>{c.value}</dd>
                 </div>
               ))}
             </dl>
           ) : (
-            <p class="contact-note">
-              Contact details are available upon request — send an inquiry using
-              the form and we will respond with the right channel.
-            </p>
+            <p class="contact-note">{t.fallbackNote}</p>
           )
         }
 
         <div class="contact-links">
-          <p class="contact-links__title">Helpful links</p>
+          <p class="contact-links__title">{t.linksTitle}</p>
           <ul>
-            <li><a href={lp(lang, '/about')}>Learn about GCS</a></li>
-            <li><a href={lp(lang, '/about')}>Learn about GCS</a></li>
+            <li><a href={lp(lang, '/about')}>{t.linkAbout}</a></li>
+            <li><a href={lp(lang, '/solutions')}>{t.linkSolutions}</a></li>
           </ul>
         </div>
       </div>
 
       <div class="form-panel">
-        <h2 class="form-panel__title">Send an Inquiry</h2>
-        <p class="form-panel__note">
-          Submission handling will be connected once the contact service is
-          configured.
-        </p>
+        <h2 class="form-panel__title">{t.formTitle}</h2>
+        <p class="form-panel__note">{t.formNote}</p>
         <form class="form" method="post" name="contact">
           <div class="form__grid">
             <div class="field">
-              <label class="field__label" for="name">Name <span aria-hidden="true">*</span></label>
+              <label class="field__label" for="name">{t.fName} <span aria-hidden="true">*</span></label>
               <input class="input" id="name" name="name" type="text" autocomplete="name" required />
             </div>
             <div class="field">
-              <label class="field__label" for="organization">Organization</label>
+              <label class="field__label" for="organization">{t.fOrg}</label>
               <input class="input" id="organization" name="organization" type="text" autocomplete="organization" />
             </div>
             <div class="field">
-              <label class="field__label" for="email">Email <span aria-hidden="true">*</span></label>
+              <label class="field__label" for="email">{t.fEmail} <span aria-hidden="true">*</span></label>
               <input class="input" id="email" name="email" type="email" autocomplete="email" required />
             </div>
             <div class="field">
-              <label class="field__label" for="phone">Phone</label>
+              <label class="field__label" for="phone">{t.fPhone}</label>
               <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" />
             </div>
             <div class="field field--full">
-              <label class="field__label" for="interest">Service / Interest</label>
+              <label class="field__label" for="interest">{t.fInterest}</label>
               <select class="select" id="interest" name="interest">
-                <option value="">Select a service area</option>
-                {services.map((s) => <option value={s.id}>{s.name}</option>)}
-                <option value="other">Other</option>
+                <option value="">{t.fInterestPlaceholder}</option>
+                {services.map((s) => <option value={s.id}>{en && s.nameEn ? s.nameEn : s.name}</option>)}
+                <option value="other">{t.fOther}</option>
               </select>
             </div>
             <div class="field field--full">
-              <label class="field__label" for="message">Message</label>
-              <textarea class="textarea" id="message" name="message" rows="5" placeholder="Describe your organization and what you need"></textarea>
+              <label class="field__label" for="message">{t.fMessage}</label>
+              <textarea class="textarea" id="message" name="message" rows="5" placeholder={t.fMsgPlaceholder}></textarea>
             </div>
           </div>
-          <Button variant="primary" type="submit">Submit Inquiry</Button>
-          <p class="form__privacy">
-            We only ask for the information needed to respond to your inquiry.
-          </p>
+          <Button variant="primary" type="submit">{t.submit}</Button>
+          <p class="form__privacy">{t.privacy}</p>
         </form>
       </div>
     </div>
