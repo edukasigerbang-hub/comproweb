@@ -11,8 +11,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      // Exclude internal development routes from the public sitemap.
-      filter: (page) => !page.includes('/design-system'),
+      // Exclude internal development routes and error pages from the public sitemap.
+      filter: (page) => !page.includes('/design-system') && !page.includes('/500') && !page.includes('/404'),
     }),
   ],
 });

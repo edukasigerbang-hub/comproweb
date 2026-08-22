@@ -1,0 +1,59 @@
+---
+// 500 — reusable internal-server-error experience.
+// Static hosting cannot auto-invoke this page on real runtime errors
+// (documented limitation); it is available at /500 for integration and QA,
+// and must remain noindex + excluded from the sitemap.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ErrorState from '../components/ErrorState.astro';
+---
+<SiteLayout
+  title="Terjadi Kesalahan | PT. Gerbang Cipta Sarana"
+  description="Sistem sedang mengalami kendala dan halaman ini tidak dapat ditampilkan untuk sementara."
+  lang="id"
+  currentPath="/"
+  noindex={true}
+>
+  <ErrorState
+    code="500"
+    lang="id"
+    eyebrow="Terjadi Kesalahan"
+    title="Terjadi kendala pada sistem."
+    description="Sistem sedang mengalami kendala dan halaman ini tidak dapat ditampilkan untuk sementara."
+    primaryLabel="Coba Lagi"
+    primaryHref="/500"
+    secondaryLabel="Kembali ke Beranda"
+    secondaryHref="/"
+    tertiaryLabel="Hubungi Kami"
+    tertiaryHref="/contact"
+  />
+</SiteLayout>
+
+<script is:inline>
+  // "Coba Lagi" / "Try Again" — real reload, no javascript: href.
+  var retry = document.querySelector('.err__actions .btn');
+  if (retry) {
+    retry.addEventListener('click', function (e) {
+      e.preventDefault();
+      location.reload();
+    });
+  }
+  (function () {
+    if (!location.pathname.startsWith('/en') && !new URLSearchParams(location.search).has('en')) return;
+    var root = document.documentElement;
+    root.setAttribute('lang', 'en');
+    var t = document.querySelector('title');
+    if (t) t.textContent = 'Internal Server Error | PT. Gerbang Cipta Sarana';
+    var m = document.querySelector('meta[name="description"]');
+    if (m) m.setAttribute('content', 'The system encountered an unexpected issue and this page could not be displayed right now.');
+    var sk = document.querySelector('.skip-link');
+    if (sk) sk.textContent = 'Skip to main content';
+    var el = function (sel, text) { var n = document.querySelector(sel); if (n) n.textContent = text; };
+    el('[data-error-root] .err__eyebrow', '500 · Internal Server Error');
+    el('.err__title', 'Something went wrong.');
+    el('.err__desc', 'The system encountered an unexpected issue and this page could not be displayed right now.');
+    var btns = document.querySelectorAll('.err__actions .btn');
+    var en = ['Try Again', 'Back to Home', 'Contact Us'];
+    btns.forEach(function (b, i) { if (en[i]) b.textContent = en[i]; });
+  })();
+</script>
+<!-- EN variant also reachable at /500?en for direct testing -->

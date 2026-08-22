@@ -1,0 +1,56 @@
+---
+// 404 — served by Cloudflare Workers assets with a real HTTP 404 status
+// (wrangler: not_found_handling = "404-page").
+// Static hosting serves ONE document for every unmatched URL, so the default
+// render is Indonesian. A tiny inline script (below) rewrites the copy to
+// English when the requested path starts with /en/ — no redirect, no framework.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ErrorState from '../components/ErrorState.astro';
+
+const lang = 'id'; // static default; EN applied at edge of request via inline script
+---
+<SiteLayout
+  title="Halaman Tidak Ditemukan | PT. Gerbang Cipta Sarana"
+  description="Alamat yang Anda buka mungkin sudah berubah, dipindahkan, atau tidak tersedia."
+  lang={lang}
+  currentPath="/"
+  noindex={true}
+>
+  <ErrorState
+    code="404"
+    lang={lang}
+    eyebrow="Halaman Tidak Ditemukan"
+    title="Halaman yang Anda cari tidak ditemukan."
+    description="Alamat yang Anda buka mungkin sudah berubah, dipindahkan, atau tidak tersedia."
+    primaryLabel="Kembali ke Beranda"
+    primaryHref="/"
+    secondaryLabel="Lihat Solusi"
+    secondaryHref="/solutions"
+    tertiaryLabel="Hubungi Kami"
+    tertiaryHref="/contact"
+  />
+</SiteLayout>
+
+<script is:inline>
+  (function () {
+    if (!location.pathname.startsWith('/en')) return;
+    var root = document.documentElement;
+    root.setAttribute('lang', 'en');
+    var el = function (sel, text) {
+      var n = document.querySelector(sel);
+      if (n) n.textContent = text;
+    };
+    var t = document.querySelector('title');
+    if (t) t.textContent = 'Page Not Found | PT. Gerbang Cipta Sarana';
+    var m = document.querySelector('meta[name="description"]');
+    if (m) m.setAttribute('content', 'The address may have changed, moved, or is no longer available.');
+    var sk = document.querySelector('.skip-link');
+    if (sk) sk.textContent = 'Skip to main content';
+    el('[data-error-root] .err__eyebrow', '404 · Page Not Found');
+    el('.err__title', 'The page you are looking for could not be found.');
+    el('.err__desc', 'The address may have changed, moved, or is no longer available.');
+    var btns = document.querySelectorAll('.err__actions .btn');
+    var en = ['Back to Home', 'Explore Solutions', 'Contact Us'];
+    btns.forEach(function (b, i) { if (en[i]) b.textContent = en[i]; });
+  })();
+</script>
