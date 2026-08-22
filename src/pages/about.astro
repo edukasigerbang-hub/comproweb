@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { company } from '../data/company';
+import { leadershipRoles } from '../data/management';
 ---
 <SiteLayout
   title="About PT. Gerbang Cipta Sarana | GCS"
@@ -96,7 +97,7 @@ import { company } from '../data/company';
         lead="The company is led by a committed leadership team."
       />
       <div class="grid grid--3">
-        {management.map((m) => (
+        {leadershipRoles.map((m) => (
           <article class="exec">
             <span class="exec__role">{m.position}</span>
             <span class="exec__line" aria-hidden="true"></span>

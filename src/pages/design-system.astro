@@ -9,11 +9,9 @@ import Badge from '../components/Badge.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import IndustryCard from '../components/IndustryCard.astro';
 import SolutionCard from '../components/SolutionCard.astro';
-import ManagementCard from '../components/ManagementCard.astro';
 import { company, site } from '../data/company';
 import { services } from '../data/services';
 import { industries } from '../data/industries';
-import { management } from '../data/management';
 
 const colors = [
   { name: 'Navy / Primary', hex: '#0b2239', variable: '--color-navy' },
@@ -151,14 +149,6 @@ const neutrals = [
           href="/solutions#information-systems"
         />
       </div>
-      <div class="grid grid--3 ds__gap-top">
-        {management.slice(0, 3).map((m) => (
-          <ManagementCard name={m.name} position={m.position} />
-        ))}
-      </div>
-      <div class="ds__gap-top">
-        <ExperienceCard project={projects[0].project} client={projects[0].client} sector={projects[0].sector} />
-      </div>
     </section>
 
     {/* Forms */}
@@ -191,20 +181,15 @@ const neutrals = [
 
     {/* Table */}
     <section class="ds__block">
-      <SectionHeader eyebrow="Data" title="Table" lead="Responsive, readable, hover state; used by the Experience page." />
+      <SectionHeader eyebrow="Data" title="Table" lead="Responsive, readable, hover state." />
       <div class="table-wrap">
         <table class="table">
           <thead>
-            <tr><th>No</th><th>Pekerjaan</th><th>User</th></tr>
+            <tr><th>No</th><th>Item</th><th>Notes</th></tr>
           </thead>
           <tbody>
-            {projects.slice(0, 4).map((p, i) => (
-              <tr key={p.id}>
-                <td>{i + 1}</td>
-                <td>{p.project}</td>
-                <td>{p.client}</td>
-              </tr>
-            ))}
+            <tr><td>1</td><td>Sample row</td><td>Table style reference</td></tr>
+            <tr><td>2</td><td>Sample row</td><td>Hover state demo</td></tr>
           </tbody>
         </table>
       </div>
