@@ -5,34 +5,73 @@ import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import { industries } from '../data/industries';
 
-const sectorContexts: Record<string, string> = {
-  education:
-    'From perguruan tinggi to schools, GCS delivers education management and learning technology adapted to academic workflows.',
-  government:
-    'Working with central and regional institutions on e-government systems — including regional financial information systems.',
-  health:
-    'Technology solutions supporting institutional and public health services.',
-  industry:
-    'Enterprise operations across procurement, production, sales, HRD, assets, and finance.',
-  cooperatives:
-    'Practical solutions scaled for cooperatives, small businesses, and BKK.',
+const sectorContexts: Record<'id' | 'en', Record<string, string>> = {
+  id: {
+    education:
+      'Dari perguruan tinggi hingga sekolah, GCS menghadirkan manajemen pendidikan dan teknologi pembelajaran yang disesuaikan dengan alur kerja akademik.',
+    government:
+      'Bekerja sama dengan institusi pusat dan daerah dalam sistem e-government — termasuk sistem informasi keuangan daerah.',
+    health:
+      'Solusi teknologi yang mendukung layanan kesehatan institusi maupun publik.',
+    industry:
+      'Operasional perusahaan lintas pengadaan, produksi, penjualan, HRD, aset, dan keuangan.',
+    cooperatives:
+      'Solusi praktis yang diskalakan untuk koperasi, usaha kecil, dan BKK.',
+  },
+  en: {
+    education:
+      'From perguruan tinggi to schools, GCS delivers education management and learning technology adapted to academic workflows.',
+    government:
+      'Working with central and regional institutions on e-government systems — including regional financial information systems.',
+    health:
+      'Technology solutions supporting institutional and public health services.',
+    industry:
+      'Enterprise operations across procurement, production, sales, HRD, assets, and finance.',
+    cooperatives:
+      'Practical solutions scaled for cooperatives, small businesses, and BKK.',
+  },
 };
 
 import { lp, type Lang } from '../i18n/config';
 interface Props { lang?: Lang }
 const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+
+const t = en
+  ? {
+      metaTitle: 'Industries We Serve | PT. Gerbang Cipta Sarana',
+      metaDesc: 'GCS serves Education, Government, Health, Industry, and Cooperatives/Small Business sectors — adapting technology solutions to each organizational context.',
+      heroEyebrow: 'Industries',
+      heroTitle: 'Solutions for Every Institutional Context',
+      heroSubtitle: 'The same capability system, applied differently across very different environments.',
+      breadcrumb: 'Industries',
+      eduPoints: ['Perguruan Tinggi (higher education)', 'Sekolah (schools)'],
+      ctaSolutions: 'See Our Solutions',
+      ctaSector: 'Discuss Your Sector',
+    }
+  : {
+      metaTitle: 'Industri yang Kami Layani | PT. Gerbang Cipta Sarana',
+      metaDesc: 'GCS melayani sektor Pendidikan, Pemerintahan, Kesehatan, Industri, serta Koperasi/Usaha Kecil — menyesuaikan solusi teknologi dengan konteks tiap organisasi.',
+      heroEyebrow: 'Industri',
+      heroTitle: 'Solusi untuk Setiap Konteks Kelembagaan',
+      heroSubtitle: 'Sistem kapabilitas yang sama, diterapkan secara berbeda di lingkungan yang sangat beragam.',
+      breadcrumb: 'Industri',
+      eduPoints: ['Perguruan Tinggi', 'Sekolah'],
+      ctaSolutions: 'Lihat Solusi Kami',
+      ctaSector: 'Diskusikan Sektor Anda',
+    };
 ---
 <SiteLayout
-  title="Industries We Serve | PT. Gerbang Cipta Sarana"
-  description="GCS serves Education, Government, Health, Industry, and Cooperatives/Small Business sectors — adapting technology solutions to each organizational context."
+  title={t.metaTitle}
+  description={t.metaDesc}
   lang={lang}
   currentPath={lp(lang, '/industries')}
 >
   <PageHero
-    eyebrow="Industries"
-    title="Solutions for Every Institutional Context"
-    subtitle="The same capability system, applied differently across very different environments."
-    breadcrumb="Industries"
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    subtitle={t.heroSubtitle}
+    breadcrumb={t.breadcrumb}
   />
 
   {/* Lead sector */}
@@ -42,11 +81,12 @@ const { lang = 'id' } = Astro.props;
         <article class="sector sector--lead" id={lead.id}>
           <span class="sector__num" aria-hidden="true">01</span>
           <div class="sector__body">
-            <h2 id="lead-sector" class="sector__title">{lead.name}</h2>
-            <p class="sector__context">{sectorContexts[lead.id]}</p>
+            <h2 id="lead-sector" class="sector__title">{en && lead.nameEn ? lead.nameEn : lead.name}</h2>
+            <p class="sector__context">{sectorContexts[lang][lead.id]}</p>
             <ul class="sector__points">
-              <li>Perguruan Tinggi (higher education)</li>
-              <li>Sekolah (schools)</li>
+              {t.eduPoints.map((p) => (
+                <li>{p}</li>
+              ))}
             </ul>
           </div>
         </article>
@@ -57,15 +97,15 @@ const { lang = 'id' } = Astro.props;
         {industries.slice(1).map((ind, i) => (
           <article class="sector" id={ind.id}>
             <span class="sector__num" aria-hidden="true">{String(i + 2).padStart(2, '0')}</span>
-            <h3 class="sector__title sector__title--sm">{ind.name}</h3>
-            <p class="sector__context">{sectorContexts[ind.id] ?? ind.description}</p>
+            <h3 class="sector__title sector__title--sm">{en && ind.nameEn ? ind.nameEn : ind.name}</h3>
+            <p class="sector__context">{sectorContexts[lang][ind.id] ?? (en && ind.descriptionEn ? ind.descriptionEn : ind.description)}</p>
           </article>
         ))}
       </div>
 
       <div class="ind-cta">
-        <Button variant="navy" href={lp(lang, '/solutions')}>See Our Solutions</Button>
-        <Button variant="ghost" href={lp(lang, '/contact')}>Discuss Your Sector</Button>
+        <Button variant="navy" href={lp(lang, '/solutions')}>{t.ctaSolutions}</Button>
+        <Button variant="ghost" href={lp(lang, '/contact')}>{t.ctaSector}</Button>
       </div>
     </div>
   </section>
