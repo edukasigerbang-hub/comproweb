@@ -60,7 +60,7 @@ const webSiteSchema = {
 <html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
     <title>{htmlTitle}</title>
     <meta name="description" content={description} />
@@ -104,6 +104,14 @@ const webSiteSchema = {
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192.png" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0b2239" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="GCS" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">{lang === 'en' ? 'Skip to main content' : 'Langsung ke konten utama'}</a>

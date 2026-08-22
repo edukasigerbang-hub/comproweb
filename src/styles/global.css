@@ -478,3 +478,18 @@ ul, ol { margin: 0 0 var(--space-2); }
   .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .section { padding-block: var(--space-4); }
 }
+
+/* ============================================================
+   PWA / STANDALONE — safe-area support
+   env() resolves to 0 in normal browsers; only applies real
+   insets when launched from an installed standalone PWA on
+   notched/rounded devices. No effect on desktop.
+   ============================================================ */
+html {
+  /* Let the page extend under system bars in standalone mode */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+body {
+  min-height: 100dvh;
+}
