@@ -27,7 +27,7 @@ export function hreflangs(lang: Lang, currentPath: string) {
   const base = import.meta.env.SITE || 'https://gerbangciptasarana.co.id';
   const other = altPath(lang, currentPath);
   return [
-    { hreflang: 'id', href: new URL(lang === 'id' ? currentPath : other, base).href },
+    { hreflang: 'id-ID', href: new URL(lang === 'id' ? currentPath : other, base).href },
     { hreflang: 'en', href: new URL(lang === 'en' ? currentPath : other, base).href },
     { hreflang: 'x-default', href: new URL(lang === 'id' ? currentPath : other, base).href },
   ];
