@@ -9,44 +9,103 @@ import { company } from '../data/company';
 import { lp, type Lang } from '../i18n/config';
 interface Props { lang?: Lang }
 const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+
+const t = en
+  ? {
+      metaTitle: 'About PT. Gerbang Cipta Sarana | GCS',
+      metaDesc: 'Established in 2012, PT. Gerbang Cipta Sarana is a multidisciplinary technology consulting company built by experienced IT professionals in Indonesia.',
+      heroEyebrow: 'About GCS',
+      heroTitle: 'Building Solutions with Technology and Experience',
+      heroSubtitle: 'An established technology and solutions company — operating since 2012.',
+      breadcrumb: 'About',
+      s1Eyebrow: '01 · Corporate Profile',
+      s1Title: 'A multidisciplinary technology consulting company.',
+      s1P1: 'PT. Gerbang Cipta Sarana (GCS) provides Information Technology consulting services covering planning, implementation, training, supervision, software, and hardware.',
+      s1P2: 'The company was founded by experienced IT professionals who have contributed to development in Indonesia across both government and private sectors. Its capability is supported by professional personnel and dynamic supporting staff with broad work experience, including collaboration with local and international companies.',
+      establishedLabel: 'Established',
+      s2Eyebrow: '02 · Our Journey',
+      s2Title: 'Established in 2012',
+      s2H3: 'PT. Gerbang Cipta Sarana was established',
+      s2P: 'Founded by reliable and experienced individuals in Information Technology, GCS began its journey as a technology consultancy participating in Indonesia\'s development across the public and private sectors.',
+      vmHeading: 'Vision & Mission',
+      vmEyebrow1: '03 · Vision',
+      vmEyebrow2: '03 · Mission',
+      vision: 'To become the best business partner that prioritizes customer satisfaction with the best technology.',
+      mission: 'To create the best creative solutions for effective and efficient business management, supporting sound managerial decision-making through technology.',
+      s4Eyebrow: '04 · Why GCS',
+      s4Title: 'Built on Experience',
+      s4Lead: 'Three pillars behind GCS project delivery.',
+      pillar1: 'People',
+      pillar1Desc: 'The quality of our people reflects the quality of our work. Expertise in each field is a guarantee of complete, dependable service.',
+      pillar2: 'Methodology',
+      pillar2Desc: 'GIP — Gerbang Implementation Methodology — combines efficiency, effectiveness, organizational considerations, and business and management aspects to deliver fast, high-quality results.',
+      pillar3: 'Involvement',
+      pillar3Desc: 'Professional involvement across planning, implementation, knowledge transfer, and solution delivery — close engagement that creates higher value for clients.',
+      ctaServices: 'Explore Services',
+      ctaSolutions: 'Explore Solutions',
+    }
+  : {
+      metaTitle: 'Tentang PT. Gerbang Cipta Sarana | GCS',
+      metaDesc: 'Berdiri sejak 2012, PT. Gerbang Cipta Sarana adalah perusahaan konsultan teknologi multidisiplin yang dibangun oleh profesional TI berpengalaman di Indonesia.',
+      heroEyebrow: 'Tentang GCS',
+      heroTitle: 'Membangun Solusi dengan Teknologi dan Pengalaman',
+      heroSubtitle: 'Perusahaan teknologi dan solusi yang telah mapan — beroperasi sejak 2012.',
+      breadcrumb: 'Tentang Kami',
+      s1Eyebrow: '01 · Profil Perusahaan',
+      s1Title: 'Perusahaan konsultan teknologi multidisiplin.',
+      s1P1: 'PT. Gerbang Cipta Sarana (GCS) menyediakan layanan konsultansi Teknologi Informasi yang mencakup perencanaan, implementasi, pelatihan, pengawasan, perangkat lunak, dan perangkat keras.',
+      s1P2: 'Perusahaan didirikan oleh profesional TI berpengalaman yang telah berkontribusi dalam pembangunan Indonesia di sektor pemerintah maupun swasta. Kapabilitas kami ditopang tenaga profesional serta staf pendukung yang dinamis dengan pengalaman kerja luas, termasuk kolaborasi dengan perusahaan lokal maupun internasional.',
+      establishedLabel: 'Berdiri',
+      s2Eyebrow: '02 · Perjalanan Kami',
+      s2Title: 'Berdiri pada 2012',
+      s2H3: 'PT. Gerbang Cipta Sarana didirikan',
+      s2P: 'Didirikan oleh individu yang andal dan berpengalaman di bidang Teknologi Informasi, GCS memulai perjalanan sebagai konsultan teknologi yang ikut ambil bagian dalam pembangunan Indonesia di sektor publik maupun swasta.',
+      vmHeading: 'Visi & Misi',
+      vmEyebrow1: '03 · Visi',
+      vmEyebrow2: '03 · Misi',
+      vision: company.vision,
+      mission: company.mission,
+      s4Eyebrow: '04 · Mengapa GCS',
+      s4Title: 'Dibangun atas Pengalaman',
+      s4Lead: 'Tiga pilar di balik pengiriman proyek GCS.',
+      pillar1: 'SDM',
+      pillar1Desc: 'Kualitas SDM kami mencerminkan kualitas pekerjaan kami. Keahlian di setiap bidang menjadi jaminan layanan yang lengkap dan dapat diandalkan.',
+      pillar2: 'Metodologi',
+      pillar2Desc: 'GIP — Gerbang Implementation Methodology — menggabungkan efisiensi, efektivitas, pertimbangan organisasi, serta aspek bisnis dan manajemen untuk hasil yang cepat dan berkualitas tinggi.',
+      pillar3: 'Keterlibatan',
+      pillar3Desc: 'Keterlibatan profesional lintas perencanaan, implementasi, transfer pengetahuan, dan penyampaian solusi — kedekatan yang menciptakan nilai lebih bagi klien.',
+      ctaServices: 'Jelajahi Layanan',
+      ctaSolutions: 'Jelajahi Solusi',
+    };
 ---
 <SiteLayout
-  title="About PT. Gerbang Cipta Sarana | GCS"
-  description="Established in 2012, PT. Gerbang Cipta Sarana is a multidisciplinary technology consulting company built by experienced IT professionals in Indonesia."
+  title={t.metaTitle}
+  description={t.metaDesc}
   lang={lang}
   currentPath={lp(lang, '/about')}
 >
   <PageHero
-    eyebrow="About GCS"
-    title="Building Solutions with Technology and Experience"
-    subtitle="An established technology and solutions company — operating since 2012."
-    breadcrumb="About"
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    subtitle={t.heroSubtitle}
+    breadcrumb={t.breadcrumb}
   />
 
   {/* 01 — CORPORATE PROFILE */}
   <section class="section" id="profile" aria-labelledby="profile-title">
     <div class="container grid grid--feature">
       <div>
-        <p class="eyebrow">01 · Corporate Profile</p>
-        <h2 id="profile-title">A multidisciplinary technology consulting company.</h2>
+        <p class="eyebrow">{t.s1Eyebrow}</p>
+        <h2 id="profile-title">{t.s1Title}</h2>
       </div>
       <div class="profile__body">
-        <p>
-          PT. Gerbang Cipta Sarana (GCS) provides Information Technology
-          consulting services covering planning, implementation, training,
-          supervision, software, and hardware.
-        </p>
-        <p>
-          The company was founded by experienced IT professionals who have
-          contributed to development in Indonesia across both government and
-          private sectors. Its capability is supported by professional personnel
-          and dynamic supporting staff with broad work experience, including
-          collaboration with local and international companies.
-        </p>
+        <p>{t.s1P1}</p>
+        <p>{t.s1P2}</p>
         <div class="profile__meta">
           <div class="meta-block">
             <span class="meta-block__value">{company.founded}</span>
-            <span class="meta-block__label">Established</span>
+            <span class="meta-block__label">{t.establishedLabel}</span>
           </div>
         </div>
       </div>
@@ -56,18 +115,13 @@ const { lang = 'id' } = Astro.props;
   {/* 02 — OUR JOURNEY */}
   <section class="section section--soft" aria-labelledby="journey-title">
     <div class="container">
-      <SectionHeader eyebrow="02 · Our Journey" title="Established in 2012" />
+      <SectionHeader eyebrow={t.s2Eyebrow} title={t.s2Title} />
       <ol class="timeline">
         <li class="timeline__item">
           <span class="timeline__year">{company.founded}</span>
           <div class="timeline__content">
-            <h3>PT. Gerbang Cipta Sarana was established</h3>
-            <p>
-              Founded by reliable and experienced individuals in Information
-              Technology, GCS began its journey as a technology consultancy
-              participating in Indonesia's development across the public and
-              private sectors.
-            </p>
+            <h3>{t.s2H3}</h3>
+            <p>{t.s2P}</p>
           </div>
         </li>
       </ol>
@@ -77,15 +131,15 @@ const { lang = 'id' } = Astro.props;
   {/* 03 — VISION & MISSION */}
   <section class="section vm" id="vision-mission" aria-labelledby="vm-title">
     <div class="container">
-      <h2 id="vm-title" class="visually-hidden">Vision &amp; Mission</h2>
+      <h2 id="vm-title" class="visually-hidden">{t.vmHeading}</h2>
       <div class="grid grid--2">
         <article class="vm__block">
-          <p class="eyebrow">03 · Vision</p>
-          <p class="vm__statement">{company.vision}</p>
+          <p class="eyebrow">{t.vmEyebrow1}</p>
+          <p class="vm__statement">{t.vision}</p>
         </article>
         <article class="vm__block vm__block--accent">
-          <p class="eyebrow">03 · Mission</p>
-          <p class="vm__text">{company.mission}</p>
+          <p class="eyebrow">{t.vmEyebrow2}</p>
+          <p class="vm__text">{t.mission}</p>
         </article>
       </div>
     </div>
@@ -95,40 +149,30 @@ const { lang = 'id' } = Astro.props;
   <section class="section" id="strengths" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
-        eyebrow="04 · Why GCS"
-        title="Built on Experience"
-        lead="Three pillars behind GCS project delivery."
+        eyebrow={t.s4Eyebrow}
+        title={t.s4Title}
+        lead={t.s4Lead}
       />
       <div class="pillars">
         <article class="pillar">
           <span class="pillar__num">01</span>
-          <h3>People</h3>
-          <p>
-            The quality of our people reflects the quality of our work.
-            Expertise in each field is a guarantee of complete, dependable service.
-          </p>
+          <h3>{t.pillar1}</h3>
+          <p>{t.pillar1Desc}</p>
         </article>
         <article class="pillar">
           <span class="pillar__num">02</span>
-          <h3>Methodology</h3>
-          <p>
-            GIP — Gerbang Implementation Methodology — combines efficiency,
-            effectiveness, organizational considerations, and business and
-            management aspects to deliver fast, high-quality results.
-          </p>
+          <h3>{t.pillar2}</h3>
+          <p>{t.pillar2Desc}</p>
         </article>
         <article class="pillar">
           <span class="pillar__num">03</span>
-          <h3>Involvement</h3>
-          <p>
-            Our directors are directly involved in project management, concept
-            design, and knowledge transfer — creating higher value for clients.
-          </p>
+          <h3>{t.pillar3}</h3>
+          <p>{t.pillar3Desc}</p>
         </article>
       </div>
       <div class="about-cta">
-        <Button variant="navy" href={lp(lang, '/services')}>Explore Services</Button>
-        <Button variant="ghost" href={lp(lang, '/solutions')}>Explore Solutions</Button>
+        <Button variant="navy" href={lp(lang, '/services')}>{t.ctaServices}</Button>
+        <Button variant="ghost" href={lp(lang, '/solutions')}>{t.ctaSolutions}</Button>
       </div>
     </div>
   </section>
