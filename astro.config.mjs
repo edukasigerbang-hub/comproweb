@@ -1,6 +1,14 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// Static, SEO-first corporate site. Default static output — no SSR needed.
+// Production SEO target. Preview deployments on *.workers.dev remain functional
+// but canonical/sitemap/OG identity always points here.
 export default defineConfig({
-  site: 'https://gerbangcipasarana.example.com',
+  site: 'https://gerbangciptasarana.co.id',
+  integrations: [
+    sitemap({
+      // Exclude internal development routes from the public sitemap.
+      filter: (page) => !page.includes('/design-system'),
+    }),
+  ],
 });

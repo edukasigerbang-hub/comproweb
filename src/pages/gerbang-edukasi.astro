@@ -13,12 +13,23 @@ import geProduct from '../assets/product-gcs.png';
 import geClassroom from '../assets/storytelling-gcs.png';
 
 const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
+
+// Minimal, fully source-supported Product schema — no price/rating/specs invented.
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: ge.name,
+  description: ge.shortDescription,
+  brand: { '@type': 'Organization', name: company.name },
+};
 ---
 <SiteLayout
-  title="Gerbang Edukasi — Interactive Learning for Modern Classrooms"
-  description="Gerbang Edukasi is interactive learning media for modern classrooms and Interactive Flat Panel platforms — a GCS Product / Solution developed by PT. Gerbang Cipta Sarana."
+  title="Gerbang Edukasi | Interactive Education Solution by GCS"
+  description="Gerbang Edukasi is interactive learning media for modern classrooms and Interactive Flat Panels — a GCS Product / Solution by PT. Gerbang Cipta Sarana."
   currentPath="/gerbang-edukasi"
+  ogImage="/og/og-gerbang-edukasi.jpg"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   {/* 01 — PRODUCT HERO */}
   <section class="p-hero" aria-labelledby="ge-title">
     <div class="container p-hero__grid">

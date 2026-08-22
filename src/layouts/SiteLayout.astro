@@ -8,26 +8,49 @@ import { company, site } from '../data/company';
 import '../styles/global.css';
 
 interface Props {
+  /** Final, complete page title (rendered verbatim). */
   title?: string;
   description?: string;
   lang?: string;
   currentPath?: string;
+  /** Path to the Open Graph image (under /public). */
+  ogImage?: string;
+  /** Set true for internal-only routes (e.g. /design-system). */
+  noindex?: boolean;
 }
 
 const {
-  title = site.name,
+  title,
   description = site.description,
   lang = 'id',
   currentPath = Astro.url.pathname,
+  ogImage = '/og/og-gcs.png',
+  noindex = false,
 } = Astro.props;
 
 // Canonical URL resolves against the `site` value in astro.config.mjs.
 const SITE = import.meta.env.SITE;
-const resolvedCanonical = SITE
-  ? new URL(Astro.url.pathname, SITE).href
-  : undefined;
+const siteUrl = new URL(SITE || 'https://gerbangciptasarana.co.id');
+const canonical = new URL(Astro.url.pathname, SITE).href;
+const resolvedOgImage = new URL(ogImage, SITE).href;
 
-const htmlTitle = title === site.name ? title : `${title} — ${company.shortName}`;
+const htmlTitle = title ?? `${site.name} — ${company.tagline}`;
+
+// JSON-LD — Organization (verified fields only; no invented contact data).
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: company.name,
+  url: siteUrl.origin,
+  foundingDate: String(company.founded),
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: siteUrl.origin,
+};
 ---
 
 <!doctype html>
@@ -38,7 +61,33 @@ const htmlTitle = title === site.name ? title : `${title} — ${company.shortNam
     <meta name="generator" content={Astro.generator} />
     <title>{htmlTitle}</title>
     <meta name="description" content={description} />
-    {resolvedCanonical && <link rel="canonical" href={resolvedCanonical} />}
+    {noindex ? (
+      <meta name="robots" content="noindex,nofollow" />
+    ) : (
+      <meta name="robots" content="index,follow" />
+    )}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={htmlTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter / social card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={htmlTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
 
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,0 +1,6 @@
+# PT. Gerbang Cipta Sarana — gerbangciptasarana.co.id
+User-agent: *
+Allow: /
+Disallow: /design-system
+
+Sitemap: https://gerbangciptasarana.co.id/sitemap-index.xml
