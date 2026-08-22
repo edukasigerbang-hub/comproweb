@@ -2,10 +2,12 @@
 // Gerbang Edukasi — a GCS product page within the GCS corporate ecosystem.
 // Brand hierarchy: GCS (corporate) → Products & Solutions → Gerbang Edukasi.
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { Image } from 'astro:assets';
 import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import { company } from '../data/company';
 import { gerbangEdukasiProductLabel, GERBANG_EDUKASI_URL } from '../data/solutions';
+import geProduct from '../assets/product-gcs.png';
 
 const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
 ---
@@ -41,7 +43,14 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
         Edukasi brings interactive learning media to modern classrooms and learning
         environments.
       </p>
-      <p class="placeholder">[CONTENT TO BE PROVIDED]</p>
+      <Image
+        src={geProduct}
+        alt="Perangkat interactive flat panel Gerbang Edukasi dengan antarmuka perangkat lunak pembelajaran di ruang kelas modern"
+        widths={[480, 720, 960]}
+        sizes="(max-width: 820px) 92vw, (max-width: 1200px) 60vw, 800px"
+        loading="lazy"
+        class="showcase-img"
+      />
     </section>
 
     {/* Key capabilities */}
@@ -106,6 +115,16 @@ const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
     border: 1px dashed var(--color-border);
     border-radius: var(--radius-sm);
     padding: var(--space-2);
+  }
+
+  .showcase-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
   }
 
   .placeholder-list { color: var(--color-muted); font-style: italic; }
