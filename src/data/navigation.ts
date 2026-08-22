@@ -17,9 +17,8 @@ export const navigation: NavItem[] = [
     href: '/about',
     children: [
       { label: 'Company Profile', href: '/about' },
-      { label: 'Vision & Mission', href: '/about#vision-mission' },
-      { label: 'Organization', href: '/about#organization' },
-      { label: 'Company Strengths', href: '/about#strengths' },
+            { label: 'Vision & Mission', href: '/about#vision-mission' },
+      { label: 'Why GCS', href: '/about#strengths' },
     ],
   },
   { label: 'Services', href: '/services' },

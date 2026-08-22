@@ -14,11 +14,16 @@ const capabilityDetails: Record<string, string[]> = {
   'interactive-multimedia': ['Interactive content', 'Interactive presentation', 'Multimedia solutions'],
   'educational-media': ['Learning media', 'Educational content', 'Education-oriented technology'],
 };
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="Technology Services & Capabilities | GCS"
   description={`GCS capabilities: IT consulting, software development, business process management, training, interactive multimedia, and educational media.`}
-  currentPath="/services"
+  lang={lang}
+  currentPath={lp(lang, '/services')}
 >
   <PageHero
     eyebrow="Services"
@@ -36,8 +41,8 @@ const capabilityDetails: Record<string, string[]> = {
         coherent solution.
       </p>
       <div class="svc-intro__links">
-        <Button variant="secondary" size="sm" href="/solutions">See Solutions</Button>
-        <Button variant="ghost" size="sm" href="/contact">Contact Us</Button>
+        <Button variant="secondary" size="sm" href={lp(lang, '/solutions')}>See Solutions</Button>
+        <Button variant="ghost" size="sm" href={lp(lang, '/contact')}>Contact Us</Button>
       </div>
     </div>
   </section>
@@ -75,7 +80,7 @@ const capabilityDetails: Record<string, string[]> = {
         <h2>Need a specific combination?</h2>
         <p>Solutions are developed according to each organization's needs.</p>
       </div>
-      <Button variant="primary" href="/contact">Discuss Your Needs</Button>
+      <Button variant="primary" href={lp(lang, '/contact')}>Discuss Your Needs</Button>
     </div>
   </section>
 </SiteLayout>

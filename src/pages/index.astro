@@ -9,7 +9,7 @@ import Button from '../components/Button.astro';
 import SolutionCard from '../components/SolutionCard.astro';
 import heroGcs from '../assets/hero-gcs.png';
 import geClassroom from '../assets/storytelling-gcs.png';
-import { company, site } from '../data/company';
+import { company } from '../data/company';
 import { services } from '../data/services';
 import { industries } from '../data/industries';
 import {
@@ -17,15 +17,105 @@ import {
   gerbangEdukasiProductLabel,
   GERBANG_EDUKASI_URL,
 } from '../data/solutions';
+import { lp, type Lang } from '../i18n/config';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
 
 const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
-const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
+const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : lp(lang, '/gerbang-edukasi');
+
+const t = en
+  ? {
+      metaTitle: 'PT. Gerbang Cipta Sarana | Technology. Experience. Solutions.',
+      metaDesc: 'GCS is an Indonesian technology consulting and solutions company since 2012 — serving government, education, and private-sector organizations.',
+      heroLead: 'A technology consulting and solutions company with experience across education, government, and business sectors.',
+      exploreSolutions: 'Explore Our Solutions',
+      contactUs: 'Contact Us',
+      sectors: 'GOVERNMENT · EDUCATION · BUSINESS',
+      whoEyebrow: 'Who We Are',
+      whoTitle: `Technology consulting since ${company.founded}.`,
+      whoP1: 'PT. Gerbang Cipta Sarana (GCS) is a multidisciplinary technology consulting company providing Information Technology services — from planning, implementation, and training to supervision of software and hardware.',
+      whoP2: 'Founded by experienced IT professionals, GCS has contributed to development in Indonesia across both the government and private sectors, supported by professional personnel with broad work experience.',
+      learnAbout: 'Learn About GCS',
+      established: 'Established',
+      capEyebrow: 'What We Do',
+      capTitle: 'Core Capabilities',
+      capLead: 'Six capability areas covering the full lifecycle of technology — from planning and development to training and educational media.',
+      indEyebrow: 'Who We Serve',
+      indTitle: 'Industries We Serve',
+                  indLead: "GCS develops technology solutions according to each organization's needs — across very different environments.",
+      solEyebrow: 'Products & Solutions',
+      solTitle: 'Solutions',
+      solLead: 'Technology capabilities delivered as solutions for organizational needs.',
+      geLead: 'Interactive learning media for modern education.',
+      geText: `Developed within GCS's interactive multimedia and educational media\n          capabilities, Gerbang Edukasi brings interactive learning to\n          classrooms and Interactive Flat Panel platforms.`,
+      geExplore: 'Explore Gerbang Edukasi',
+      geDetails: 'Product Details',
+      whyEyebrow: 'Why GCS',
+      whyTitle: 'The GCS Approach',
+      whyLead: 'Three pillars behind the quality and consistency of our work.',
+      strPeople: 'People',
+      strPeopleDesc: 'Professional human resources with expertise in their respective fields — the foundation of reliable service delivery.',
+      strMethodology: 'Methodology',
+      strMethodologyDesc: 'GIP — Gerbang Implementation Methodology — combining work efficiency, effectiveness, organizational considerations, and business and management aspects.',
+      strInvolvement: 'Involvement',
+      strInvolvementDesc: 'Our directors are directly involved in project management, concept design, and knowledge transfer — delivering higher value to clients.',
+      ctaTitle: 'Let\'s Build the Right Solution',
+      ctaText: `Discuss your organization's technology needs with a team that has been delivering solutions since ${company.founded}.`,
+      ctaContact: 'Contact Us',
+      ctaExplore: 'Explore Solutions',
+    }
+  : {
+      metaTitle: 'PT. Gerbang Cipta Sarana | Teknologi. Pengalaman. Solusi.',
+      metaDesc: 'GCS adalah perusahaan konsultan teknologi & solusi Indonesia sejak 2012 — melayani institusi pemerintah, pendidikan, dan sektor swasta.',
+      heroLead: 'Perusahaan konsultan teknologi dan solusi dengan pengalaman lintas sektor pendidikan, pemerintahan, dan bisnis.',
+      exploreSolutions: 'Jelajahi Solusi Kami',
+      contactUs: 'Hubungi Kami',
+      sectors: 'PEMERINTAHAN · PENDIDIKAN · BISNIS',
+      whoEyebrow: 'Tentang Kami',
+      whoTitle: `Konsultan teknologi sejak ${company.founded}.`,
+      whoP1: 'PT. Gerbang Cipta Sarana (GCS) adalah perusahaan konsultan teknologi multidisiplin yang menyediakan layanan Teknologi Informasi — mulai dari perencanaan, implementasi, dan pelatihan hingga pengawasan perangkat lunak dan perangkat keras.',
+      whoP2: 'Didirikan oleh profesional TI berpengalaman, GCS telah berkontribusi dalam pembangunan Indonesia di sektor pemerintah maupun swasta, didukung tenaga profesional dengan pengalaman kerja yang luas.',
+      learnAbout: 'Kenali GCS',
+      established: 'Berdiri',
+      capEyebrow: 'Apa yang Kami Kerjakan',
+      capTitle: 'Kapabilitas Utama',
+      capLead: 'Enam area kapabilitas yang mencakup siklus teknologi secara utuh — dari perencanaan dan pengembangan hingga pelatihan dan media pendidikan.',
+      indEyebrow: 'Yang Kami Layani',
+      indTitle: 'Industri yang Kami Layani',
+      indLead: 'GCS mengembangkan solusi teknologi sesuai kebutuhan tiap organisasi — di lingkungan yang sangat beragam.',
+      solEyebrow: 'Produk & Solusi',
+      solTitle: 'Solusi',
+      solLead: 'Kemampuan teknologi yang disampaikan sebagai solusi untuk kebutuhan organisasi.',
+      geLead: 'Media pembelajaran interaktif untuk pendidikan modern.',
+      geText: `Dikembangkan dari kemampuan multimedia interaktif dan media\n          pendidikan GCS, Gerbang Edukasi membawa pembelajaran interaktif ke\n          kelas dan platform Interactive Flat Panel.`,
+      geExplore: 'Jelajahi Gerbang Edukasi',
+      geDetails: 'Detail Produk',
+      whyEyebrow: 'Mengapa GCS',
+      whyTitle: 'Pendekatan GCS',
+      whyLead: 'Tiga pilar yang mendukung kualitas dan konsistensi kerja kami.',
+      strPeople: 'People',
+      strPeopleDesc: 'Sumber daya manusia profesional dengan keahlian di bidang masing-masing — fondasi dari layanan yang dapat diandalkan.',
+      strMethodology: 'Methodology',
+      strMethodologyDesc: 'GIP — Gerbang Implementation Methodology — menggabungkan efisiensi kerja, keefektifan, pertimbangan organisasi, serta aspek bisnis dan manajemen.',
+      strInvolvement: 'Involvement',
+      strInvolvementDesc: 'Direksi kami terlibat langsung dalam manajemen proyek, desain konsep, dan transfer ilmu — memberikan nilai lebih kepada klien.',
+      ctaTitle: 'Mari Bangun Solusi yang Tepat',
+      ctaText: `Diskusikan kebutuhan teknologi organisasi Anda dengan tim yang telah\n          mengirimkan solusi sejak ${company.founded}.`,
+      ctaContact: 'Hubungi Kami',
+      ctaExplore: 'Jelajahi Solusi',
+    };
 ---
 
 <SiteLayout
-  title="PT. Gerbang Cipta Sarana | Technology. Experience. Solutions."
-  description="GCS is an Indonesian technology consulting and solutions company since 2012 — serving government, education, and private-sector organizations."
-  currentPath="/"
+  title={t.metaTitle}
+  description={t.metaDesc}
+  currentPath={lp(lang, '/')}
+  lang={lang}
 >
   {/* 01 — HERO */}
   <section class="hero" aria-labelledby="hero-title">
@@ -33,17 +123,14 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
       <div class="hero__content">
         <p class="hero__eyebrow">{company.name}</p>
         <h1 id="hero-title" class="hero__title">
-          Technology.<br />
-          Experience.<br />
-          Solutions.
+          {en ? 'Technology.' : 'Teknologi.'}<br />
+          {en ? 'Experience.' : 'Pengalaman.'}<br />
+          {en ? 'Solutions.' : 'Solusi.'}
         </h1>
-        <p class="hero__lead">
-          A technology consulting and solutions company with experience across
-          education, government, and business sectors.
-        </p>
+        <p class="hero__lead">{t.heroLead}</p>
         <div class="hero__actions">
-          <Button variant="primary" href="/solutions">Explore Our Solutions</Button>
-          <Button variant="white" href="/contact">Contact Us</Button>
+          <Button variant="primary" href={lp(lang, '/solutions')}>{t.exploreSolutions}</Button>
+          <Button variant="white" href={lp(lang, '/contact')}>{t.contactUs}</Button>
         </div>
       </div>
 
@@ -70,46 +157,36 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
   <section class="section intro" aria-labelledby="intro-title">
     <div class="container grid grid--feature">
       <div>
-        <p class="eyebrow">Who We Are</p>
-        <h2 id="intro-title">Technology consulting since {company.founded}.</h2>
-        <p class="intro__text">
-          PT. Gerbang Cipta Sarana (GCS) is a multidisciplinary technology
-          consulting company providing Information Technology services — from
-          planning, implementation, and training to supervision of software and
-          hardware.
-        </p>
-        <p class="intro__text">
-          Founded by experienced IT professionals, GCS has contributed to
-          development in Indonesia across both the government and private
-          sectors, supported by professional personnel with broad work
-          experience.
-        </p>
-        <Button variant="navy" href="/about">Learn About GCS</Button>
+        <p class="eyebrow">{t.whoEyebrow}</p>
+        <h2 id="intro-title">{t.whoTitle}</h2>
+        <p class="intro__text">{t.whoP1}</p>
+        <p class="intro__text">{t.whoP2}</p>
+        <Button variant="navy" href={lp(lang, '/about')}>{t.learnAbout}</Button>
       </div>
       <div class="intro__visual" aria-hidden="true">
         <span class="intro__year">{company.founded}</span>
-        <span class="intro__est">Established</span>
+        <span class="intro__est">{t.established}</span>
       </div>
     </div>
   </section>
   {/* 03 — CORE CAPABILITIES */}
   <section class="section section--soft" aria-labelledby="cap-title">
     <div class="container">
-      <SectionHeader
-        eyebrow="What We Do"
-        title="Core Capabilities"
-        lead="Six capability areas covering the full lifecycle of technology — from planning and development to training and educational media."
+            <SectionHeader
+        eyebrow={t.capEyebrow}
+        title={t.capTitle}
+        lead={t.capLead}
       />
       <div class="caps">
         {services.map((s, i) => (
           <a
-            href="/services"
+            href={lp(lang, '/services')}
             class={'cap cap--' + (i < 2 ? 'wide' : 'std')}
           >
             <span class="cap__num">{String(i + 1).padStart(2, '0')}</span>
             <span class="cap__body">
-              <h3 class="cap__title">{s.name}</h3>
-              <p class="cap__desc">{s.shortDescription}</p>
+              <h3 class="cap__title">{en && s.nameEn ? s.nameEn : s.name}</h3>
+              <p class="cap__desc">{en && s.shortDescriptionEn ? s.shortDescriptionEn : s.shortDescription}</p>
             </span>
           </a>
         ))}
@@ -120,21 +197,21 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
   {/* 04 — INDUSTRIES */}
   <section class="section" aria-labelledby="ind-title">
     <div class="container">
-      <SectionHeader
-        eyebrow="Who We Serve"
-        title="Industries We Serve"
-        lead="GCS develops technology solutions according to each organization's needs — across very different environments."
+            <SectionHeader
+        eyebrow={t.indEyebrow}
+        title={t.indTitle}
+        lead={t.indLead}
         align="center"
       />
       <div class="inds">
         {industries.map((ind, i) => (
           <a
-            href="/industries"
+            href={lp(lang, '/industries')}
             class={'ind ind--' + (i === 0 ? 'lead' : 'cell')}
           >
             <span class="ind__icon" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <h3 class="ind__name">{ind.name}</h3>
-            <p class="ind__desc">{ind.description}</p>
+            <h3 class="ind__name">{en && ind.nameEn ? ind.nameEn : ind.name}</h3>
+            <p class="ind__desc">{en && ind.descriptionEn ? ind.descriptionEn : ind.description}</p>
           </a>
         ))}
       </div>
@@ -144,10 +221,10 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
   {/* 05 — SOLUTIONS */}
   <section class="section section--soft" aria-labelledby="sol-title">
     <div class="container">
-      <SectionHeader
-        eyebrow="Products & Solutions"
-        title="Solutions"
-        lead="Technology capabilities delivered as solutions for organizational needs."
+            <SectionHeader
+                eyebrow={t.solEyebrow}
+        title={t.solTitle}
+        lead={t.solLead}
         cta={{ label: 'All Solutions', href: '/solutions' }}
       />
       <div class="sols">
@@ -168,17 +245,13 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
     <div class="container grid grid--feature">
       <div class="ge__content">
         <p class="badge badge--orange">{gerbangEdukasiProductLabel}</p>
-        <h2 id="ge-title" class="ge__title">Gerbang Edukasi</h2>
-        <p class="ge__lead">Interactive learning media for modern education.</p>
-        <p class="ge__text">
-          Developed within GCS's interactive multimedia and educational media
-          capabilities, Gerbang Edukasi brings interactive learning to
-          classrooms and Interactive Flat Panel platforms.
-        </p>
+                <h2 id="ge-title" class="ge__title">Gerbang Edukasi</h2>
+        <p class="ge__lead">{t.geLead}</p>
+        <p class="ge__text">{t.geText}</p>
         <div class="ge__actions">
-          <Button variant="accent" href={geHref}>Explore Gerbang Edukasi</Button>
+          <Button variant="accent" href={geHref}>{t.geExplore}</Button>
           {hasExternalGeUrl && (
-            <Button variant="ghost" href="/gerbang-edukasi">Product Details</Button>
+            <Button variant="ghost" href={lp(lang, '/gerbang-edukasi')}>{t.geDetails}</Button>
           )}
         </div>
       </div>
@@ -244,8 +317,8 @@ const geHref = hasExternalGeUrl ? GERBANG_EDUKASI_URL : '/gerbang-edukasi';
         delivering solutions since {company.founded}.
       </p>
       <div class="cta__actions">
-        <Button variant="primary" href="/contact">Contact Us</Button>
-        <Button variant="white" href="/solutions">Explore Solutions</Button>
+        <Button variant="primary" href={lp(lang, '/contact')}>Contact Us</Button>
+        <Button variant="white" href={lp(lang, '/solutions')}>Explore Solutions</Button>
       </div>
     </div>
   </section>

@@ -5,11 +5,16 @@ import PageHero from '../components/PageHero.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import Button from '../components/Button.astro';
 import { company } from '../data/company';
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="About PT. Gerbang Cipta Sarana | GCS"
   description="Established in 2012, PT. Gerbang Cipta Sarana is a multidisciplinary technology consulting company built by experienced IT professionals in Indonesia."
-  currentPath="/about"
+  lang={lang}
+  currentPath={lp(lang, '/about')}
 >
   <PageHero
     eyebrow="About GCS"
@@ -86,48 +91,11 @@ import { company } from '../data/company';
     </div>
   </section>
 
-  {/* 05 â€” ORGANIZATION */}
-  <section class="section" id="organization" aria-labelledby="org-title">
-    <div class="container">
-      <SectionHeader
-        eyebrow="04 · Organization"
-        title="Struktur Organisasi"
-        lead="A clear structure connecting board roles to delivery divisions."
-      />
-      <div class="org">
-        <div class="org__tier">
-          <div class="org__node org__node--top">Komisaris</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__tier">
-          <div class="org__node org__node--top">Direktur Utama</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__tier">
-          <div class="org__node org__node--top">Direktur</div>
-        </div>
-        <span class="org__link" aria-hidden="true"></span>
-        <div class="org__row" role="list">
-          <div class="org__node" role="listitem">Divisi Pemasaran</div>
-          <div class="org__node" role="listitem">Divisi Implementasi</div>
-          <div class="org__node" role="listitem">Divisi Riset &amp; Development</div>
-          <div class="org__node" role="listitem">Divisi Multimedia Interaktif</div>
-          <div class="org__node" role="listitem">Adm &amp; Keuangan</div>
-        </div>
-      </div>
-      <p class="org__note">
-        Supporting units: Perguruan Tinggi · Sekolah · Pemerintah Daerah ·
-        Perusahaan Swasta · HRD Support · Factory · Project Based · Departemen
-        SAP &amp; Non SAP · Keuangan · Administrasi
-      </p>
-    </div>
-  </section>
-
-  {/* 05 — WHY GCS */}
+    {/* 04 — WHY GCS */}
   <section class="section" id="strengths" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
-        eyebrow="05 · Why GCS"
+        eyebrow="04 · Why GCS"
         title="Built on Experience"
         lead="Three pillars behind GCS project delivery."
       />
@@ -159,8 +127,8 @@ import { company } from '../data/company';
         </article>
       </div>
       <div class="about-cta">
-        <Button variant="navy" href="/services">Explore Services</Button>
-        <Button variant="ghost" href="/solutions">Explore Solutions</Button>
+        <Button variant="navy" href={lp(lang, '/services')}>Explore Services</Button>
+        <Button variant="ghost" href={lp(lang, '/solutions')}>Explore Solutions</Button>
       </div>
     </div>
   </section>
@@ -308,9 +276,7 @@ import { company } from '../data/company';
     .timeline__item.timeline__item { grid-template-columns: 1fr; gap: var(--space-1); }
   }
   @media (max-width: 560px) {
-    .org__row.org__row { flex-direction: column; align-items: stretch; }
-    .org__link { height: var(--space-3); }
-    .profile__meta { gap: var(--space-3); }
+.profile__meta { gap: var(--space-3); }
   }
 </style>
 

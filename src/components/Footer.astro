@@ -1,18 +1,35 @@
 ---
 // GCS Footer — reinforces GCS as the parent identity and Gerbang Edukasi as a product.
 import { company } from '../data/company';
-import { footerNavigation } from '../data/navigation';
 import { contact } from '../data/contact';
+import { ui, lp, type Lang } from '../i18n/config';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'id' } = Astro.props;
+const t = ui.footer[lang];
 
 // Only show confirmed contact details publicly — placeholders stay in the data layer.
 const contactDetails = [contact.address, contact.phone, contact.email, contact.socialMedia]
   .filter((v) => v && !v.includes('['));
+
+const companyLinks = [
+  { label: t.aboutGcs, href: lp(lang, '/about') },
+  { label: t.nav_services ?? ui.nav[lang].services, href: lp(lang, '/services') },
+  { label: ui.nav[lang].industries, href: lp(lang, '/industries') },
+  { label: ui.nav[lang].contact, href: lp(lang, '/contact') },
+];
+const solutionLinks = [
+  { label: ui.nav[lang].solutions, href: lp(lang, '/solutions') },
+  { label: 'Gerbang Edukasi', href: lp(lang, '/gerbang-edukasi') },
+];
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div class="site-footer__brand">
-      <a class="site-footer__logo" href="/" aria-label={company.name + ' — Beranda'}>
+      <a class="site-footer__logo" href={lp(lang, '/')} aria-label={company.name}>
         <span class="site-footer__mark">
           <img src="/favicon-192.png" alt="" width="34" height="34" loading="lazy" />
         </span>
@@ -21,49 +38,46 @@ const contactDetails = [contact.address, contact.phone, contact.email, contact.s
           <span class="site-footer__tagline">{company.tagline}</span>
         </span>
       </a>
-      <p class="site-footer__blurb">
-        A multidisciplinary technology consulting and solutions company with
-        experience across education, government, and private-sector projects.
-      </p>
+      <p class="site-footer__blurb">{t.taglineNote}</p>
     </div>
 
     <div class="site-footer__col">
-      <h3 class="site-footer__heading">Company</h3>
+      <h3 class="site-footer__heading">{t.companyTitle}</h3>
       <ul class="site-footer__list">
-        {footerNavigation.company.map((item) => (
+        {companyLinks.map((item) => (
           <li><a href={item.href}>{item.label}</a></li>
         ))}
       </ul>
     </div>
 
     <div class="site-footer__col">
-      <h3 class="site-footer__heading">Solutions</h3>
+      <h3 class="site-footer__heading">{t.solutionsTitle}</h3>
       <ul class="site-footer__list">
-        {footerNavigation.solutions.map((item) => (
+        {solutionLinks.map((item) => (
           <li class="site-footer__solution-item">
             <a href={item.href}>{item.label}</a>
-            {item.label === 'Gerbang Edukasi' && <span class="site-footer__product-tag">A GCS Product / Solution</span>}
+            {item.label === 'Gerbang Edukasi' && <span class="site-footer__product-tag">{t.gerbangEdukasiLabel}</span>}
           </li>
         ))}
       </ul>
     </div>
 
     <div class="site-footer__col">
-      <h3 class="site-footer__heading">Contact</h3>
+      <h3 class="site-footer__heading">{ui.nav[lang].contact}</h3>
       {
         contactDetails.length > 0 ? (
           <ul class="site-footer__list site-footer__contact">
             {contactDetails.map((line) => <li>{line}</li>)}
           </ul>
         ) : (
-          <p class="site-footer__contact-note">Contact details are available upon request.</p>
+          <p class="site-footer__contact-note">{t.contactFallback}</p>
         )
       }
     </div>
   </div>
 
   <div class="container site-footer__bottom">
-    <p>&copy; {new Date().getFullYear()} {company.name}. All rights reserved.</p>
+    <p>&copy; {new Date().getFullYear()} {company.name}. {t.rights}</p>
   </div>
 </footer>
 

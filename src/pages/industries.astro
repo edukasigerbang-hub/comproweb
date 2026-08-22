@@ -17,11 +17,16 @@ const sectorContexts: Record<string, string> = {
   cooperatives:
     'Practical solutions scaled for cooperatives, small businesses, and BKK.',
 };
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="Industries We Serve | PT. Gerbang Cipta Sarana"
   description="GCS serves Education, Government, Health, Industry, and Cooperatives/Small Business sectors — adapting technology solutions to each organizational context."
-  currentPath="/industries"
+  lang={lang}
+  currentPath={lp(lang, '/industries')}
 >
   <PageHero
     eyebrow="Industries"
@@ -59,8 +64,8 @@ const sectorContexts: Record<string, string> = {
       </div>
 
       <div class="ind-cta">
-        <Button variant="navy" href="/solutions">See Our Solutions</Button>
-        <Button variant="ghost" href="/contact">Discuss Your Sector</Button>
+        <Button variant="navy" href={lp(lang, '/solutions')}>See Our Solutions</Button>
+        <Button variant="ghost" href={lp(lang, '/contact')}>Discuss Your Sector</Button>
       </div>
     </div>
   </section>

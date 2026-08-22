@@ -22,12 +22,17 @@ const productSchema = {
   description: ge.shortDescription,
   brand: { '@type': 'Organization', name: company.name },
 };
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="Gerbang Edukasi | Interactive Education Solution by GCS"
   description="Gerbang Edukasi is interactive learning media for modern classrooms and Interactive Flat Panels — a GCS Product / Solution by PT. Gerbang Cipta Sarana."
-  currentPath="/gerbang-edukasi"
-  ogImage="/og/og-gerbang-edukasi.jpg"
+  lang={lang}
+  currentPath={lp(lang, "/gerbang-edukasi")}
+    ogImage="/og/og-gerbang-edukasi.jpg"
 >
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   {/* 01 — PRODUCT HERO */}
@@ -39,8 +44,8 @@ const productSchema = {
         <p class="p-hero__tagline">{ge.tagline}</p>
         <p class="p-hero__desc">{ge.shortDescription}</p>
         <div class="p-hero__actions">
-          <Button variant="primary" href="/contact">Contact GCS</Button>
-          <Button variant="ghost" href="/solutions">Explore Solutions</Button>
+          <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
+          <Button variant="ghost" href={lp(lang, '/solutions')}>Explore Solutions</Button>
         </div>
         <p class="p-hero__provider">{ge.providerLine}</p>
       </div>
@@ -204,8 +209,8 @@ const productSchema = {
       <h2 id="cta-title">{ge.cta.heading}</h2>
       <p>{ge.cta.text}</p>
       <div class="cta-final__actions">
-        <Button variant="primary" href="/contact">Contact GCS</Button>
-        <Button variant="white" href="/solutions">Explore GCS Solutions</Button>
+        <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
+        <Button variant="white" href={lp(lang, '/solutions')}>Explore GCS Solutions</Button>
       </div>
       {hasExternalUrl && (
         <p class="cta-final__ext">

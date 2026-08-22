@@ -15,11 +15,16 @@ const contactDetails = [
   { label: 'Email', value: contact.email },
   { label: 'Social Media', value: contact.socialMedia },
 ].filter((c) => c.value && !c.value.includes('['));
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="Contact PT. Gerbang Cipta Sarana | GCS"
   description={`Contact ${company.name} to discuss your organization's technology needs — technology consulting and solutions since ${company.founded}.`}
-  currentPath="/contact"
+  lang={lang}
+  currentPath={lp(lang, '/contact')}
 >
   <PageHero
     eyebrow="Contact"
@@ -59,8 +64,8 @@ const contactDetails = [
         <div class="contact-links">
           <p class="contact-links__title">Helpful links</p>
           <ul>
-            <li><a href="/about">Learn about GCS</a></li>
-            <li><a href="/about">Learn about GCS</a></li>
+            <li><a href={lp(lang, '/about')}>Learn about GCS</a></li>
+            <li><a href={lp(lang, '/about')}>Learn about GCS</a></li>
           </ul>
         </div>
       </div>

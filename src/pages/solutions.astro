@@ -17,11 +17,16 @@ import geProduct from '../assets/product-gcs.png';
 const standard = solutions.filter((s) => !s.product);
 const product = solutions.find((s) => s.product);
 const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
+
+import { lp, type Lang } from '../i18n/config';
+interface Props { lang?: Lang }
+const { lang = 'id' } = Astro.props;
 ---
 <SiteLayout
   title="Technology Solutions | PT. Gerbang Cipta Sarana"
   description={`Explore GCS solutions — information systems, education solutions, interactive multimedia, and Gerbang Edukasi for modern classrooms.`}
-  currentPath="/solutions"
+  lang={lang}
+    currentPath={lp(lang, '/solutions')}
   ogImage="/og/og-gerbang-edukasi.jpg"
 >
   <PageHero
@@ -94,7 +99,7 @@ const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
       <p>
         GCS develops technology solutions according to each organization's needs.
       </p>
-      <Button variant="primary" href="/contact">Contact GCS</Button>
+      <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
     </div>
   </section>
 </SiteLayout>
