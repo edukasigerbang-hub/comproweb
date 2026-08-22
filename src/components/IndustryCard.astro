@@ -1,0 +1,20 @@
+---
+// Industry card — icon + name + description.
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<article class="card card--hover industry-card">
+  {icon && <span class="card__icon" aria-hidden="true">{icon}</span>}
+  <h3 class="industry-card__title">{title}</h3>
+  <p class="card__body">{description}</p>
+</article>
+
+<style>
+  .industry-card__title { font-size: var(--font-h4); margin-bottom: var(--space-1); }
+</style>

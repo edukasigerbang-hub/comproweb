@@ -1,0 +1,32 @@
+---
+// Solution card — category label + title + description + CTA.
+import Badge from './Badge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href?: string;
+  productLabel?: string;
+  accent?: boolean;
+}
+
+const { title, description, href, productLabel, accent = false } = Astro.props;
+const cardClass = 'card card--hover solution-card' + (accent ? ' card--accent-border' : '');
+---
+
+<article class={cardClass}>
+  {productLabel && <Badge variant="orange" label={productLabel} />}
+  <h3 class="solution-card__title">{title}</h3>
+  <p class="card__body">{description}</p>
+  {href && (
+    <a class="link solution-card__link" href={href}>
+      {accent ? 'Explore Gerbang Edukasi' : 'View details'}
+    </a>
+  )}
+</article>
+
+<style>
+  .solution-card { display: flex; flex-direction: column; gap: var(--space-1); }
+  .solution-card__title { font-size: var(--font-h4); margin: var(--space-1) 0; }
+  .solution-card__link { margin-top: auto; }
+</style>

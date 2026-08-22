@@ -1,0 +1,115 @@
+---
+// Gerbang Edukasi — a GCS product page within the GCS corporate ecosystem.
+// Brand hierarchy: GCS (corporate) → Products & Solutions → Gerbang Edukasi.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { company } from '../data/company';
+import { gerbangEdukasiProductLabel, GERBANG_EDUKASI_URL } from '../data/solutions';
+
+const hasExternalUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
+---
+<SiteLayout
+  title="Gerbang Edukasi"
+  description="Gerbang Edukasi is interactive learning media for modern education — a product / solution developed by PT. Gerbang Cipta Sarana."
+  currentPath="/gerbang-edukasi"
+>
+  <PageHero
+    title="Gerbang Edukasi"
+    subtitle="Interactive learning media for modern education."
+    breadcrumb="Gerbang Edukasi"
+  />
+
+  <div class="container">
+    {/* Product attribution to GCS — critical brand relationship */}
+    <div class="product-label">
+      <span class="pill">{gerbangEdukasiProductLabel}</span>
+      <p class="product-label__text">
+        Developed / provided by {company.name}.
+      </p>
+    </div>
+
+    {/* Product Overview */}
+    <section class="section">
+      <SectionHeader
+        eyebrow="Product Overview"
+        title="Interactive Learning Media"
+        lead="Gerbang Edukasi is an interactive learning application designed for education and interactive flat panels."
+      />
+      <p>
+        As part of GCS's education and interactive multimedia solutions, Gerbang
+        Edukasi brings interactive learning media to modern classrooms and learning
+        environments.
+      </p>
+      <p class="placeholder">[CONTENT TO BE PROVIDED]</p>
+    </section>
+
+    {/* Key capabilities */}
+    <section class="section section--soft">
+      <SectionHeader eyebrow="Key Capabilities" title="Capabilities" lead="[CONTENT TO BE PROVIDED]" />
+      <ul class="placeholder-list">
+        <li>[CONTENT TO BE PROVIDED]</li>
+      </ul>
+    </section>
+
+    {/* Educational use case */}
+    <section class="section">
+      <SectionHeader
+        eyebrow="Use Case"
+        title="Built for Education"
+        lead="Interactive Flat Panel (IFP) and other platforms — [CONTENT TO BE PROVIDED]."
+      />
+    </section>
+
+    {/* CTA */}
+    <section class="section section--soft">
+      <div class="cta-inner">
+        <h2>Explore Gerbang Edukasi</h2>
+        <p>
+          {hasExternalUrl
+            ? 'Visit the Gerbang Edukasi product site.'
+            : 'The Gerbang Edukasi product website URL is not yet confirmed.'}
+        </p>
+        {hasExternalUrl
+          ? <a class="btn btn--primary" href={GERBANG_EDUKASI_URL} target="_blank" rel="noopener">Visit Gerbang Edukasi</a>
+          : <span class="placeholder">{GERBANG_EDUKASI_URL}</span>}
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .product-label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .pil {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+    background: rgba(240, 122, 46, 0.12);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+  }
+  .product-label__text { margin: 0; font-weight: 600; }
+
+  .placeholder {
+    color: var(--color-muted);
+    font-style: italic;
+    background: rgba(27, 95, 180, 0.06);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2);
+  }
+
+  .placeholder-list { color: var(--color-muted); font-style: italic; }
+
+  .cta-inner { text-align: center; padding-block: var(--space-2); }
+  .cta-inner p { color: var(--color-muted); }
+</style>

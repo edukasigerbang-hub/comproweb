@@ -1,0 +1,44 @@
+---
+// Reusable section header (eyebrow + title + lead + optional CTA).
+interface CTA {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  align?: 'start' | 'center';
+  cta?: CTA;
+}
+
+const { eyebrow, title, lead, align = 'start', cta } = Astro.props;
+const alignClass = align === 'center' ? ' section__header--center' : '';
+---
+
+<div class={`section__header${alignClass}`}>
+  {eyebrow && <p class="section__eyebrow">{eyebrow}</p>}
+  <h2 class="section__title">{title}</h2>
+  {lead && <p class="section__lead">{lead}</p>}
+  {cta && (
+    <p class="section__cta"><a class="btn btn--primary btn--sm" href={cta.href}>{cta.label}</a></p>
+  )}
+</div>
+
+<style>
+  .section__eyebrow {
+    font-family: var(--font-heading);
+    font-size: var(--font-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    margin-bottom: var(--space-1);
+  }
+  .section__header--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section__cta { margin: var(--space-3) 0 0; }
+</style>

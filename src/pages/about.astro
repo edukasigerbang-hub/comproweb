@@ -1,0 +1,231 @@
+---
+// About — corporate information: profile, history, vision & mission, legalitas,
+// management, organization, and company strengths.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { company } from '../data/company';
+import { management } from '../data/management';
+import { projectCount } from '../data/experience';
+---
+<SiteLayout
+  title="About GCS"
+  description="Learn about PT. Gerbang Cipta Sarana — a technology consulting company established in 2012, its vision, mission, management, organization, and strengths."
+  currentPath="/about"
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">About</span>
+      </nav>
+      <h1>About {company.shortName}</h1>
+      <p>{company.tagline}</p>
+    </div>
+  </section>
+
+  <div class="container">
+    {/* Company Profile + History */}
+    <section class="section" id="profile">
+      <SectionHeader eyebrow="Company Profile" title="Who We Are" />
+      <p class="lead">
+        {company.name} ({company.shortName}) is a technology consulting company
+        providing services related to Information Technology — from planning,
+        implementation, and training to supervision of software and hardware.
+      </p>
+      <p>
+        {company.shortName} is a multidisciplinary consulting company established
+        in {company.founded}. It was founded by experienced professionals in the
+        Information Technology field who have contributed to development across
+        Indonesia in both the government and private sectors.
+      </p>
+      <p>
+        The company's capability is supported by professional personnel and dynamic
+        supporting staff with broad work experience, including working with both
+        local and international companies.
+      </p>
+    </section>
+
+    {/* Vision & Mission */}
+    <section class="section section--soft" id="vision-mission">
+      <SectionHeader eyebrow="Vision & Mission" title="Direction" />
+      <article class="card">
+        <h3>Visi</h3>
+        <p>{company.vision}</p>
+      </article>
+      <article class="card">
+        <h3>Misi</h3>
+        <p>{company.mission}</p>
+      </article>
+      <ul class="anchor-nav" aria-label="About sections">
+        <li><a href="#management">Management</a></li>
+        <li><a href="#organization">Organization</a></li>
+        <li><a href="#legalitas">Legalitas</a></li>
+        <li><a href="#strengths">Company Strengths</a></li>
+        <li><a href="/experience">Experience</a></li>
+      </ul>
+    </section>
+
+    {/* Management */}
+    <section class="section" id="management">
+      <SectionHeader
+        eyebrow="Management"
+        title="Susunan Pengurus"
+        lead="The company is led by the following leadership team."
+      />
+      <div class="grid">
+        {management.map((m) => (
+          <article class="card person" key={m.name}>
+            <h3>{m.name}</h3>
+            <p class="person__role">{m.position}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* Organization */}
+    <section class="section section--soft" id="organization">
+      <SectionHeader eyebrow="Organization" title="Struktur Organisasi" />
+      <div class="org">
+        <div class="org__row org__row--center">
+          <div class="org__node">Komisaris</div>
+        </div>
+        <div class="org__connector" aria-hidden="true"></div>
+        <div class="org__row org__row--center">
+          <div class="org__node">Direktur Utama</div>
+        </div>
+        <div class="org__connector" aria-hidden="true"></div>
+        <div class="org__row org__row--center">
+          <div class="org__node">Direktur</div>
+        </div>
+        <div class="org__connector" aria-hidden="true"></div>
+        <div class="org__row">
+          <div class="org__node">Divisi Pemasaran</div>
+          <div class="org__node">Divisi Implementasi</div>
+          <div class="org__node">Divisi Riset &amp; Development</div>
+          <div class="org__node">Divisi Multimedia Interaktif</div>
+          <div class="org__node">Adm &amp; Keuangan</div>
+        </div>
+      </div>
+      <p class="org__note">
+        Supporting units and departments: Perguruan Tinggi · Sekolah ·
+        Pemerintah Daerah · Perusahaan Swasta · HRD Support · Factory ·
+        Project Based · Departemen SAP · Non SAP · Keuangan · Administrasi.
+      </p>
+    </section>
+
+    {/* Legalitas */}
+    <section class="section" id="legalitas">
+      <SectionHeader eyebrow="Legalitas" title="Legal Foundation" />
+      <p>
+        {company.shortName} holds the formal legal requirements to operate as a
+        consulting firm, including:
+      </p>
+      <ul class="list">
+        <li>{company.legal.akte}</li>
+        <li>NIB: {company.legal.nib}</li>
+        <li>NPWP: {company.legal.npwp}</li>
+      </ul>
+    </section>
+
+    {/* Company Strengths */}
+    <section class="section section--soft" id="strengths">
+      <SectionHeader eyebrow="Company Strengths" title="Why GCS" />
+      <div class="grid">
+        <article class="card">
+          <h3>Human Resources</h3>
+          <p>
+            The quality of our people reflects the quality of our work.
+            Our expertise in each field is a guarantee of complete service.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Methodology</h3>
+          <p>
+            GIP — Gerbang Implementation Methodology combines work efficiency
+            and effectiveness, organizational considerations, and business and
+            management aspects to deliver fast, high-quality results.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Directors</h3>
+          <p>
+            Our directors dedicate a large part of their time to direct
+            involvement in project management, concept design, and knowledge
+            transfer — delivering higher value to our clients.
+          </p>
+        </article>
+      </div>
+      <p class="stat-line">
+        <strong>{projectCount}+</strong> recorded project experiences across
+        education, government, and other sectors.
+      </p>
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-2) 100%);
+    color: #fff;
+    padding: var(--space-5) 0;
+  }
+  .page-hero h1 { color: #fff; margin-bottom: var(--space-1); }
+  .page-hero p { margin: 0; color: #d5e0ea; }
+
+  .crumbs { font-size: 0.85rem; margin-bottom: var(--space-3); }
+  .crumbs a { color: #bcd0e4; }
+  .crumbs a:hover { color: #fff; text-decoration: none; }
+  .crumbs span[aria-current] { color: #fff; }
+
+  .lead { font-size: 1.15rem; }
+
+  .anchor-nav {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+  }
+  .anchor-nav a {
+    display: inline-block;
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .anchor-nav a:hover { border-color: var(--color-blue); text-decoration: none; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  .card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow); }
+  .person { text-align: center; }
+  .person__role { color: var(--color-teal); font-weight: 600; margin: 0; }
+
+  .list { padding-inline-start: 1.25rem; }
+
+  .org { max-width: 860px; margin-inline: auto; }
+  .org__row { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center; }
+  .org__row--center { justify-content: center; }
+  .org__node {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+  }
+  .org__connector {
+    width: 2px;
+    height: var(--space-3);
+    background: var(--color-border);
+    margin-inline: auto;
+  }
+  .org__note { text-align: center; color: var(--color-muted); margin-top: var(--space-4); }
+
+  .stat-line { text-align: center; margin-top: var(--space-3); }
+  .stat-line strong { font-size: 1.3rem; color: var(--color-navy); }
+
+  @media (max-width: 820px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>

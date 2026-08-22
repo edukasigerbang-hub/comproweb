@@ -1,0 +1,12 @@
+---
+// Badge / tag — small labelled pill. Variants inherit the global `.badge` system.
+interface Props {
+  variant?: 'default' | 'teal' | 'blue' | 'orange' | 'navy';
+  label?: string;
+}
+
+const { variant = 'default', label } = Astro.props;
+const className = `badge${variant !== 'default' ? ` badge--${variant}` : ''}`;
+---
+
+<span class={className}>{label ?? <slot />}</span>

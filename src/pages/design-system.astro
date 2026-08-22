@@ -1,0 +1,279 @@
+---
+// DESIGN SYSTEM — internal preview page. NOT linked from navigation.
+// Used to visually verify design tokens and reusable components.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Button from '../components/Button.astro';
+import Badge from '../components/Badge.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import IndustryCard from '../components/IndustryCard.astro';
+import SolutionCard from '../components/SolutionCard.astro';
+import ManagementCard from '../components/ManagementCard.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import { company, site } from '../data/company';
+import { services } from '../data/services';
+import { industries } from '../data/industries';
+import { management } from '../data/management';
+import { projects } from '../data/experience';
+
+const colors = [
+  { name: 'Navy / Primary', hex: '#0b2239', variable: '--color-navy' },
+  { name: 'Blue / Secondary', hex: '#1b5fb4', variable: '--color-blue' },
+  { name: 'Teal / Supporting', hex: '#14919b', variable: '--color-teal' },
+  { name: 'Orange / Accent', hex: '#f07a2e', variable: '--color-orange' },
+];
+
+const neutrals = [
+  { label: '50', value: '#f8fafc' },
+  { label: '100', value: '#f1f5f9' },
+  { label: '200', value: '#e2e8f0' },
+  { label: '300', value: '#cbd5e1' },
+  { label: '400', value: '#94a3b8' },
+  { label: '500', value: '#64748b' },
+  { label: '600', value: '#475569' },
+  { label: '700', value: '#334155' },
+  { label: '800', value: '#1e293b' },
+  { label: '900', value: '#0f172a' },
+];
+---
+<SiteLayout
+  title="Design System"
+  description={`Design system reference for ${company.name}.`}
+  currentPath="/design-system"
+>
+  <PageHero
+    title="Design System"
+    subtitle="Reusable visual language for the GCS corporate website."
+    breadcrumb="Design System"
+    eyebrow="Internal Reference"
+  />
+
+  <div class="ds">
+    {/* Colors */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Foundations" title="Colors" lead="Navy + white + neutral dominate; blue, teal and orange are accents." />
+      <div class="grid grid--2">
+        {colors.map((c) => (
+          <div class="swatch">
+            <span class="swatch__box" style={`background:${c.hex}`} aria-hidden="true"></span>
+            <div>
+              <strong>{c.name}</strong>
+              <code>{c.hex} · {c.variable}</code>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3>Neutral scale</h3>
+      <div class="neutral-scale">
+        {neutrals.map((n, i) => (
+          <span
+            class="neutral-step"
+            style={`background:${n.value};color:${i > 3 ? '#ffffff' : '#0f172a'}`}
+          >
+            {n.label}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    {/* Typography */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Type" title="Typography" lead="Plus Jakarta Sans for headings · Inter for body." />
+      <div class="type-specimen">
+        <p class="type-display">Display — {site.tagline}</p>
+        <p class="type-h1">Heading 1 — Technology consulting</p>
+        <p class="type-h2">Heading 2 — Experience since {company.founded}</p>
+        <p class="type-h3">Heading 3 — Solutions that work</p>
+        <p class="type-body-lg">Body large — supporting paragraph text.</p>
+        <p>Body — default paragraph size for reading content.</p>
+        <p class="type-body-sm">Body small — metadata and captions.</p>
+        <p class="eyebrow">Eyebrow label</p>
+      </div>
+    </section>
+
+    {/* Buttons */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Controls" title="Buttons" />
+      <div class="row">
+        <Button variant="primary" href="/design-system#buttons">Primary</Button>
+        <Button variant="navy" href="/design-system#buttons">Navy</Button>
+        <Button variant="secondary" href="/design-system#buttons">Secondary</Button>
+        <Button variant="ghost" href="/design-system#buttons">Ghost</Button>
+        <Button variant="accent" href="/design-system#buttons">Accent</Button>
+        <Button variant="white" href="/design-system#buttons">White</Button>
+        <Button variant="primary" size="sm" href="/design-system#buttons">Small</Button>
+        <button class="btn btn--primary" disabled>Disabled</button>
+        <a class="link" href="/design-system#buttons">Inline link</a>
+      </div>
+      <div class="dark-panel">
+        <Button variant="white" href="/design-system#buttons">White on dark</Button>
+        <Button variant="ghost" href="/design-system#buttons">Ghost</Button>
+      </div>
+    </section>
+
+    {/* Badges */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Labels" title="Badges & Tags" />
+      <div class="row">
+        <Badge label="Default tag" />
+        <Badge variant="teal" label="Sector" />
+        <Badge variant="blue" label="Category" />
+        <Badge variant="orange" label="A GCS Product / Solution" />
+        <Badge variant="navy" label="Status" />
+      </div>
+    </section>
+  </div>
+    {/* Cards */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Components" title="Cards" lead="Consistent padding, radius, border, typography and hover behavior." />
+      <div class="grid grid--3" id="buttons">
+        {services.slice(0, 3).map((s) => (
+          <ServiceCard title={s.name} description={s.shortDescription} icon={s.icon} />
+        ))}
+      </div>
+      <div class="grid grid--3 ds__gap-top">
+        {industries.slice(0, 3).map((i) => (
+          <IndustryCard title={i.name} description={i.description} icon={i.icon} />
+        ))}
+      </div>
+      <div class="grid grid--2 ds__gap-top">
+        <SolutionCard
+          title="Gerbang Edukasi"
+          description="Interactive learning media for modern education."
+          productLabel="A GCS Product / Solution"
+          accent
+          href="/gerbang-edukasi"
+        />
+        <SolutionCard
+          title="Information Systems"
+          description="Information systems for organizations — planning, implementation, and support."
+          href="/solutions#information-systems"
+        />
+      </div>
+      <div class="grid grid--3 ds__gap-top">
+        {management.slice(0, 3).map((m) => (
+          <ManagementCard name={m.name} position={m.position} />
+        ))}
+      </div>
+      <div class="ds__gap-top">
+        <ExperienceCard project={projects[0].project} client={projects[0].client} sector={projects[0].sector} />
+      </div>
+    </section>
+
+    {/* Forms */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Inputs" title="Forms" lead="Structure only — not connected to a backend." />
+      <div class="form-demo">
+        <div class="field">
+          <label class="field__label" for="ds-name">Name</label>
+          <input class="input" id="ds-name" type="text" placeholder="Your full name" />
+          <p class="field__hint">Helper text sits below the field.</p>
+        </div>
+        <div class="field field--error">
+          <label class="field__label" for="ds-email">Email</label>
+          <input class="input" id="ds-email" type="email" value="not-an-email" />
+          <p class="field__error">Please enter a valid email address.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="ds-select">Service / Interest</label>
+          <select class="select" id="ds-select">
+            <option>Select a service area</option>
+            {services.map((s) => <option>{s.name}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="ds-msg">Message</label>
+          <textarea class="textarea" id="ds-msg" rows="4" placeholder="Tell us about your organization"></textarea>
+        </div>
+      </div>
+    </section>
+
+    {/* Table */}
+    <section class="ds__block">
+      <SectionHeader eyebrow="Data" title="Table" lead="Responsive, readable, hover state; used by the Experience page." />
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th>No</th><th>Pekerjaan</th><th>User</th></tr>
+          </thead>
+          <tbody>
+            {projects.slice(0, 4).map((p, i) => (
+              <tr key={p.id}>
+                <td>{i + 1}</td>
+                <td>{p.project}</td>
+                <td>{p.client}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {/* Motion */}
+    <section class="ds__block">
+      <SectionHeader
+        eyebrow="Interaction"
+        title="Motion & Focus"
+        lead="Subtle opacity/transform transitions only. Focus states are always visible. Reduced motion is fully supported."
+      />
+      <div class="row">
+        <a class="btn btn--secondary" href="#top">Hover / focus me</a>
+        <span class="type-caption">Transitions: 120–320ms · easing ease</span>
+      </div>
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .ds { padding-block: var(--space-5); }
+  .ds__block { padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
+  .ds__block:last-child { border-bottom: none; }
+  .ds__gap-top { margin-top: var(--space-4); }
+
+  /* Swatches */
+  .swatch { display: flex; align-items: center; gap: var(--space-3); }
+  .swatch__box {
+    width: 64px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  .swatch code { display: block; font-family: var(--font-body); font-size: var(--font-body-sm); color: var(--color-muted); }
+
+  /* Neutral scale */
+  .neutral-scale {
+    display: flex;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    margin-bottom: var(--space-2);
+  }
+  .neutral-step { flex: 1; padding: var(--space-4) 0; text-align: center; font-size: var(--font-caption); }
+
+  /* Typography specimen */
+  .type-specimen > * { margin-bottom: var(--space-2); }
+
+  /* Rows */
+  .row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-bottom: var(--space-4); }
+  .dark-panel {
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  /* Form demo */
+  .form-demo { max-width: 520px; }
+
+  @media (max-width: 820px) {
+    .neutral-scale { flex-wrap: wrap; }
+    .neutral-step { flex: 0 0 20%; }
+  }
+</style>
+</SiteLayout>

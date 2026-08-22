@@ -1,0 +1,63 @@
+---
+// Reusable subpage hero (breadcrumb + eyebrow + title + lead + optional CTA).
+interface CTA {
+  label: string;
+  href: string;
+  variant?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  lead?: string;
+  breadcrumb: string;
+  eyebrow?: string;
+  cta?: CTA;
+}
+
+const { title, subtitle, lead, breadcrumb, eyebrow, cta } = Astro.props;
+const leadText = lead ?? subtitle;
+---
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">{breadcrumb}</span>
+    </nav>
+    {eyebrow && <p class="page-hero__eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {leadText && <p class="page-hero__lead">{leadText}</p>}
+    {cta && (
+      <p class="page-hero__cta">
+        <a class={'btn ' + (cta.variant ?? 'btn--primary')} href={cta.href}>{cta.label}</a>
+      </p>
+    )}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    background:
+      radial-gradient(circle at 85% 15%, rgba(20, 145, 155, 0.18) 0%, transparent 40%),
+      linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-3) 100%);
+    color: #fff;
+    padding: var(--space-6) 0 var(--space-5);
+  }
+  .page-hero h1 { color: #fff; margin-bottom: var(--space-2); max-width: var(--container-narrow); }
+  .page-hero__eyebrow {
+    font-family: var(--font-heading);
+    font-size: var(--font-eyebrow);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8fd0d6;
+    margin-bottom: var(--space-1);
+  }
+  .page-hero__lead { margin: 0; color: #d5e0ea; max-width: var(--container-narrow); font-size: var(--font-body-lg); }
+  .page-hero__cta { margin: var(--space-4) 0 0; }
+
+  .crumbs { font-size: 0.85rem; margin-bottom: var(--space-3); }
+  .crumbs a { color: #9fb2c4; }
+  .crumbs a:hover { color: #fff; text-decoration: none; }
+  .crumbs span[aria-current] { color: #fff; }
+</style>

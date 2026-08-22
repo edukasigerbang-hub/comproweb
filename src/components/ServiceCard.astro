@@ -1,0 +1,23 @@
+---
+// Service card — icon + title + description (+ optional link).
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  href?: string;
+}
+
+const { title, description, icon, href } = Astro.props;
+---
+
+<article class="card card--hover service-card">
+  {icon && <span class="card__icon" aria-hidden="true">{icon}</span>}
+  <h3 class="service-card__title">{title}</h3>
+  <p class="card__body">{description}</p>
+  {href && <a class="link" href={href}>Learn more</a>}
+</article>
+
+<style>
+  .service-card { display: flex; flex-direction: column; }
+  .service-card__title { font-size: var(--font-h4); margin-bottom: var(--space-1); }
+</style>

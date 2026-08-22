@@ -1,0 +1,78 @@
+---
+// Services — the six primary capability areas.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { services } from '../data/services';
+---
+<SiteLayout
+  title="Services"
+  description="GCS service areas: IT Consulting, Software Development, Business Process Management, Training & Knowledge Transfer, Interactive Multimedia, and Educational Media."
+  currentPath="/services"
+>
+  <PageHero
+    title="Services"
+    subtitle="Technology consulting, software, business process, training, multimedia, and educational media services."
+    breadcrumb="Services"
+  />
+
+  <div class="container">
+    <section class="section">
+      <SectionHeader
+        eyebrow="Capabilities"
+        title="What GCS Delivers"
+        lead="Six capability areas rooted in GCS's technology consulting scope."
+      />
+      <div class="grid">
+        {
+          services.map((s) => (
+            <article class="card" key={s.id}>
+              <span class="card__icon" aria-hidden="true">{s.icon}</span>
+              <h2 class="card__title">{s.name}</h2>
+              <p class="card__body">{s.shortDescription}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="note">
+        Solutions are developed according to each organization's needs.
+        Contact GCS to discuss your technology requirements.
+      </p>
+      <a class="btn btn--primary" href="/contact">Discuss Your Technology Needs</a>
+    </section>
+  </div>
+</SiteLayout>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+  .card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    box-shadow: var(--shadow);
+  }
+  .card__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(20, 145, 155, 0.12);
+    color: var(--color-teal);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-2);
+  }
+  .card__title { font-size: 1.2rem; margin-bottom: var(--space-1); }
+  .card__body { color: var(--color-muted); margin: 0; }
+
+  .note { color: var(--color-muted); margin: var(--space-3) 0 var(--space-2); }
+
+  @media (max-width: 820px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+</style>

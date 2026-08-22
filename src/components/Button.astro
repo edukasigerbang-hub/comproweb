@@ -1,0 +1,42 @@
+---
+// Button — reusable call-to-action. Renders an <a> when `href` is provided,
+// otherwise a <button>. Styling comes from the global `.btn` system.
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'navy' | 'secondary' | 'ghost' | 'white' | 'accent';
+  size?: 'default' | 'sm' | 'block';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  newTab?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'default',
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  newTab = false,
+} = Astro.props;
+
+const className = `btn btn--${variant}${size === 'sm' ? ' btn--sm' : ''}${size === 'block' ? ' btn--block' : ''}`;
+---
+
+{
+  href ? (
+    <a
+      class={className}
+      href={href}
+      aria-label={ariaLabel}
+      {...(newTab ? { target: '_blank', rel: 'noopener' } : {})}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button class={className} type={type} disabled={disabled} aria-label={ariaLabel}>
+      <slot />
+    </button>
+  )
+}

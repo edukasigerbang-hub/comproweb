@@ -1,0 +1,126 @@
+---
+// Experience — searchable/filterable project database (20 source-grounded projects).
+// Lightweight client-side filtering by sector; no invented data.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { projects, projectCount, projectFilters } from '../data/experience';
+---
+<SiteLayout
+  title="Experience"
+  description={`GCS project experience — ${projectCount} recorded projects across education, government, higher education, and other sectors.`}
+  currentPath="/experience"
+>
+  <PageHero
+    title="Experience"
+    subtitle={`${projectCount} recorded project experiences with clients across the public and private sectors.`}
+    breadcrumb="Experience"
+  />
+
+  <div class="container">
+    <section class="section">
+      <SectionHeader
+        eyebrow="Project Experience"
+        title="Selected Projects"
+        lead="Projects and clients from the GCS company profile. Use the filters to browse by sector."
+      />
+
+      <div class="filters" aria-label="Filter projects">
+        {
+          projectFilters.map((f) => (
+            <button
+              class={'filter' + (f === 'All' ? ' filter--active' : '')}
+              type="button"
+              data-filter={f}
+            >
+              {f}
+            </button>
+          ))
+        }
+      </div>
+
+      <ul class="project-list" data-project-list>
+        {
+          projects.map((p) => (
+            <li class="project" data-sector={p.sector} key={p.id}>
+              <div class="project__head">
+                <h3 class="project__name">{p.project}</h3>
+                <span class="project__chip">{p.sector}</span>
+              </div>
+              <p class="project__client"><strong>Client / User:</strong> {p.client}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="filter-empty" data-filter-empty hidden>
+        No projects found for the selected sector.
+      </p>
+    </section>
+  </div>
+</SiteLayout>
+
+<script>
+  const listEl = document.querySelector('[data-project-list]');
+  const emptyEl = document.querySelector('[data-filter-empty]');
+  const buttons = Array.from(document.querySelectorAll('[data-filter]'));
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      buttons.forEach((b) => b.classList.toggle('filter--active', b === btn));
+
+      if (listEl) {
+        let visible = 0;
+        listEl.querySelectorAll('[data-sector]').forEach((item) => {
+          const match = filter === 'All' || item.getAttribute('data-sector') === filter;
+          item.hidden = !match;
+          if (match) visible += 1;
+        });
+        if (emptyEl) emptyEl.hidden = visible !== 0;
+      }
+    });
+  });
+</script>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-bottom: var(--space-3); }
+  .filter {
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .filter:hover { border-color: var(--color-blue); }
+  .filter--active { background: var(--color-navy); color: #fff; border-color: var(--color-navy); }
+
+  .project-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  .project {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    box-shadow: var(--shadow);
+  }
+  .project__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); flex-wrap: wrap; }
+  .project__name { font-size: 1.05rem; margin: 0 0 var(--space-1); }
+  .project__chip {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-teal);
+    background: rgba(20, 145, 155, 0.12);
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    white-space: nowrap;
+  }
+  .project__client { color: var(--color-muted); margin: 0; }
+
+  .filter-empty { color: var(--color-muted); font-style: italic; }
+</style>
