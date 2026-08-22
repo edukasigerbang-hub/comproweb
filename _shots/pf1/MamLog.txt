@@ -1,0 +1,24 @@
+[2026-08-22T09:12:39.509Z] [INFO] ========================================================================================================================
+[2026-08-22T09:12:39.510Z] [INFO] Initializing MAM Client.
+App: com.microsoft.edge 151.0.4129.101
+SDK: 2.1.367.0
+OS: windows 10.0.19045.6466
+DeviceType: Desktop
+Manufacturer: ASUSTeK COMPUTER INC.
+Model: TS110-E8-PI4
+Telemetry: yes
+Managed device support: enabled
+[2026-08-22T09:12:39.512Z] [INFO] Telemetry session 8623bf69-2e23-46d4-9b4b-043cb8aa5072.
+[2026-08-22T09:12:39.512Z] [INFO] Initializing cache (v1).
+[2026-08-22T09:12:39.778Z] [INFO] Registered UserID:dde28958-2a74-4edb-87c4-01d25a48f18e in the Azure public cloud.
+[2026-08-22T09:12:39.778Z] [INFO] Conditional Access is blocked for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e pre-enrollment; compliance reporting will be accelerated to unblock the user.
+[2026-08-22T09:12:39.778Z] [INFO] Queuing pre-enrollment policy assignment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e to run as soon as possible.
+[2026-08-22T09:12:39.778Z] [INFO] Scheduler background thread starting for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:12:40.676Z] [INFO] Resolved MAM Location Service address "https://mamservice.manage.microsoft.com/api/Locations" for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:12:41.271Z] [ERROR] MAM Location Service request for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e failed with a status (404) indicating the tenant has not completed onboarding, or the user is not licensed for Intune. (client-request-id:f128e72b-e054-4ba4-a7e5-d783b0c5899b)
+[2026-08-22T09:12:41.272Z] [ERROR] Unable to retrieve or validate the MAM Service address during check for MAM policy assignment for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e; the operation will be reattempted at a later time.
+[2026-08-22T09:12:41.272Z] [INFO] Queuing pre-enrollment policy assignment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e to run at 2026-08-23T09:12:42.271Z.
+[2026-08-22T09:12:43.266Z] [INFO] Shutting down.
+[2026-08-22T09:12:43.266Z] [INFO] Stopping the task scheduler and canceling any outstanding work items...
+[2026-08-22T09:12:43.266Z] [INFO] Scheduler background thread for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e is exiting after completing the last task.
+[2026-08-22T09:12:43.267Z] [INFO] Task scheduler has stopped, and all work has been canceled.

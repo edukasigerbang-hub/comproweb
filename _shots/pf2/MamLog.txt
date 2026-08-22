@@ -1,0 +1,51 @@
+[2026-08-22T09:13:16.477Z] [INFO] ========================================================================================================================
+[2026-08-22T09:13:16.477Z] [INFO] Initializing MAM Client.
+App: com.microsoft.edge 151.0.4129.101
+SDK: 2.1.367.0
+OS: windows 10.0.19045.6466
+DeviceType: Desktop
+Manufacturer: ASUSTeK COMPUTER INC.
+Model: TS110-E8-PI4
+Telemetry: yes
+Managed device support: enabled
+[2026-08-22T09:13:16.477Z] [INFO] Telemetry session 69157a60-85cb-4176-aad5-35d6c8c57f92.
+[2026-08-22T09:13:16.477Z] [INFO] Initializing cache (v1).
+[2026-08-22T09:13:16.482Z] [INFO] Registered UserID:dde28958-2a74-4edb-87c4-01d25a48f18e in the Azure public cloud.
+[2026-08-22T09:13:16.482Z] [INFO] Conditional Access is blocked for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e pre-enrollment; compliance reporting will be accelerated to unblock the user.
+[2026-08-22T09:13:16.482Z] [INFO] Queuing pre-enrollment policy assignment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e to run as soon as possible.
+[2026-08-22T09:13:16.482Z] [INFO] Scheduler background thread starting for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:13:18.150Z] [INFO] Resolved MAM Location Service address "https://mamservice.manage.microsoft.com/api/Locations" for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:13:18.567Z] [ERROR] MAM Location Service request for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e failed with a status (404) indicating the tenant has not completed onboarding, or the user is not licensed for Intune. (client-request-id:d2031ee4-892f-4709-8f17-f414aa0905e5)
+[2026-08-22T09:13:18.567Z] [ERROR] Unable to retrieve or validate the MAM Service address during check for MAM policy assignment for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e; the operation will be reattempted at a later time.
+[2026-08-22T09:13:18.567Z] [INFO] Queuing pre-enrollment policy assignment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e to run at 2026-08-23T09:13:19.567Z.
+[2026-08-22T09:13:21.958Z] [INFO] Shutting down.
+[2026-08-22T09:13:21.958Z] [INFO] Stopping the task scheduler and canceling any outstanding work items...
+[2026-08-22T09:13:21.958Z] [INFO] Scheduler background thread for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e is exiting after completing the last task.
+[2026-08-22T09:13:21.959Z] [INFO] Task scheduler has stopped, and all work has been canceled.
+[2026-08-22T09:35:40.027Z] [INFO] ========================================================================================================================
+[2026-08-22T09:35:40.027Z] [INFO] Initializing MAM Client.
+App: com.microsoft.edge 151.0.4129.101
+SDK: 2.1.367.0
+OS: windows 10.0.19045.6466
+DeviceType: Desktop
+Manufacturer: ASUSTeK COMPUTER INC.
+Model: TS110-E8-PI4
+Telemetry: yes
+Managed device support: enabled
+[2026-08-22T09:35:40.027Z] [INFO] Telemetry session a96828c2-a5af-4070-8f6f-9be62f9fc2df.
+[2026-08-22T09:35:40.027Z] [INFO] Restored UserID:dde28958-2a74-4edb-87c4-01d25a48f18e
+Azure public cloud
+[2026-08-22T09:35:40.027Z] [INFO] Reinitialized cache (v1).
+[2026-08-22T09:35:40.028Z] [INFO] Scheduler background thread starting for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:35:40.028Z] [INFO] Re-queuing pre-enrollment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:35:40.028Z] [INFO] Queuing pre-enrollment policy assignment check for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e to run as soon as possible.
+[2026-08-22T09:35:40.394Z] [ERROR] The application could not supply an access token on request for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+Reason: 0
+User not found: token fetch aborted.
+[2026-08-22T09:35:40.394Z] [WARNING] Unable to acquire an access token during check for MAM policy assignment for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e.
+[2026-08-22T09:35:40.394Z] [ERROR] An unexpected error occurred during check for MAM policy assignment for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e; the operation will be reattempted after a brief delay on local conditions.
+[2026-08-22T09:35:40.999Z] [INFO] Shutting down.
+[2026-08-22T09:35:41.000Z] [INFO] Stopping the task scheduler and canceling any outstanding work items...
+[2026-08-22T09:35:41.000Z] [INFO] The check for MAM policy assignment reattempt for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e needs to be postponed due to application shutdown.
+[2026-08-22T09:35:41.000Z] [INFO] Scheduler background thread for UserID:dde28958-2a74-4edb-87c4-01d25a48f18e is exiting after completing the last task.
+[2026-08-22T09:35:41.000Z] [INFO] Task scheduler has stopped, and all work has been canceled.
