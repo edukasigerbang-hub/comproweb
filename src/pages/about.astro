@@ -90,11 +90,40 @@ import { company } from '../data/company';
   <section class="section" id="organization" aria-labelledby="org-title">
     <div class="container">
       <SectionHeader
-        eyebrow="04 Â· Organization"
+        eyebrow="04 · Organization"
         title="Struktur Organisasi"
+        lead="A clear structure connecting board roles to delivery divisions."
+      />
+      <div class="org">
+        <div class="org__tier">
+          <div class="org__node org__node--top">Komisaris</div>
+        </div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__tier">
+          <div class="org__node org__node--top">Direktur Utama</div>
+        </div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__tier">
+          <div class="org__node org__node--top">Direktur</div>
+        </div>
+        <span class="org__link" aria-hidden="true"></span>
+        <div class="org__row" role="list">
+          <div class="org__node" role="listitem">Divisi Pemasaran</div>
+          <div class="org__node" role="listitem">Divisi Implementasi</div>
+          <div class="org__node" role="listitem">Divisi Riset &amp; Development</div>
+          <div class="org__node" role="listitem">Divisi Multimedia Interaktif</div>
+          <div class="org__node" role="listitem">Adm &amp; Keuangan</div>
+        </div>
+      </div>
+      <p class="org__note">
+        Supporting units: Perguruan Tinggi · Sekolah · Pemerintah Daerah ·
+        Perusahaan Swasta · HRD Support · Factory · Project Based · Departemen
+        SAP &amp; Non SAP · Keuangan · Administrasi
+      </p>
+    </div>
+  </section>
 
-
-  {/* 07 â€” WHY GCS */}
+  {/* 05 — WHY GCS */}
   <section class="section" id="strengths" aria-labelledby="why-title">
     <div class="container">
       <SectionHeader
