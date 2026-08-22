@@ -19,7 +19,7 @@ export type Solution = {
 export const solutions: Solution[] = [
   {
     id: 'information-systems',
-    name: 'Information Systems',
+    name: 'Sistem Informasi',
     nameEn: 'Information Systems',
     description:
       'Sistem informasi untuk organisasi — perencanaan, implementasi, dan dukungan lintas sektor.',
@@ -31,7 +31,7 @@ export const solutions: Solution[] = [
   },
   {
     id: 'education-solutions',
-    name: 'Education Solutions',
+    name: 'Solusi Pendidikan',
     nameEn: 'Education Solutions',
     description:
       'Solusi teknologi untuk pendidikan — institusi pendidikan tinggi dan sekolah.',
@@ -43,7 +43,7 @@ export const solutions: Solution[] = [
   },
   {
     id: 'interactive-multimedia',
-    name: 'Interactive Multimedia',
+    name: 'Multimedia Interaktif',
     nameEn: 'Interactive Multimedia',
     description:
       'Konten interaktif, presentasi, dan solusi multimedia untuk komunikasi modern.',
@@ -67,7 +67,7 @@ export const solutions: Solution[] = [
   },
   {
     id: 'other-solutions',
-    name: 'Other Solutions',
+    name: 'Solusi Lainnya',
     nameEn: 'Other Solutions',
     // Public copy stays neutral; detailed offerings are added when verified.
     description:

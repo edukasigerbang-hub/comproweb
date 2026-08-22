@@ -14,44 +14,82 @@ import {
 } from '../data/solutions';
 import geProduct from '../assets/product-gcs.png';
 
-const standard = solutions.filter((s) => !s.product);
-const product = solutions.find((s) => s.product);
-const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
-
 import { lp, type Lang } from '../i18n/config';
 interface Props { lang?: Lang }
 const { lang = 'id' } = Astro.props;
+const en = lang === 'id' ? false : true;
+const hasExternalGeUrl = GERBANG_EDUKASI_URL !== '[TO BE PROVIDED]';
+const standard = solutions.filter((s) => !s.product);
+const product = solutions.find((s) => s.product);
+
+const t = en
+  ? {
+      metaTitle: 'Technology Solutions | PT. Gerbang Cipta Sarana',
+      metaDesc: 'Explore GCS solutions — information systems, education solutions, interactive multimedia, and Gerbang Edukasi for modern classrooms.',
+      heroEyebrow: 'Products & Solutions',
+      heroTitle: 'From Capabilities to Working Solutions',
+      heroSubtitle: `GCS turns its capability system into solutions for organizational needs — under the ${company.name} ecosystem.`,
+      breadcrumb: 'Solutions',
+      archEyebrow: 'Solution Architecture',
+      archTitle: 'Solution Categories',
+      archLead: 'Categories built on the same delivery methodology — combined according to your needs.',
+      learnMore: 'Learn more',
+      geText: 'Developed within GCS\'s education and interactive multimedia capabilities — interactive learning media designed for classrooms and Interactive Flat Panel platforms.',
+      geCta: 'View Gerbang Edukasi',
+      geImgAlt: 'Gerbang Edukasi interactive flat panel device with an interactive learning interface',
+      ctaTitle: 'Don\'t see an exact fit?',
+      ctaText: 'GCS develops technology solutions according to each organization\'s needs.',
+      ctaButton: 'Contact GCS',
+    }
+  : {
+      metaTitle: 'Solusi Teknologi | PT. Gerbang Cipta Sarana',
+      metaDesc: 'Jelajahi solusi GCS — sistem informasi, solusi pendidikan, multimedia interaktif, serta Gerbang Edukasi untuk kelas modern.',
+      heroEyebrow: 'Produk & Solusi',
+      heroTitle: 'Dari Kapabilitas Menjadi Solusi Nyata',
+      heroSubtitle: `GCS mengubah sistem kapabilitasnya menjadi solusi untuk kebutuhan organisasi — dalam ekosistem ${company.name}.`,
+      breadcrumb: 'Solusi',
+      archEyebrow: 'Arsitektur Solusi',
+      archTitle: 'Kategori Solusi',
+      archLead: 'Kategori yang dibangun atas metodologi pengiriman yang sama — dikombinasikan sesuai kebutuhan Anda.',
+      learnMore: 'Pelajari selengkapnya',
+      geText: 'Dikembangkan dari kapabilitas pendidikan dan multimedia interaktif GCS — media pembelajaran interaktif yang dirancang untuk kelas dan platform Interactive Flat Panel.',
+      geCta: 'Lihat Gerbang Edukasi',
+      geImgAlt: 'Perangkat interactive flat panel Gerbang Edukasi dengan antarmuka pembelajaran interaktif',
+      ctaTitle: 'Tidak menemukan yang tepat?',
+      ctaText: 'GCS mengembangkan solusi teknologi sesuai kebutuhan masing-masing organisasi.',
+      ctaButton: 'Hubungi GCS',
+    };
 ---
 <SiteLayout
-  title="Technology Solutions | PT. Gerbang Cipta Sarana"
-  description={`Explore GCS solutions — information systems, education solutions, interactive multimedia, and Gerbang Edukasi for modern classrooms.`}
+  title={t.metaTitle}
+  description={t.metaDesc}
   lang={lang}
     currentPath={lp(lang, '/solutions')}
   ogImage="/og/og-gerbang-edukasi.jpg"
 >
   <PageHero
-    eyebrow="Products & Solutions"
-    title="From Capabilities to Working Solutions"
-    subtitle={`GCS turns its capability system into solutions for organizational needs — under the ${company.name} ecosystem.`}
-    breadcrumb="Solutions"
+    eyebrow={t.heroEyebrow}
+    title={t.heroTitle}
+    subtitle={t.heroSubtitle}
+    breadcrumb={t.breadcrumb}
   />
 
   {/* Solution categories */}
   <section class="section" aria-labelledby="cats-title">
     <div class="container">
       <SectionHeader
-        eyebrow="Solution Architecture"
-        title="Solution Categories"
-        lead="Categories built on the same delivery methodology — combined according to your needs."
+        eyebrow={t.archEyebrow}
+        title={t.archTitle}
+        lead={t.archLead}
       />
       <div class="cat-grid">
         {
           standard.map((s, i) => (
             <article class="cat" id={s.id} key={s.id}>
               <span class="cat__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-              <h3 class="cat__title">{s.name}</h3>
-              <p class="cat__desc">{s.description}</p>
-              <a class="link" href={s.route}>Learn more</a>
+              <h3 class="cat__title">{en && s.nameEn ? s.nameEn : s.name}</h3>
+              <p class="cat__desc">{en && s.descriptionEn ? s.descriptionEn : s.description}</p>
+              <a class="link" href={lp(lang, s.route)}>{t.learnMore}</a>
             </article>
           ))
         }
@@ -67,20 +105,16 @@ const { lang = 'id' } = Astro.props;
           <div class="ge-sol__content">
             <Badge variant="orange" label={gerbangEdukasiProductLabel} />
             <h2 id="ge-sol-title">Gerbang Edukasi</h2>
-            <p class="ge-sol__lead">{product.description}</p>
-            <p class="ge-sol__text">
-              Developed within GCS's education and interactive multimedia
-              capabilities — interactive learning media designed for classrooms
-              and Interactive Flat Panel platforms.
-            </p>
-            <Button variant="accent" href={hasExternalGeUrl ? GERBANG_EDUKASI_URL : product.route}>
-              View Gerbang Edukasi
+            <p class="ge-sol__lead">{en && product.descriptionEn ? product.descriptionEn : product.description}</p>
+            <p class="ge-sol__text">{t.geText}</p>
+            <Button variant="accent" href={hasExternalGeUrl ? GERBANG_EDUKASI_URL : lp(lang, product.route)}>
+              {t.geCta}
             </Button>
           </div>
           <div class="ge-sol__visual">
             <Image
               src={geProduct}
-              alt="Perangkat interactive flat panel Gerbang Edukasi dengan antarmuka pembelajaran interaktif"
+              alt={t.geImgAlt}
               widths={[480, 720]}
               sizes="(max-width: 820px) 92vw, 44vw"
               loading="lazy"
@@ -95,11 +129,9 @@ const { lang = 'id' } = Astro.props;
   {/* CTA */}
   <section class="section">
     <div class="container sol-cta">
-      <h2>Don't see an exact fit?</h2>
-      <p>
-        GCS develops technology solutions according to each organization's needs.
-      </p>
-      <Button variant="primary" href={lp(lang, '/contact')}>Contact GCS</Button>
+      <h2>{t.ctaTitle}</h2>
+      <p>{t.ctaText}</p>
+      <Button variant="primary" href={lp(lang, '/contact')}>{t.ctaButton}</Button>
     </div>
   </section>
 </SiteLayout>
